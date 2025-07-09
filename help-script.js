@@ -164,7 +164,7 @@ const faqs = [
     {
         id: '32',
         question: 'What are the bird thumbnail images and bird cards?',
-        answer: 'Peregrine Planner displays small thumbnail images next to bird names throughout the app to help with visual identification. These images are sourced from iNaturalist.org, a global nature community platform. Thumbnails appear in bird lists on the Plan screen, Trip Plans, Trip Logs, Hotspot Browser, Species Map, and Big Month screens. **Enhanced Bird Cards:** Tap any thumbnail or placeholder bubble to open a comprehensive bird information card featuring detailed species information including size, habitat, key identifying features, behavior, best viewing times, colors, and seasonal patterns. Each card includes external links to eBird, Wikipedia, and iNaturalist for additional learning resources. **Advanced Name Matching:** The system intelligently handles various bird naming conventions, including European species with prefixes like "Greater," "Common," "Eurasian," and "Western," ensuring you get accurate information even when exact name matches aren\'t available. Images are cached for 72 hours for offline viewing and automatically update based on the best available photos from iNaturalist\'s extensive database. All images are used with permission under Creative Commons licensing and properly credited to their photographers. You can manage image downloads and cache storage in More > Settings under "Image Cache Management".',
+        answer: 'Peregrine Planner displays small thumbnail images next to bird names throughout the app to help with visual identification. These images are sourced from iNaturalist.org, a global nature community platform. Thumbnails appear in bird lists on the Plan screen, Trip Plans, Trip Logs, Hotspot Browser, Species Map, Big Month screens, **Life List, and State Goals screens**. **Enhanced Bird Cards:** Tap any thumbnail or placeholder bubble to open a comprehensive bird information card featuring detailed species information including size, habitat, key identifying features, behavior, best viewing times, colors, and seasonal patterns. Each card includes external links to eBird, Wikipedia, and iNaturalist for additional learning resources. **Advanced Name Matching:** The system intelligently handles various bird naming conventions, including European species with prefixes like "Greater," "Common," "Eurasian," and "Western," ensuring you get accurate information even when exact name matches aren\'t available. **Hybrid Species Support:** The app now properly handles hybrid birds and special forms from the eBird taxonomy, ensuring comprehensive coverage of all officially recognized species. Images are cached for 72 hours for offline viewing and automatically update based on the best available photos from iNaturalist\'s extensive database. All images are used with permission under Creative Commons licensing and properly credited to their photographers. You can manage image downloads and cache storage in More > Settings under "Image Cache Management".',
         topics: ['thumbnails', 'bird images', 'bird cards', 'visual identification', 'inaturalist', 'offline', 'cache management', 'species information'],
         related: ['20', '21', '23']
     },
@@ -310,16 +310,16 @@ const orientationSteps = [
         content: 'This help system contains everything you need to know about using Peregrine Planner effectively. Let\'s take a quick tour of the available resources.'
     },
     {
-        title: 'Quick Start Guide',
-        content: 'The Quick Start tab provides an overview of key features and gets you started quickly with the most important functions.'
-    },
-    {
-        title: 'Frequently Asked Questions',
-        content: 'The FAQ section contains answers to common questions. Use the search function to quickly find specific topics.'
+        title: 'Quickstart Guide',
+        content: 'The Quickstart tab provides step-by-step instructions to get you started quickly with the most important functions.'
     },
     {
         title: 'Comprehensive User Guide',
         content: 'The User Guide provides detailed instructions for all features. This is your go-to resource for in-depth information about using the app.'
+    },
+    {
+        title: 'Frequently Asked Questions',
+        content: 'The FAQ section contains answers to common questions. Use the search function to quickly find specific topics.'
     }
 ];
 
