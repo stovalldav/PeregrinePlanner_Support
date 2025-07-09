@@ -3,49 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peregrine Planner - Help & Information</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Peregrine Planner - Help & Support</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #4CAF50;
+            --secondary: #FF9800;
+            --dark: #333333;
+            --gray: #757575;
+            --gray-dark: #555555;
+            --gray-light: #DDDDDD;
+            --light: #F5F5F5;
+            --white: #FFFFFF;
+            --lightest-gray: #f7f9fc;
         }
 
-        :root {
-            --primary: #2563eb;
-            --secondary: #7c3aed;
-            --dark: #1f2937;
-            --gray: #6b7280;
-            --gray-light: #d1d5db;
-            --gray-dark: #374151;
-            --light: #f3f4f6;
-            --white: #ffffff;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
-        }
-	header {
-	    background-color: var(--primary);
-	    color: var(--white);
-	    padding: 16px;
-	    position: relative;
-	    text-align: center;
-	}
-        .header-title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        
-        .header-links {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--light);
             color: var(--dark);
             line-height: 1.6;
@@ -54,531 +34,272 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            min-height: 100vh;
-            background-color: var(--white);
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            padding: 0 15px;
         }
 
-        .info-bar {
-            background-color: var(--white);
+        header {
+            background-color: var(--primary);
+            color: var(--white);
             padding: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--gray-light);
+            position: relative;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .info-bar-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--dark);
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
         }
-
-        .help-button {
-            padding: 8px;
-            border: none;
-            background: none;
-            color: var(--primary);
-            cursor: pointer;
+        
+        .header-links {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .header-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            padding: 4px 8px;
+            border: 1px solid rgba(255,255,255,0.5);
             border-radius: 4px;
-            transition: background-color 0.2s;
+            transition: all 0.2s ease;
+        }
+        
+        .header-link:hover {
+            background-color: rgba(255,255,255,0.2);
         }
 
-        .help-button:hover {
-            background-color: var(--light);
-        }
-
-        .tab-container {
+        .tabs {
             display: flex;
             background-color: var(--white);
             border-bottom: 1px solid var(--gray-light);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .tab {
-            flex: 1;
-            padding: 12px;
-            text-align: center;
-            background: none;
-            border: none;
+            padding: 12px 20px;
             cursor: pointer;
-            font-size: 14px;
-            color: var(--gray);
-            transition: all 0.2s;
             border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            background-color: var(--lightest-gray);
         }
 
         .tab.active {
             color: var(--primary);
             border-bottom-color: var(--primary);
-            font-weight: 600;
+            background-color: var(--lightest-gray);
         }
 
         .tab-content {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
+            display: none;
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
 
-        /* Quickstart Styles */
-        .step-container {
-            display: flex;
-            margin-bottom: 24px;
+        .tab-content.active {
+            display: block;
         }
 
-        .step-number {
-            width: 32px;
-            height: 32px;
-            border-radius: 16px;
-            background-color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            flex-shrink: 0;
+        .search-container {
+            margin-bottom: 20px;
         }
 
-        .step-number-text {
-            color: var(--white);
-            font-weight: bold;
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--gray-light);
+            border-radius: 8px;
             font-size: 16px;
+            background-color: var(--white);
         }
 
-        .step-content {
-            flex: 1;
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
         }
 
-        .step-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 4px;
-            color: var(--dark);
-        }
-
-        .step-description {
-            font-size: 14px;
-            color: var(--gray-dark);
-            line-height: 1.5;
-        }
-
-        /* Guide Styles */
-        .guide-section {
-            margin-bottom: 32px;
-            padding-bottom: 16px;
+        .faq-item {
             border-bottom: 1px solid var(--gray-light);
+            padding: 16px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            padding: 12px 16px;
+            background-color: var(--lightest-gray);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            background-color: var(--gray-light);
+        }
+
+        .faq-answer {
+            padding: 0 16px;
+            color: var(--gray-dark);
+            display: none;
+        }
+
+        .faq-answer.expanded {
+            display: block;
+        }
+
+        .guide-section {
+            margin-bottom: 30px;
         }
 
         .guide-section-title {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary);
             margin-bottom: 12px;
-            color: var(--dark);
         }
 
         .guide-text {
-            font-size: 14px;
-            color: var(--dark);
-            line-height: 1.5;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
+            line-height: 1.6;
         }
 
         .guide-instructions {
-            background-color: #f7f9fc;
+            background-color: var(--lightest-gray);
             padding: 16px;
             border-radius: 8px;
-            border-left: 3px solid var(--primary);
-            font-size: 14px;
-            line-height: 1.5;
+            margin-bottom: 16px;
         }
 
         .instruction-title {
             font-weight: bold;
             color: var(--primary);
-            margin-bottom: 8px;
             display: block;
-        }
-
-        .attribution-buttons {
-            display: flex;
-            gap: 16px;
-            margin-top: 16px;
-            flex-wrap: wrap;
-        }
-
-        .attribution-button {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: background-color 0.2s;
-            cursor: pointer;
-        }
-
-        .attribution-button:hover {
-            background-color: #1d4ed8;
-        }
-
-        .attribution-button.secondary {
-            background-color: var(--secondary);
-        }
-
-        .attribution-button.secondary:hover {
-            background-color: #6d28d9;
-        }
-
-        /* FAQ Styles */
-        .faq-container {
-            display: flex;
-            flex-direction: column;
-            height: calc(100vh - 120px);
-        }
-
-        .search-container {
-            display: flex;
-            align-items: center;
-            background-color: var(--white);
-            border: 1px solid var(--gray-light);
-            border-radius: 8px;
-            padding: 8px 12px;
-            margin-bottom: 16px;
-        }
-
-        .search-input {
-            flex: 1;
-            border: none;
-            outline: none;
-            font-size: 16px;
-            margin-left: 8px;
-        }
-
-        .search-clear {
-            background: none;
-            border: none;
-            color: var(--gray);
-            cursor: pointer;
-            padding: 4px;
-        }
-
-        .results-count {
-            font-size: 14px;
-            color: var(--gray);
-            margin-bottom: 16px;
-            font-style: italic;
-        }
-
-        .faq-list {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .faq-item {
-            background-color: var(--white);
-            border: 1px solid var(--gray-light);
-            border-radius: 8px;
-            margin-bottom: 16px;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-
-        .faq-question:hover {
-            background-color: var(--light);
-        }
-
-        .faq-question-text {
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--dark);
-            flex: 1;
-            margin-right: 8px;
-        }
-
-        .faq-answer {
-            background-color: var(--light);
-            padding: 12px;
-            padding-top: 0;
-        }
-
-        .faq-answer-text {
-            font-size: 14px;
-            color: var(--dark);
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .topics-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 12px;
-        }
-
-        .topic-tag {
-            background-color: rgba(124, 58, 237, 0.2);
-            color: var(--secondary);
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 12px;
-        }
-
-        .related-container {
-            border-top: 1px solid rgba(209, 213, 219, 0.4);
-            padding-top: 12px;
-        }
-
-        .related-title {
-            font-size: 14px;
-            font-weight: 500;
             margin-bottom: 8px;
-            color: var(--dark);
         }
 
-        .related-item {
-            display: flex;
-            align-items: center;
-            padding: 4px 0;
-            cursor: pointer;
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .related-item:hover {
-            text-decoration: underline;
-        }
-
-        .related-item i {
-            margin-right: 6px;
-        }
-
-        .faq-tip {
-            display: flex;
-            align-items: center;
-            background-color: rgba(124, 58, 237, 0.1);
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 16px;
-        }
-
-        .faq-tip i {
-            color: var(--secondary);
-            margin-right: 8px;
-        }
-
-        .faq-tip-text {
-            font-size: 14px;
-            color: var(--secondary);
-        }
-
-        .empty-results {
-            text-align: center;
-            padding: 40px;
-            color: var(--gray);
-        }
-
-        .empty-results i {
-            font-size: 48px;
-            margin-bottom: 16px;
-            opacity: 0.5;
-        }
-
-        /* Contact Form Styles */
-        .contact-intro {
-            font-size: 16px;
-            color: var(--dark);
-            margin-bottom: 24px;
-            line-height: 1.4;
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .form-group {
             margin-bottom: 20px;
         }
 
-        .label {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: var(--dark);
+        .form-label {
             display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
         }
 
-        .input, .textarea {
+        .form-input, .form-textarea, .form-select {
             width: 100%;
+            padding: 12px;
             border: 1px solid var(--gray-light);
             border-radius: 8px;
-            padding: 12px;
             font-size: 16px;
-            background-color: var(--white);
             font-family: inherit;
         }
 
-        .textarea {
+        .form-textarea {
             min-height: 120px;
             resize: vertical;
         }
 
-        .subject-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 8px;
-        }
-
-        .subject-button {
-            padding: 8px 16px;
-            border: 1px solid var(--gray-light);
-            background-color: var(--light);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 14px;
-        }
-
-        .subject-button.selected {
-            background-color: var(--primary);
-            color: var(--white);
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
             border-color: var(--primary);
         }
 
-        .submit-button {
+        .submit-btn {
             background-color: var(--primary);
             color: var(--white);
             padding: 12px 24px;
             border: none;
             border-radius: 8px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.2s;
-            margin-top: 10px;
-            margin-bottom: 24px;
+            transition: background-color 0.2s ease;
         }
 
-        .submit-button:hover:not(:disabled) {
-            background-color: #1d4ed8;
+        .submit-btn:hover {
+            background-color: #45a049;
         }
 
-        .submit-button:disabled {
-            background-color: var(--gray-light);
-            opacity: 0.7;
+        .submit-btn:disabled {
+            background-color: var(--gray);
             cursor: not-allowed;
         }
 
-        .direct-contact {
-            text-align: center;
-            margin-top: 16px;
-            font-size: 14px;
-            color: var(--gray-dark);
-            line-height: 1.4;
-        }
-
-        .email-link {
-            color: var(--primary);
-            font-weight: 500;
-            text-decoration: none;
-        }
-
-        .email-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Tooltip Styles */
-        .tooltip-overlay {
+        .back-to-top {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
             justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
             z-index: 1000;
         }
 
-        .tooltip-overlay.show {
-            display: flex;
+        .back-to-top.visible {
+            opacity: 1;
         }
 
-        .tooltip {
-            background-color: var(--white);
-            border-radius: 8px;
-            padding: 16px;
-            max-width: 300px;
-            width: 80%;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        .tooltip-title {
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 8px;
-        }
-
-        .tooltip-content {
-            font-size: 14px;
-            color: var(--dark);
-            line-height: 1.4;
-        }
-
-        .tooltip-close {
-            align-self: flex-end;
-            margin-top: 16px;
-            padding: 6px 12px;
-            background-color: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        /* Orientation Modal Styles */
-        .orientation-overlay {
+        .orientation-modal {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-        }
-
-        .orientation-overlay.show {
+            background-color: rgba(0,0,0,0.5);
             display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
         }
 
-        .orientation-card {
+        .orientation-content {
             background-color: var(--white);
+            padding: 30px;
             border-radius: 12px;
-            padding: 24px;
-            width: 85%;
-            max-width: 340px;
-            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
             text-align: center;
         }
 
         .orientation-step {
             font-size: 14px;
             color: var(--gray);
-            margin-bottom: 16px;
+            margin-bottom: 8px;
         }
 
         .orientation-title {
@@ -588,10 +309,10 @@
             margin-bottom: 16px;
         }
 
-        .orientation-content {
+        .orientation-text {
             font-size: 16px;
             color: var(--dark);
-            line-height: 1.5;
+            line-height: 1.6;
             margin-bottom: 24px;
         }
 
@@ -602,855 +323,245 @@
             border: none;
             border-radius: 8px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            width: 100%;
+            margin-right: 10px;
         }
 
         .orientation-skip {
+            color: var(--gray);
             background: none;
             border: none;
-            color: var(--gray);
             cursor: pointer;
-            margin-top: 16px;
             font-size: 14px;
+            text-decoration: underline;
         }
 
-        /* Section Title */
-        .section-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 16px;
-            color: var(--dark);
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .container {
-                box-shadow: none;
+            .tabs {
+                flex-direction: column;
             }
-
-            .tab-container {
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-
+            
             .tab {
-                min-width: 80px;
-                flex: none;
+                border-bottom: 1px solid var(--gray-light);
+                border-right: none;
             }
-
-            .attribution-buttons {
-                flex-direction: column;
+            
+            .tab.active {
+                border-bottom-color: var(--primary);
             }
-
-            .attribution-button {
-                justify-content: center;
+            
+            .header-links {
+                position: static;
+                transform: none;
+                margin-top: 10px;
             }
-
-            .subject-buttons {
-                flex-direction: column;
+            
+            .tab-content {
+                padding: 15px;
             }
-
-            .subject-button {
-                text-align: center;
-            }
-        }
-
-        /* Hidden class */
-        .hidden {
-            display: none !important;
         }
     </style>
 </head>
 <body>
     <header>
-        </button>
+        <h1 class="header-title">Peregrine Planner Help & Support</h1>
         <div class="header-links">
             <a href="privacy-policy.html" class="header-link">Privacy Policy</a>
         </div>
     </header>
+
     <div class="container">
-        <!-- Info Bar -->
-        <div class="info-bar">
-            <h1 class="info-bar-title">Help & Information</h1>
-            <button class="help-button" onclick="showTooltip('Help & Info', 'This screen provides guides, FAQs, and support options. Tap on any section to learn more about using the app.')">
-                <i class="fas fa-question-circle fa-lg"></i>
-            </button>
+        <div class="tabs">
+            <div class="tab active" data-tab="quickstart">Quick Start</div>
+            <div class="tab" data-tab="faq">FAQ</div>
+            <div class="tab" data-tab="guide">User Guide</div>
+            <div class="tab" data-tab="contact">Contact</div>
         </div>
 
-        <!-- Tab Container -->
-        <div class="tab-container">
-            <button class="tab active" onclick="switchTab('quickstart')">Quickstart</button>
-            <button class="tab" onclick="switchTab('guide')">User Guide</button>
-            <button class="tab" onclick="switchTab('faq')">FAQ</button>
-            <button class="tab" onclick="switchTab('contact')">Contact</button>
-        </div>
-
-        <!-- Tab Content -->
-        <div class="tab-content">
-            <!-- Quickstart Tab -->
-            <div id="quickstart-content" class="tab-panel">
-                <h2 class="section-title">Getting Started Quickly</h2>
-                
-                <div class="step-container">
-                    <div class="step-number">
-                        <span class="step-number-text">1</span>
-                    </div>
-                    <div class="step-content">
-                        <h3 class="step-title">Set Your Location</h3>
-                        <p class="step-description">
-                            Tap the location button to use your current location or select a custom location on the map.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="step-container">
-                    <div class="step-number">
-                        <span class="step-number-text">2</span>
-                    </div>
-                    <div class="step-content">
-                        <h3 class="step-title">Choose Birds</h3>
-                        <p class="step-description">
-                            Select birds you want to see from the list by tapping on them. You can use the search bar to filter by name or the Hotspot Browser to select birds by location. In advanced mode, you can adjust the time period to see more historical data.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="step-container">
-                    <div class="step-number">
-                        <span class="step-number-text">3</span>
-                    </div>
-                    <div class="step-content">
-                        <h3 class="step-title">Plan Your Trip</h3>
-                        <p class="step-description">
-                            Set your trip duration and click "Plan My Birding Trip" to generate an optimized itinerary. The app will create the most efficient route to maximize your chances of seeing all selected birds. If you have a custom start location set, you can choose to "Start route from current location" to begin your trip from where you are now instead of the search location. You can toggle Beginner Mode on/off using the button at the top if you need a simpler interface.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="step-container">
-                    <div class="step-number">
-                        <span class="step-number-text">4</span>
-                    </div>
-                    <div class="step-content">
-                        <h3 class="step-title">Go Birding!</h3>
-                        <p class="step-description">
-                            Use the directions to navigate to each location and check off birds as you spot them. Mark birds as seen in your trip log and add notes about your observations. Take photos using the camera icon to document your sightings. You can also use the "Add Sighting" button in the Trip Logs screen to quickly log birds you encounter outside of your planned itinerary - simply select the birds, choose their location on an interactive map, and give the location a custom name. The app will automatically add all sightings to your Life List and Big Month count.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="step-container">
-                    <div class="step-number">
-                        <span class="step-number-text">5</span>
-                    </div>
-                    <div class="step-content">
-                        <h3 class="step-title">Save & Share</h3>
-                        <p class="step-description">
-                            Save your trips to access them later from Trip Logs. You can import trips created by others, or export and share your own trips via email, messaging apps, or as calendar events. Your birding statistics are tallied in your Profile screen to track your progress over time. View your photos in the Photo Gallery and track progress in the Big Month feature.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Guide Tab -->
-            <div id="guide-content" class="tab-panel hidden">
-                <h2 class="section-title">Comprehensive User Guide</h2>
-                
-                <div class="guide-section">
-                    <h3 class="guide-section-title">Home Screen</h3>
-                    <p class="guide-text">
-                        The home screen shows a list of birds observed near your current or selected location. Tap on any bird to select it for your trip plan (selected birds will be highlighted). Use the search bar to filter by name, and if you're not in Beginner Mode, the time filter to adjust how many days of observations to include. The Beginner Mode toggle at the top lets you switch between simple and advanced interfaces.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">How to use:</span><br>
-                        1. Tap the location indicator at the top to change your location<br>
-                        2. Use the search bar to find specific birds by name<br>
-                        3. Tap the filter icon to adjust observation time periods (7, 14, or 30 days)<br>
-                        4. Tap any bird in the list to select it for your trip<br>
-                        5. Use the action bar buttons to access additional features like Coverage Map, Hotspot Browser, and Big Month
-                    </div>
-                </div>
-                
-                <div class="guide-section">
-                    <h3 class="guide-section-title">Trip Planning</h3>
-                    <p class="guide-text">
-                        After selecting birds, set your trip duration and tap "Plan My Birding Trip". The app will generate an optimized route to maximize your chances of seeing all selected birds. The trip plan includes maps, directions, and a day-by-day itinerary. In Beginner Mode, the planning process is simplified with fewer options and more guidance.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">How to plan a trip:</span><br>
-                        1. Select birds from the home screen or hotspot browser<br>
-                        2. Set trip duration in days and locations per day<br>
-                        3. Choose routing options:<br>
-                        &nbsp;&nbsp;&nbsp;• "Exclude seen birds" - skip birds you've already logged<br>
-                        &nbsp;&nbsp;&nbsp;• "Exclude visited hotspots" - skip places you've been<br>
-                        &nbsp;&nbsp;&nbsp;• "Start route from current location" - begin from where you are instead of the search location<br>
-                        4. Tap "Plan My Birding Trip" or "Auto-Plan" button<br>
-                        5. Review the generated itinerary which shows:<br>
-                        &nbsp;&nbsp;&nbsp;• Day-by-day breakdown of locations<br>
-                        &nbsp;&nbsp;&nbsp;• Estimated travel times between stops<br>
-                        &nbsp;&nbsp;&nbsp;• Specific birds likely at each location<br>
-                        &nbsp;&nbsp;&nbsp;• Optimized routing from your starting point<br>
-                        6. Save the trip for later or start navigating immediately
-                    </div>
-                </div>
-
-                <div class="guide-section">
-                    <h3 class="guide-section-title">Trip Map</h3>
-                    <p class="guide-text">
-                        The Trip Map provides a visual overview of all your birding adventures on an interactive map. It shows only locations where you've actually logged bird sightings, giving you a clear picture of your birding journey across different locations and trips.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">How to use Trip Map:</span><br>
-                        1. Navigate to My Trips → Trip Map<br>
-                        2. Tap "Load Map" to display the interactive map<br>
-                        3. View all your logged birding locations with colored markers<br>
-                        4. Each marker shows the location name and number of birds logged<br>
-                        5. Click any trip in the list below the map to highlight it<br>
-                        6. Selected trips will:<br>
-                        &nbsp;&nbsp;&nbsp;• Show only that trip's locations on the map<br>
-                        &nbsp;&nbsp;&nbsp;• Automatically center and zoom to the trip area<br>
-                        &nbsp;&nbsp;&nbsp;• Display trip details with completion status<br>
-                        7. Use the map button (📍) next to each trip to highlight it<br>
-                        8. Use the eye button (👁️) to view the full trip log<br>
-                        9. Click a selected trip again to deselect and see all trips
-                    </div>
-                </div>
-
-                <div class="guide-section">
-                    <h3 class="guide-section-title">Import & Export</h3>
-                    <p class="guide-text">
-                        You can import trips from files in the Trip Logs screen. To export a trip, open it in your Trip Log and tap Actions. You can export as a file (which can be imported by other app users), as a text/PDF summary, or add it directly to your calendar. You can also share a trip summary via text or email. All photos attached to your sightings are included in exports and preserved when importing.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">Contributing to eBird:</span><br>
-                        1. Your sightings can be exported in a format compatible with eBird.org<br>
-                        2. After checking off birds on your trip:<br>
-                        &nbsp;&nbsp;&nbsp;• Export your trip using the "Export for eBird" option<br>
-                        &nbsp;&nbsp;&nbsp;• The export includes date, location, species, counts, notes, and photos<br>
-                        &nbsp;&nbsp;&nbsp;• Photos are prepared in the format eBird expects<br>
-                        &nbsp;&nbsp;&nbsp;• Visit eBird.org and sign in to your account<br>
-                        &nbsp;&nbsp;&nbsp;• Go to "Submit Observations" and use the "Upload Data" option<br>
-                        &nbsp;&nbsp;&nbsp;• Follow eBird's instructions to import your sightings and photos<br>
-                        3. Why contribute to eBird?<br>
-                        &nbsp;&nbsp;&nbsp;• Your observations help scientists track bird populations and migration patterns<br>
-                        &nbsp;&nbsp;&nbsp;• Data supports conservation efforts and habitat protection<br>
-                        &nbsp;&nbsp;&nbsp;• Helps identify important bird areas that need protection<br>
-                        &nbsp;&nbsp;&nbsp;• Your contributions create a more complete picture of bird distribution worldwide<br>
-                        &nbsp;&nbsp;&nbsp;• Photos help verify rare sightings and assist with research<br>
-                        4. All exports include proper location data, time of observation, and species identifiers that match eBird's taxonomy
-                    </div>
-                    <div class="attribution-buttons">
-                        <a href="https://ebird.org/submit" class="attribution-button" target="_blank">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            Submit to eBird.org
-                        </a>
-                        <a href="https://support.ebird.org/en/support/solutions/articles/48000957911-upload-data-to-ebird" class="attribution-button secondary" target="_blank">
-                            <i class="fas fa-info-circle"></i>
-                            eBird Upload Guide
-                        </a>
-                    </div>
-                </div>
-
-                <div class="guide-section">
-                    <h3 class="guide-section-title">Data Attribution</h3>
-                    <p class="guide-text">
-                        Peregrine Planner uses bird observation data from eBird, one of the world's largest biodiversity-related citizen science projects. The app integrates this data to provide you with accurate and up-to-date information about bird sightings in your area.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">Data sources:</span><br>
-                        1. Bird observation data is provided by eBird (eBird.org)<br>
-                        2. eBird is a project of the Cornell Lab of Ornithology<br>
-                        3. Worldwide bird taxonomy data is provided by eBird.org<br>
-                        4. For more information or to contribute your own bird sightings, visit eBird.org
-                    </div>
-                    <div class="attribution-buttons">
-                        <a href="https://ebird.org" class="attribution-button" target="_blank">
-                            Visit eBird.org
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FAQ Tab -->
-            <div id="faq-content" class="tab-panel hidden">
-                <div class="faq-container">
-                    <!-- Search bar -->
-                    <div class="search-container">
-                        <i class="fas fa-search" style="color: var(--gray);"></i>
-                        <input type="text" class="search-input" placeholder="Search FAQs..." id="faq-search">
-                        <button class="search-clear" onclick="clearSearch()" id="clear-search" style="display: none;">
-                            <i class="fas fa-times-circle"></i>
-                        </button>
-                    </div>
-                    
-                    <!-- Results count -->
-                    <div class="results-count" id="results-count" style="display: none;"></div>
-                    
-                    <!-- FAQ List -->
-                    <div class="faq-list" id="faq-list">
-                        <!-- FAQs will be populated by JavaScript -->
-                    </div>
-                    
-                    <!-- Tip at the bottom -->
-                    <div class="faq-tip">
-                        <i class="fas fa-lightbulb"></i>
-                        <span class="faq-tip-text">
-                            Tip: Try searching for "routing", "location", "add sighting", "map", "naming", "life list", or "export"
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Contact Tab -->
-            <div id="contact-content" class="tab-panel hidden">
-                <h2 class="section-title">Contact Support</h2>
-                <p class="contact-intro">
-                    Have a question, found a bug, or want to suggest a feature? 
-                    Fill out the form below and we'll get back to you as soon as possible.
+        <div id="quickstart" class="tab-content active">
+            <div class="guide-section">
+                <h2 class="guide-section-title">Welcome to Peregrine Planner</h2>
+                <p class="guide-text">
+                    Peregrine Planner is your comprehensive birding companion that helps you plan trips, identify birds, and track your sightings. This guide will help you get started with the key features.
                 </p>
                 
-                <form id="contact-form">
+                <div class="guide-instructions">
+                    <span class="instruction-title">Getting Started:</span>
+                    <br>1. Plan your birding trips using the Plan tab
+                    <br>2. Use AI-powered bird identification in the ID tab
+                    <br>3. Track your sightings in Trip Logs
+                    <br>4. Build your Life List as you discover new species
+                    <br>5. Learn about birds with interactive tutorials
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h2 class="guide-section-title">Key Features</h2>
+                <div class="guide-instructions">
+                    <span class="instruction-title">Trip Planning:</span>
+                    <br>• Smart route optimization based on bird sightings
+                    <br>• Integration with eBird hotspot data
+                    <br>• Customizable trip parameters and preferences
+                    <br>• Export trips to calendar and PDF formats
+                </div>
+                
+                <div class="guide-instructions">
+                    <span class="instruction-title">Bird Identification:</span>
+                    <br>• Real-time sound detection using Cornell BirdNET AI
+                    <br>• Photo identification with confidence scoring
+                    <br>• Regional species filtering for improved accuracy
+                    <br>• Comprehensive bird information cards
+                </div>
+                
+                <div class="guide-instructions">
+                    <span class="instruction-title">Tracking & Learning:</span>
+                    <br>• Automatic Life List building from your sightings
+                    <br>• Interactive learning modules with progress tracking
+                    <br>• Big Month challenges and statistics
+                    <br>• Export sightings to eBird for citizen science
+                </div>
+            </div>
+        </div>
+
+        <div id="faq" class="tab-content">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search frequently asked questions..." id="faqSearch">
+            </div>
+            <div id="faqContainer">
+                <!-- FAQ items will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <div id="guide" class="tab-content">
+            <div class="guide-section">
+                <h2 class="guide-section-title">Trip Planning</h2>
+                <p class="guide-text">
+                    The Plan tab is your starting point for creating optimized birding trips. The system analyzes recent eBird data to suggest the best locations and times for bird watching in your area.
+                </p>
+                <div class="guide-instructions">
+                    <span class="instruction-title">How to Plan a Trip:</span>
+                    <br>1. Set your search location using the location picker
+                    <br>2. Choose your search radius (1-50 miles)
+                    <br>3. Select date range for your trip
+                    <br>4. Choose between auto-planning or manual bird selection
+                    <br>5. Review and customize your suggested itinerary
+                    <br>6. Save your trip and start birding!
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h2 class="guide-section-title">AI Bird Identification</h2>
+                <p class="guide-text">
+                    The ID tab contains AI-powered bird identification tools that help you identify birds you encounter in the field. These tools use advanced machine learning to analyze bird sounds and images for accurate species identification.
+                </p>
+                <div class="guide-instructions">
+                    <span class="instruction-title">Bird Sounds Detection:</span>
+                    <br>1. Navigate to ID → Bird Sounds Detection
+                    <br>2. Configure detection settings (sensitivity level, regional filtering)
+                    <br>3. Toggle the switch to "On" to start real-time listening
+                    <br>4. The app uses Cornell BirdNET AI with enhanced sensitivity
+                    <br>5. Detected species appear with confidence scores and timestamps
+                    <br>6. Add detected birds to existing trips or create new ones
+                </div>
+                
+                <div class="guide-instructions">
+                    <span class="instruction-title">Bird Photo Detection:</span>
+                    <br>1. Navigate to ID → Bird Photo Detection
+                    <br>2. Select photos from gallery or take new ones
+                    <br>3. AI analyzes images and provides species suggestions
+                    <br>4. View results grouped by species or individually
+                    <br>5. Create trips from detected birds with location integration
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h2 class="guide-section-title">Trip Logs & Life List</h2>
+                <p class="guide-text">
+                    Track your birding progress with comprehensive trip logs and automatically build your Life List as you discover new species.
+                </p>
+                <div class="guide-instructions">
+                    <span class="instruction-title">Using Trip Logs:</span>
+                    <br>1. Access active and completed trips from the Trip Logs tab
+                    <br>2. Mark birds as seen by tapping checkboxes
+                    <br>3. Add notes, counts, and photos to your sightings
+                    <br>4. Use the floating "Add Sighting" button for quick entries
+                    <br>5. Export trips to eBird for citizen science contributions
+                </div>
+            </div>
+
+            <div class="guide-section">
+                <h2 class="guide-section-title">Learning & Progress</h2>
+                <p class="guide-text">
+                    The Learn tab provides structured learning activities for birders of all levels, with interactive tutorials and progress tracking.
+                </p>
+                <div class="guide-instructions">
+                    <span class="instruction-title">Learning Features:</span>
+                    <br>• Location-based bird selection from real eBird data
+                    <br>• Interactive quizzes with multiple choice questions
+                    <br>• Progress tracking with points and streaks
+                    <br>• Comprehensive bird information and identification tips
+                    <br>• Reset option to start fresh learning journey
+                </div>
+            </div>
+        </div>
+
+        <div id="contact" class="tab-content">
+            <div class="contact-form">
+                <h2 class="guide-section-title">Contact Support</h2>
+                <p class="guide-text">
+                    Need help with Peregrine Planner? Send us a message and we'll get back to you as soon as possible.
+                </p>
+                
+                <form id="contactForm">
                     <div class="form-group">
-                        <label class="label" for="contact-name">Your Name:</label>
-                        <input type="text" class="input" id="contact-name" placeholder="Enter your name">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" class="form-input" required>
                     </div>
                     
                     <div class="form-group">
-                        <label class="label" for="contact-email">Your Email:</label>
-                        <input type="email" class="input" id="contact-email" placeholder="Enter your email address">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-input" required>
                     </div>
                     
                     <div class="form-group">
-                        <label class="label">Subject:</label>
-                        <div class="subject-buttons">
-                            <button type="button" class="subject-button selected" data-subject="Bug Report">Bug Report</button>
-                            <button type="button" class="subject-button" data-subject="Feature Request">Feature Request</button>
-                            <button type="button" class="subject-button" data-subject="General Question">General Question</button>
-                        </div>
+                        <label for="subject" class="form-label">Subject</label>
+                        <select id="subject" class="form-select">
+                            <option value="Bug Report">Bug Report</option>
+                            <option value="Feature Request">Feature Request</option>
+                            <option value="General Question">General Question</option>
+                            <option value="Technical Support">Technical Support</option>
+                        </select>
                     </div>
                     
                     <div class="form-group">
-                        <label class="label" for="contact-message">Message:</label>
-                        <textarea class="textarea" id="contact-message" placeholder="Please describe the issue in detail. Include what you were doing, what you expected to happen, and what actually happened."></textarea>
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" class="form-textarea" required placeholder="Please describe your issue or question in detail..."></textarea>
                     </div>
                     
-                    <button type="submit" class="submit-button" id="submit-button" disabled>
-                        Send Message
-                    </button>
+                    <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
                 </form>
-                
-                <p class="direct-contact">
-                    You can also email us directly at:<br>
-                    <a href="mailto:peregrineplanner@gmail.com" class="email-link">peregrineplanner@gmail.com</a>
-                </p>
-
-                <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--gray-light);">
-                    <a href="privacy-policy.html" class="email-link" style="font-size: 14px;">
-                        <i class="fas fa-shield-alt" style="margin-right: 6px;"></i>
-                        Privacy Policy
-                    </a>
-                </div>
             </div>
         </div>
     </div>
 
-    <!-- Tooltip -->
-    <div class="tooltip-overlay" id="tooltip-overlay" onclick="hideTooltip()">
-        <div class="tooltip" onclick="event.stopPropagation()">
-            <h3 class="tooltip-title" id="tooltip-title"></h3>
-            <p class="tooltip-content" id="tooltip-content"></p>
-            <button class="tooltip-close" onclick="hideTooltip()">Got it</button>
-        </div>
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
     </div>
 
     <!-- Orientation Modal -->
-    <div class="orientation-overlay" id="orientation-overlay">
-        <div class="orientation-card">
-            <div class="orientation-step" id="orientation-step"></div>
-            <h2 class="orientation-title" id="orientation-title"></h2>
-            <p class="orientation-content" id="orientation-content"></p>
-            <button class="orientation-button" id="orientation-button" onclick="handleOrientationStep()"></button>
-            <button class="orientation-skip" id="orientation-skip" onclick="closeOrientation()" style="display: none;">Skip Tour</button>
+    <div id="orientationModal" class="orientation-modal" style="display: none;">
+        <div class="orientation-content">
+            <div class="orientation-step" id="orientationStep">Step 1 of 4</div>
+            <h2 class="orientation-title" id="orientationTitle">Welcome to Help & Support</h2>
+            <p class="orientation-text" id="orientationText">
+                This help system contains everything you need to know about using Peregrine Planner effectively. Let's take a quick tour of the available resources.
+            </p>
+            <button class="orientation-button" id="orientationNext">Next</button>
+            <button class="orientation-skip" id="orientationSkip">Skip Tour</button>
         </div>
     </div>
 
-    <script>
-        // FAQ Data
-        const faqs = [
-            { 
-                id: '1', 
-                question: 'How do I log birds I\'ve seen during my trip?',
-                answer: 'Open your active trip from the Trip Logs screen, find the bird in your itinerary, and tap the checkbox next to it to mark it as seen. You can also add notes and the number of birds spotted. These sightings will automatically be added to your Life List. Additionally, you can use the "Add Sighting" floating button in the Trip Logs screen to quickly log birds you see outside of planned trips.',
-                topics: ['sightings', 'trip log', 'life list'],
-                related: ['9', '12', '20']
-            },
-            { 
-                id: '20', 
-                question: 'How can I contribute my bird sightings to eBird?',
-                answer: 'Peregrine Planner makes it easy to contribute your sightings to eBird.org, which helps support bird conservation worldwide. After marking birds as seen in your trip log, tap the "Actions" button and select "Export for eBird". This creates a special file with all your sighting data formatted for eBird. Then visit eBird.org, sign in, and use their "Upload Data" option to submit your observations. This contributes to a global citizen science project that helps track bird populations, migration patterns, and habitat needs.',
-                topics: ['export', 'ebird', 'citizen science', 'contribution'],
-                related: ['1', '12', '14', '19']
-            },
-            { 
-                id: '2', 
-                question: 'How do I use the Add Sighting feature?',
-                answer: 'The Add Sighting feature allows you to log bird sightings that happen outside your planned trips. To use it: 1) Go to My Trips > Trip Logs. 2) Tap the green "Add Sighting" floating button in the bottom right. 3) Select the birds you spotted from the list. 4) Tap "Select on Map" to choose the exact location where you saw the birds. 5) Tap anywhere on the map to set coordinates, then enter a custom name for the location (e.g., "Central Park Lake", "My Backyard"). 6) Confirm the location and add your sighting. These sightings will be added to your current trip or create a new trip if needed.',
-                topics: ['sightings', 'trip log', 'quick log', 'map', 'location'],
-                related: ['1', '9', '23']
-            },
-            { 
-                id: '24', 
-                question: 'How do I view my birding locations on the Trip Map?',
-                answer: 'The Trip Map shows all your logged birding locations on an interactive map. To use it: 1) Go to My Trips > Trip Map. 2) Tap "Load Map" to display your birding locations. 3) Each marker shows a location where you\'ve logged bird sightings, with the number of birds in the marker title. 4) Click any trip in the list below to highlight only that trip\'s locations on the map. 5) The map will automatically center and zoom to show the selected trip area. 6) Use the map button (📍) next to each trip to highlight it, or the eye button (👁️) to view the full trip details. 7) Click a selected trip again to return to viewing all trips.',
-                topics: ['trip map', 'map', 'locations', 'visualization', 'trips'],
-                related: ['1', '2', '9', '12']
-            },
-            { 
-                id: '3', 
-                question: 'How do I plan my first birding trip?',
-                answer: 'To plan your first trip: 1) Set your starting location by tapping the location button. 2) Select birds you want to see from the list. 3) Choose your trip duration. 4) Click "Plan My Birding Trip" to generate an itinerary. In Beginner Mode, the process is simplified with additional guidance.',
-                topics: ['getting started', 'trips', 'planning'],
-                related: ['4', '10']
-            },
-            { 
-                id: '4', 
-                question: 'What is Beginner Mode?',
-                answer: 'Beginner Mode offers a simplified interface with additional guidance for new birders. It shows fewer options, provides helpful tips, and makes trip planning easier. You can toggle it on/off using the button in the action bar or in your Profile settings.',
-                topics: ['interface', 'beginner', 'settings'],
-                related: ['3']
-            },
-            { 
-                id: '5', 
-                question: 'Can I change the location for my trip?',
-                answer: 'Yes, tap on your location at the top of the home screen to open the location picker. You can either tap anywhere on the map to set a custom location or use your current location. When you have both a current location and a custom search location set, you can choose "Start route from current location" in the trip planning options to begin your route from where you are now instead of the search location.',
-                topics: ['location', 'maps', 'planning', 'routing'],
-                related: ['3', '10', '22'] 
-            },
-            { 
-                id: '6', 
-                question: 'What is the Life List screen?',
-                answer: 'The Life List screen shows all bird species you\'ve marked as "seen" across all your trips. It acts as your personal birding record, showing your total species count and allowing you to track your birding achievements over time.',
-                topics: ['life list', 'records', 'sightings'],
-                related: ['1', '2', '13']
-            },
-            { 
-                id: '7', 
-                question: 'What are hotspots and how do I use them?',
-                answer: 'Hotspots are locations known for good bird watching, usually with many reported sightings. Use the Hotspot Browser (accessible from the action bar) to explore nearby hotspots and see which birds have been spotted there recently. You can select a hotspot and add its birds to your trip plan.',
-                topics: ['hotspots', 'locations', 'planning'],
-                related: ['8', '5']
-            },
-            { 
-                id: '8', 
-                question: 'What does the Coverage Map show?',
-                answer: 'The Coverage Map displays hotspots with bird sightings in your area. The size and color intensity of each marker indicates the number of unique bird species observed at that location. Tap on any marker to see the exact species count. Official hotspots are marked with stars, and you can access enhanced data including seasonal patterns and peak observation times.',
-                topics: ['maps', 'hotspots', 'planning'],
-                related: ['7', '5']
-            },
-            { 
-                id: '9', 
-                question: 'How do I import a trip from a file?',
-                answer: 'There are multiple ways to import trips: 1) From the Home screen, tap the "Import Trip" button in the action bar. 2) From My Trips > Trip Logs, tap the "Import Trip" button. 3) If you have no trips yet, you\'ll also see an Import Trip button in the empty state. All options will open a file picker where you can select a trip file (.json format) to import. When importing a trip, any photos included in the file will be automatically saved to your device and linked to their corresponding bird sightings. All photo metadata such as date, location, and species information is preserved during import.',
-                topics: ['import', 'export', 'sharing', 'photos'],
-                related: ['14', '21']
-            },
-            { 
-                id: '10', 
-                question: 'How does the app determine which birds I might see?',
-                answer: 'The app uses recent observation data from eBird.org to show birds that have been reported near your location within your selected time frame (1-30 days). eBird is a project of the Cornell Lab of Ornithology that collects and distributes bird observations from birdwatchers worldwide.',
-                topics: ['birds', 'data', 'planning', 'ebird'],
-                related: ['3', '7', '19']
-            },
-            { 
-                id: '11', 
-                question: 'What do the rarity indicators mean?',
-                answer: 'Birds are assigned rarity scores on a 1-10 scale, with higher numbers indicating rarer species. In bird lists and itineraries, you\'ll see stars (★) next to rarer birds, with more stars indicating higher rarity. You can toggle rarity indicators on/off in your Profile settings.',
-                topics: ['birds', 'interface', 'settings'],
-                related: ['10']
-            },
-            { 
-                id: '12', 
-                question: 'How can I export or share my birding trips?',
-                answer: 'You can export any saved trip by opening it in your Trip Log and tapping the "Actions" button. You can export as a file, PDF, or even add it to your calendar. These files can be shared with others via email, messaging apps, or other sharing methods. All exports include your photos with appropriate resolution for each format type. When exporting as a PDF, photos will be compressed for optimal file size, while JSON exports include full-resolution images. Additionally, the "Export for eBird" option creates a special format that can be uploaded to eBird.org to contribute your sightings and photos to their citizen science project. If you prefer not to include photos in your exports for privacy reasons, you can disable this feature in your Profile settings.',
-                topics: ['export', 'sharing', 'trips', 'ebird', 'photos', 'privacy'],
-                related: ['9', '14', '20', '21']
-            },
-            { 
-                id: '13', 
-                question: 'What is the State Goals feature?',
-                answer: 'The State Goals feature helps you track your progress toward seeing all official state birds. In the State Goals screen, you can view which state birds you\'ve already spotted and which ones you still need to find. The app can also recommend trips to help you add specific state birds to your life list.',
-                topics: ['goals', 'tracking', 'birds'],
-                related: ['6']
-            },
-            { 
-                id: '14', 
-                question: 'How do I export my trips to share with friends?',
-                answer: 'You can export any saved trip by opening it in your Trip Log and tapping the "Actions" button. Choose the export format and share the file via email, messaging apps, or other sharing methods. Others can import your trips using the Import Trip feature. Trip exports include all your photos, which are automatically processed according to the export format. JSON exports include full-resolution photos, while PDF and shared exports include compressed photos. If you want to contribute to citizen science, use the "Export for eBird" option to create a file that can be uploaded to eBird.org, helping researchers track bird populations worldwide.',
-                topics: ['export', 'sharing', 'trips', 'ebird', 'photos'],
-                related: ['9', '12', '20', '21']
-            },
-            { 
-                id: '15', 
-                question: 'How do I change from miles to kilometers?',
-                answer: 'Go to More > Settings and toggle the "Use Metric Units" setting. This will switch the app to display distances in kilometers instead of miles.',
-                topics: ['settings', 'units', 'profile'],
-                related: ['16']
-            },
-            { 
-                id: '16', 
-                question: 'What are the notification settings for?',
-                answer: 'Notification settings let you control when and how the app alerts you. You can receive notifications for rare bird sightings in your area, trip reminders, and other birding-related updates. Customize these in More > Settings.',
-                topics: ['settings', 'notifications', 'profile'],
-                related: ['15']
-            },
-            { 
-                id: '17', 
-                question: 'How can I support the app?',
-                answer: 'The app includes an optional tip jar where you can make contributions at various levels to support ongoing development. Access the tip jar from More > Settings under "Support the App" to view available contribution options.',
-                topics: ['support', 'donations', 'profile'],
-                related: []
-            },
-            { 
-                id: '18', 
-                question: 'How do I report a bug or suggest a feature?',
-                answer: 'Go to More > Help & Info and select the Contact tab. There you can fill out a form to report bugs, request features, or ask questions. Your feedback will be sent directly to our development team at peregrineplanner@gmail.com.',
-                topics: ['support', 'bugs', 'contact'],
-                related: []
-            },
-            {
-                id: '19',
-                question: 'Where does the bird data come from?',
-                answer: 'All bird observation data in the app comes from eBird.org, one of the world\'s largest biodiversity-related citizen science projects. eBird is managed by the Cornell Lab of Ornithology and collects millions of bird observations from birdwatchers around the world. Visit eBird.org to learn more. You can also contribute your own sightings by using the "Export for eBird" option in the Trip Log actions menu, creating a file that can be directly uploaded to eBird.org.',
-                topics: ['data', 'ebird', 'birds', 'citizen science'],
-                related: ['10', '20']
-            },
-            {
-                id: '21',
-                question: 'How do photos work with trip imports and exports?',
-                answer: 'When you export a trip, all photos from your bird sightings are included in the export file. The resolution depends on the export format: JSON files include full-resolution photos, PDFs include compressed photos, and shared exports include smaller photos for efficiency. When someone imports your trip, all photos are preserved along with their metadata (date, species, location). Photos from imports are automatically saved to the user\'s device photo library and linked to the corresponding sightings. For privacy, you can disable including photos in exports from your Profile settings. You can also manage photos by tapping on any bird sighting to add, edit, or delete photos.',
-                topics: ['photos', 'import', 'export', 'sharing', 'privacy'],
-                related: ['9', '12', '14']
-            },
-            {
-                id: '22',
-                question: 'What does "Start route from current location" do?',
-                answer: 'The "Start route from current location" option changes how your trip route is planned. Normally, trips are optimized starting from your custom search location. When this option is enabled, the app creates a route that starts from wherever you currently are and goes directly to the optimized birding locations. This is useful when you want to search for birds in a specific area but start your actual trip from a different location. The option only appears when you have both a current location and a different custom search location set.',
-                topics: ['routing', 'planning', 'location', 'optimization'],
-                related: ['3', '5', '7']
-            },
-            {
-                id: '23',
-                question: 'How do I select and name locations for my bird sightings?',
-                answer: 'When adding adhoc sightings, you can precisely select where you saw the birds using an interactive map. After selecting birds in the Add Sighting modal, tap "Select on Map" to open the location picker. Tap anywhere on the map to set the exact coordinates, then enter a custom name for the location (like "Central Park Lake" or "My Backyard"). You can also use the "Use Current Location" button to automatically select your GPS position. The app will suggest a default name based on the current time, but you can change it to anything meaningful. Both location coordinates and a name are required before you can save the sighting.',
-                topics: ['location', 'map', 'naming', 'coordinates', 'sighting'],
-                related: ['2', '5']
-            }
-        ];
-
-        // State management
-        let currentTab = 'quickstart';
-        let expandedFAQ = null;
-        let filteredFAQs = [...faqs];
-        let currentSearchQuery = '';
-        let currentOrientationStep = 0;
-        let selectedSubject = 'Bug Report';
-
-        // Orientation steps
-        const orientationSteps = [
-            {
-                title: "Welcome to Peregrine Planner!",
-                content: "Let's take a quick tour of key features to help you get started.",
-                button: "Next"
-            },
-            {
-                title: "Plan Birding Trips",
-                content: "Use the home screen to select birds you want to see and plan optimized trips to find them.",
-                button: "Next"
-            },
-            {
-                title: "Add Bird Sightings",
-                content: "Use the \"Add Sighting\" button in Trip Logs to quickly log birds you spot any time. You can select the exact location on a map and give it a custom name.",
-                button: "Next"
-            },
-            {
-                title: "Track Your Life List",
-                content: "All birds you mark as seen are added to your Life List - your personal birding achievement record.",
-                button: "Next"
-            },
-            {
-                title: "Get Help Anytime",
-                content: "Find guides, FAQs, and tips in the Help screen. Look for tooltip icons throughout the app for quick explanations.",
-                button: "Let's Go!"
-            }
-        ];
-
-        // Initialize page
-        document.addEventListener('DOMContentLoaded', function() {
-            setupEventListeners();
-            renderFAQs();
-            checkFirstTimeVisit();
-        });
-
-        // Setup event listeners
-        function setupEventListeners() {
-            // Search functionality
-            const searchInput = document.getElementById('faq-search');
-            searchInput.addEventListener('input', handleSearch);
-
-            // Contact form
-            const contactForm = document.getElementById('contact-form');
-            contactForm.addEventListener('submit', handleContactSubmit);
-
-            // Form validation
-            document.getElementById('contact-name').addEventListener('input', validateForm);
-            document.getElementById('contact-email').addEventListener('input', validateForm);
-            document.getElementById('contact-message').addEventListener('input', validateForm);
-
-            // Subject buttons
-            const subjectButtons = document.querySelectorAll('.subject-button');
-            subjectButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    subjectButtons.forEach(btn => btn.classList.remove('selected'));
-                    this.classList.add('selected');
-                    selectedSubject = this.dataset.subject;
-                    updateMessagePlaceholder();
-                });
-            });
-        }
-
-        // Tab switching
-        function switchTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
-
-            // Show/hide content
-            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.add('hidden'));
-            document.getElementById(`${tabName}-content`).classList.remove('hidden');
-
-            currentTab = tabName;
-        }
-
-        // FAQ functionality
-        function handleSearch() {
-            const searchInput = document.getElementById('faq-search');
-            const query = searchInput.value.toLowerCase().trim();
-            currentSearchQuery = query;
-
-            // Show/hide clear button
-            const clearButton = document.getElementById('clear-search');
-            clearButton.style.display = query ? 'block' : 'none';
-
-            // Filter FAQs
-            if (!query) {
-                filteredFAQs = [...faqs];
-            } else {
-                filteredFAQs = faqs.filter(faq => 
-                    faq.question.toLowerCase().includes(query) || 
-                    faq.answer.toLowerCase().includes(query) ||
-                    faq.topics.some(topic => topic.toLowerCase().includes(query))
-                );
-            }
-
-            // Update results count
-            const resultsCount = document.getElementById('results-count');
-            if (query) {
-                resultsCount.style.display = 'block';
-                resultsCount.textContent = `${filteredFAQs.length} result${filteredFAQs.length !== 1 ? 's' : ''} found`;
-            } else {
-                resultsCount.style.display = 'none';
-            }
-
-            renderFAQs();
-        }
-
-        function clearSearch() {
-            document.getElementById('faq-search').value = '';
-            handleSearch();
-        }
-
-        function renderFAQs() {
-            const faqList = document.getElementById('faq-list');
-            
-            if (filteredFAQs.length === 0) {
-                faqList.innerHTML = `
-                    <div class="empty-results">
-                        <i class="fas fa-search"></i>
-                        <div style="font-size: 16px; font-weight: 500; margin-top: 16px;">No FAQs match your search</div>
-                        <div style="font-size: 14px; margin-top: 8px;">Try using different keywords</div>
-                    </div>
-                `;
-                return;
-            }
-
-            faqList.innerHTML = filteredFAQs.map(faq => `
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ('${faq.id}')">
-                        <div class="faq-question-text">${faq.question}</div>
-                        <i class="fas fa-chevron-${expandedFAQ === faq.id ? 'up' : 'down'}"></i>
-                    </div>
-                    ${expandedFAQ === faq.id ? `
-                        <div class="faq-answer">
-                            <div class="faq-answer-text">${faq.answer}</div>
-                            <div class="topics-container">
-                                ${faq.topics.map(topic => `<span class="topic-tag">${topic}</span>`).join('')}
-                            </div>
-                            ${faq.related && faq.related.length > 0 ? `
-                                <div class="related-container">
-                                    <div class="related-title">Related Questions:</div>
-                                    ${faq.related.map(relatedId => {
-                                        const relatedFaq = faqs.find(f => f.id === relatedId);
-                                        if (!relatedFaq) return '';
-                                        return `
-                                            <a href="#" class="related-item" onclick="navigateToRelatedFAQ('${relatedId}'); return false;">
-                                                <i class="fas fa-arrow-circle-right"></i>
-                                                ${relatedFaq.question}
-                                            </a>
-                                        `;
-                                    }).join('')}
-                                </div>
-                            ` : ''}
-                        </div>
-                    ` : ''}
-                </div>
-            `).join('');
-        }
-
-        function toggleFAQ(id) {
-            expandedFAQ = expandedFAQ === id ? null : id;
-            renderFAQs();
-        }
-
-        function navigateToRelatedFAQ(id) {
-            switchTab('faq');
-            document.getElementById('faq-search').value = '';
-            currentSearchQuery = '';
-            filteredFAQs = [...faqs];
-            expandedFAQ = id;
-            renderFAQs();
-            
-            // Scroll to the FAQ
-            setTimeout(() => {
-                const faqItems = document.querySelectorAll('.faq-item');
-                const index = filteredFAQs.findIndex(faq => faq.id === id);
-                if (index !== -1 && faqItems[index]) {
-                    faqItems[index].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            }, 100);
-        }
-
-        // Contact form functionality
-        function validateForm() {
-            const name = document.getElementById('contact-name').value.trim();
-            const email = document.getElementById('contact-email').value.trim();
-            const message = document.getElementById('contact-message').value.trim();
-            
-            const submitButton = document.getElementById('submit-button');
-            submitButton.disabled = !name || !email || !message;
-        }
-
-        function updateMessagePlaceholder() {
-            const messageField = document.getElementById('contact-message');
-            const placeholders = {
-                'Bug Report': "Please describe the issue in detail. Include what you were doing, what you expected to happen, and what actually happened.",
-                'Feature Request': "Please describe the feature you'd like to see. How would it work and why is it important to you?",
-                'General Question': "How can we help you?"
-            };
-            messageField.placeholder = placeholders[selectedSubject];
-        }
-
-        function handleContactSubmit(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('contact-name').value.trim();
-            const email = document.getElementById('contact-email').value.trim();
-            const message = document.getElementById('contact-message').value.trim();
-            
-            if (!name || !email || !message) {
-                alert('Please fill in all fields.');
-                return;
-            }
-            
-            // Create email content
-            const subject = `[${selectedSubject}] ${name}`;
-            const body = `Name: ${name}
-Email: ${email}
-
-${message}
-
-----
-Sent from Peregrine Planner Help Page
-Browser: ${navigator.userAgent}`;
-            
-            // Create mailto URL
-            const emailUrl = `mailto:peregrineplanner@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
-            // Open email client
-            window.location.href = emailUrl;
-            
-            // Clear form
-            document.getElementById('contact-form').reset();
-            document.querySelectorAll('.subject-button').forEach(btn => btn.classList.remove('selected'));
-            document.querySelector('[data-subject="Bug Report"]').classList.add('selected');
-            selectedSubject = 'Bug Report';
-            updateMessagePlaceholder();
-            
-            alert('Your message has been prepared to send. Complete the process in your email app.');
-        }
-
-        // Tooltip functionality
-        function showTooltip(title, content) {
-            document.getElementById('tooltip-title').textContent = title;
-            document.getElementById('tooltip-content').textContent = content;
-            document.getElementById('tooltip-overlay').classList.add('show');
-        }
-
-        function hideTooltip() {
-            document.getElementById('tooltip-overlay').classList.remove('show');
-        }
-
-        // Orientation functionality
-        function checkFirstTimeVisit() {
-            const hasSeenTour = localStorage.getItem('hasSeenHelpTour');
-            if (!hasSeenTour) {
-                setTimeout(() => {
-                    showOrientation();
-                }, 500);
-            }
-        }
-
-        function showOrientation() {
-            updateOrientationStep();
-            document.getElementById('orientation-overlay').classList.add('show');
-        }
-
-        function updateOrientationStep() {
-            const step = orientationSteps[currentOrientationStep];
-            document.getElementById('orientation-step').textContent = `${currentOrientationStep + 1} of ${orientationSteps.length}`;
-            document.getElementById('orientation-title').textContent = step.title;
-            document.getElementById('orientation-content').textContent = step.content;
-            document.getElementById('orientation-button').textContent = step.button;
-            
-            const skipButton = document.getElementById('orientation-skip');
-            skipButton.style.display = currentOrientationStep > 0 ? 'block' : 'none';
-        }
-
-        function handleOrientationStep() {
-            if (currentOrientationStep < orientationSteps.length - 1) {
-                currentOrientationStep++;
-                updateOrientationStep();
-            } else {
-                closeOrientation();
-            }
-        }
-
-        function closeOrientation() {
-            localStorage.setItem('hasSeenHelpTour', 'true');
-            document.getElementById('orientation-overlay').classList.remove('show');
-            currentOrientationStep = 0;
-        }
-    </script>
+    <script src="help-script.js"></script>
 </body>
 </html>
