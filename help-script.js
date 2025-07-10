@@ -79,9 +79,9 @@ const faqs = [
     },
     {
         id: '9',
-        question: 'How do I build my Life List?',
-        answer: 'Your Life List is automatically built as you mark birds as seen during your trips. Each new species you log gets added to your Life List with the date and location of first sighting. You can view your Life List from the main menu, where you can see statistics, search for specific species, and export your list in various formats.',
-        topics: ['life list', 'species tracking', 'progress'],
+        question: 'What is the Life List screen?',
+        answer: 'The Life List screen shows all bird species you\'ve marked as "seen" across all your trips, acting as your personal birding record and achievement tracker. **Enhanced Visual Experience:** Each bird now displays a thumbnail image from iNaturalist.org alongside its name, making it easier to recall and identify species. Tap any thumbnail or placeholder to open a comprehensive bird information card with detailed species information, identification features, habitat, behavior, and external learning resources. **Interactive Sightings:** Click on any bird in your Life List to see detailed sighting information including all the locations and dates where you\'ve spotted that species. **Trip Navigation:** From individual bird sightings, you can navigate directly to the original trip logs where those birds were recorded, making it easy to revisit your birding memories and add additional notes or photos. **Advanced Filtering:** Switch between viewing birds and hotspots visited, with time-based filters (All Time, Year, 6 Months, 3 Months) to track your progress over different periods. **Enhanced Duplicate Detection:** The app now includes intelligent duplicate detection and removal to ensure your Life List accurately reflects unique species without redundant entries. **Detailed Statistics:** View your total species count, rarity scores, first sighting dates, and sighting frequency. The screen shows when and where you first spotted each species, helping you remember your birding journey. **Smart Organization:** Birds are sorted with seen birds first, then alphabetically, and include rarity indicators to highlight your most significant sightings.',
+        topics: ['life list', 'records', 'sightings', 'thumbnails', 'bird cards', 'statistics', 'filtering', 'hotspots', 'detailed sightings', 'trip navigation', 'duplicate detection'],
         related: ['1', '10', '11']
     },
     {
