@@ -410,7 +410,7 @@
                 
                 <div class="guide-instructions">
                     <span class="instruction-title">6. AI Bird Identification & AR Features</span>
-                    <br>Use the ID tab for AI-powered bird identification. Bird Sounds Detection provides real-time audio identification using Cornell BirdNET AI with configurable sensitivity and regional filtering - toggle it on to automatically detect and log birds by their calls. Bird Photo Detection analyzes your photos to identify bird species with confidence scores. **ENHANCED: AR Bird Identification** now features advanced dual-mode detection, combining both visual camera detection AND real-time audio detection for comprehensive bird identification. Grant camera and microphone permissions to begin identifying birds through your camera viewfinder. The system automatically listens for bird sounds while using the camera, creating intelligent multi-modal detections. When a bird is detected through both sight and sound simultaneously, the system creates a single fused entry rather than duplicate detections. In your trip logs, birds detected through multiple methods show both "Seen" (eye icon) and "Heard" (sound icon) labels, clearly indicating how each bird was identified. Point your camera at birds to see instant identification overlays with common names, scientific names, and confidence scores. **Enhanced Photo Capture:** Use the camera button to capture AR photos with overlays. Photos can be saved with detected species to your trip log, or saved without species to your photo library. If no birds are detected, tap "Add Species" to manually select multiple species from the searchable eBird taxonomy. The AR feature works with both front and back cameras and includes adjustable confidence thresholds and detection settings. All AI tools create trip logs automatically. Throughout the app, bird thumbnails from iNaturalist.org appear next to species names to help with visual identification - tap any thumbnail to see a larger image with photographer credits. Remember: AI identification is experimental and should always be validated with field guides or expert birders.
+                    <br>Use the ID tab for AI-powered bird identification. Bird Sounds Detection provides real-time audio identification using Cornell BirdNET AI with configurable sensitivity and regional filtering - toggle it on to automatically detect and log birds by their calls. Bird Photo Detection analyzes your photos to identify bird species with confidence scores. **ENHANCED: AR Bird Identification** now features advanced dual-mode detection, combining both visual camera detection AND real-time audio detection for comprehensive bird identification. Grant camera and microphone permissions to begin identifying birds through your camera viewfinder. The app works with both front and back cameras and automatically switches between Expo Camera and Vision Camera for optimal compatibility. The system automatically listens for bird sounds while using the camera, creating intelligent multi-modal detections. When a bird is detected through both sight and sound simultaneously, the system creates a single fused entry rather than duplicate detections. In your trip logs, birds detected through multiple methods show both "Seen" (eye icon) and "Heard" (sound icon) labels, clearly indicating how each bird was identified. Point your camera at birds to see instant identification overlays with common names, scientific names, and confidence scores. Each bird gets a floating card that can be moved around the screen by dragging. **Interactive Features:** Tap any bird thumbnail in the overlay to open a detailed species card with full-size images, habitat information, and identification features. Use the "Dismiss" button to remove incorrect detections from the screen. The "Save to Trip" button adds the bird to your current trip log and automatically dismisses the overlay. **Enhanced Photo Capture:** Use the camera button to capture AR photos with overlays. Photos can be saved with detected species to your trip log, or saved without species to your photo library. **Manual Species Addition:** If no birds are detected, tap "Add Species" to manually select multiple species from the searchable eBird taxonomy. **Settings:** Adjust confidence thresholds from very low (0.1%) to very high (80%) to control detection sensitivity. Enable or disable bounding boxes, confidence scores, and other visual elements. Toggle battery optimization for longer sessions. All AI tools create trip logs automatically. Throughout the app, bird thumbnails from iNaturalist.org appear next to species names to help with visual identification - tap any thumbnail to see a larger image with photographer credits. Remember: AI identification is experimental and should always be validated with field guides or expert birders.
                 </div>
                 
                 <div class="guide-instructions">
@@ -538,16 +538,25 @@
                         <br>6. Each bird gets a floating card showing:
                         <br>   • Common name and scientific name
                         <br>   • Confidence percentage
-                        <br>   • Interactive thumbnail image
-                        <br>7. Tap bird thumbnails to open detailed species information
-                        <br>8. Use "Dismiss" button to remove incorrect detections
-                        <br>9. Use "Save to Trip" button to add birds to your trip log
-                        <br>10. Photo capture options:
+                        <br>   • Draggable floating cards that can be moved around the screen
+                        <br>7. Interactive features:
+                        <br>   • Tap bird thumbnails in overlays to open detailed species cards
+                        <br>   • Use "Dismiss" button to remove incorrect detections from screen
+                        <br>   • Use "Save to Trip" button to add birds to trip log and dismiss overlay
+                        <br>   • Multiple birds can be detected with independent overlay interaction
+                        <br>8. Photo capture options:
                         <br>   • Camera button to capture AR photos with overlays
-                        <br>   • Save with species to trip log or without species to photo library
-                        <br>   • Manual species addition if no birds detected
-                        <br>11. Adjust confidence thresholds and visual settings in AR settings
-                        <br>12. Works with both front and back cameras with automatic switching
+                        <br>   • Save with detected species to trip log or without species to photo library
+                        <br>   • Manual species addition if no birds detected in photo
+                        <br>   • Select multiple species from searchable eBird taxonomy
+                        <br>9. Advanced settings:
+                        <br>   • Adjust confidence thresholds from very low (0.1%) to very high (80%)
+                        <br>   • Enable/disable bounding boxes, confidence scores, and visual elements
+                        <br>   • Toggle battery optimization for longer sessions
+                        <br>10. Camera management:
+                        <br>   • Works with both front and back cameras with automatic switching
+                        <br>   • Switches between Expo Camera and Vision Camera for optimal compatibility
+                        <br>   • Automatic camera switching and error recovery
                     </div>
                 </div>
                 
