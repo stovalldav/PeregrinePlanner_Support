@@ -195,6 +195,20 @@
             margin-bottom: 8px;
         }
 
+        .guide-detail-list {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--gray-dark);
+        }
+
+        .guide-detail-list li {
+            margin-bottom: 8px;
+        }
+
+        .guide-detail-list li:last-child {
+            margin-bottom: 0;
+        }
+
         .contact-form {
             max-width: 600px;
             margin: 0 auto;
@@ -382,61 +396,32 @@
         <div id="quickstart" class="tab-content active">
             <div class="guide-section">
                 <h2 class="guide-section-title">Getting Started Quickly</h2>
-                
+
                 <div class="guide-instructions">
-                    <span class="instruction-title">1. Set Your Location</span>
-                    <br>Tap the location button in the action bar (shows "Set Start" or your address) to use your current location or select a custom location on the map.
+                    <span class="instruction-title">Find birds near you</span>
+                    <br>The Plan tab shows real eBird sightings near your current location (or a custom start location) from the last few days. Tap the time filter to widen or narrow the lookback window.
                 </div>
-                
+
                 <div class="guide-instructions">
-                    <span class="instruction-title">2. Learn About Local Birds</span>
-                    <br>Visit the Learn tab to study birds common to your area. The app shows 5 birds at a time from recent eBird observations near your location. Mark each bird as learned after studying their features, habitats, and identification tips. Complete all 5 birds to take an interactive quiz - you need 80% to advance to the next set of birds. This builds your knowledge before planning trips.
+                    <span class="instruction-title">Select birds you want to see</span>
+                    <br>Tap any bird in the list to select it. Selected birds are tracked for trip planning.
                 </div>
-                
+
                 <div class="guide-instructions">
-                    <span class="instruction-title">3. Choose Birds</span>
-                    <br>Select birds you want to see from the list by tapping on them. You can use the search bar to filter by name or the Hotspot Browser to select birds by location. In advanced mode, you can adjust the time period to see more historical data.
+                    <span class="instruction-title">Identify birds by sound or photo</span>
+                    <br>The ID tab offers real-time audio detection (powered by the BirdNET model), photo identification, AR camera identification, and an AI assistant for identification questions.
                 </div>
-                
+
                 <div class="guide-instructions">
-                    <span class="instruction-title">4. Plan Your Trip</span>
-                    <br>Set your trip duration and click "Plan My Birding Trip" to generate an optimized itinerary. The app will create the most efficient route to maximize your chances of seeing all selected birds. If you have a custom start location set, you can choose to "Start route from current location" to begin your trip from where you are now instead of the search location. New birders can use the Learn tab for step-by-step guidance.
+                    <span class="instruction-title">Track your sightings</span>
+                    <br>The Log tab holds your trip logs, life list, and behavior/migration observations.
                 </div>
-                
+
                 <div class="guide-instructions">
-                    <span class="instruction-title">5. Go Birding!</span>
-                    <br>Use the directions to navigate to each location and check off birds as you spot them. Mark birds as seen in your trip log and add notes about your observations. Take photos using the camera icon to document your sightings.
+                    <span class="instruction-title">Customize your experience</span>
+                    <br>Visit More &gt; Settings to set your home state, adjust units, and manage notification preferences.
                 </div>
-                
-                <div class="guide-instructions">
-                    <span class="instruction-title">6. AI Bird Identification & AR Features</span>
-                    <br>Use the ID tab for AI-powered bird identification. Bird Sounds Detection provides real-time audio identification using Cornell BirdNET AI with configurable sensitivity and regional filtering - toggle it on to automatically detect and log birds by their calls. Bird Photo Detection analyzes your photos to identify bird species with confidence scores. **ENHANCED: AR Bird Identification** now features advanced dual-mode detection, combining both visual camera detection AND real-time audio detection for comprehensive bird identification. Grant camera and microphone permissions to begin identifying birds through your camera viewfinder. The app works with both front and back cameras and automatically switches between Expo Camera and Vision Camera for optimal compatibility. The system automatically listens for bird sounds while using the camera, creating intelligent multi-modal detections. When a bird is detected through both sight and sound simultaneously, the system creates a single fused entry rather than duplicate detections. In your trip logs, birds detected through multiple methods show both "Seen" (eye icon) and "Heard" (sound icon) labels, clearly indicating how each bird was identified. Point your camera at birds to see instant identification overlays with common names, scientific names, and confidence scores. Each bird gets a floating card that can be moved around the screen by dragging. **Interactive Features:** Tap any bird thumbnail in the overlay to open a detailed species card with full-size images, habitat information, and identification features. Use the "Dismiss" button to remove incorrect detections from the screen. The "Save to Trip" button adds the bird to your current trip log and automatically dismisses the overlay. **Enhanced Photo Capture:** Use the camera button to capture AR photos with overlays. Photos can be saved with detected species to your trip log, or saved without species to your photo library. **Manual Species Addition:** If no birds are detected, tap "Add Species" to manually select multiple species from the searchable eBird taxonomy. **Settings:** Adjust confidence thresholds from very low (0.1%) to very high (80%) to control detection sensitivity. Enable or disable bounding boxes, confidence scores, and other visual elements. Toggle battery optimization for longer sessions. All AI tools create trip logs automatically. Throughout the app, bird thumbnails from iNaturalist.org appear next to species names to help with visual identification - tap any thumbnail to see a larger image with photographer credits. Remember: AI identification is experimental and should always be validated with field guides or expert birders.
-                </div>
-                
-                <div class="guide-instructions">
-                    <span class="instruction-title">7. Bird Challenges & Gamification</span>
-                    <br>Access gamified Bird Challenges through Learn > Bird Challenges to encourage real-world birding activities. Daily challenges reset at midnight and include identification tasks, sound detection goals, and photo capture objectives. Weekly challenges reset every Monday and focus on species diversity, habitat exploration, and rare bird discovery. Monthly challenges reset on the 1st of each month and include migration tracking, behavior studies, and mastery goals. Challenges automatically track your progress as you use the app - when you log birds in trip logs, use AI sound/photo detection, or mark birds as seen, your challenge progress updates in real-time. Each challenge has a point value and specific target, and you'll receive completion alerts when finished. All challenges are designed to get you outside and actively birding in different habitats.
-                </div>
-                
-                <div class="guide-instructions">
-                    <span class="instruction-title">8. Research Features: Behavior Logging & Migration Tracking</span>
-                    <br>Use specialized research tools found in the ID tab for detailed scientific observations. **Behavior Logging:** Record detailed bird behaviors by selecting from 14 behavior categories including Feeding, Nesting, Social Interaction, and more. Use the built-in timer to track observation duration, add location names, note weather conditions, and include detailed descriptions. **Migration Tracking:** Document migratory bird movements by recording migration status (Actively Migrating, Staging/Resting, etc.), flock size, direction of movement, flight altitude, and environmental conditions. These research observations are stored separately from regular trip logs and contribute to monthly research challenges. Access your logs through Logs > Behavior Logs and Logs > Migration Logs to review statistics and manage your research data.
-                </div>
-                
-                <div class="guide-instructions">
-                    <span class="instruction-title">9. Log Sightings</span>
-                    <br>The "Add Sighting" button in Trip Logs lets you quickly log birds encountered outside planned trips - select the birds, choose their location on an interactive map, and give the location a custom name. All sightings are automatically added to your Life List and Big Month count.
-                </div>
-                
-                <div class="guide-instructions">
-                    <span class="instruction-title">10. Tell Your Story</span>
-                    <br>Create comprehensive birding journals with the Tell Your Story feature. Navigate to Trips > Trip Logs and tap "Tell Your Story" to combine trip logs, photos, and personal narratives into shareable stories. Set date ranges to filter your data, select trips and research logs to include, write personal narratives, and add extra photos. The app automatically generates species lists and behavior summaries. Export complete stories as detailed text files or share simplified versions through standard sharing interfaces.
-                </div>
-                
-                <div class="guide-instructions">
-                    <span class="instruction-title">11. Save & Share</span>
-                    <br>Save your trips to access them later from Trip Logs. You can import trips created by others, or export and share your own trips via email, messaging apps, or as calendar events. Your birding statistics are tallied in your Profile screen to track your progress over time. View your photos in the Photo Gallery and track progress in the Big Month feature.
-                </div>
+
             </div>
         </div>
 
@@ -452,284 +437,286 @@
         <div id="guide" class="tab-content">
             <div class="guide-section">
                 <h2 class="guide-section-title">Comprehensive User Guide</h2>
-                
+
                 <div class="guide-section">
-                    <h3 class="guide-section-title">Plan Screen</h3>
-                    <p class="guide-text">
-                        The Plan screen shows a list of birds observed near your current or selected location. Tap on any bird to select it for your trip plan (selected birds will be highlighted). Use the search bar to filter by name and the time filter to adjust how many days of observations to include. The main navigation includes Learn, Plan, ID, Log, and More tabs.
-                    </p>
+                    <h3 class="guide-section-title">Plan Tab</h3>
+                    <p class="guide-text">Shows birds observed near your current or selected location, sourced from real eBird data.</p>
                     <div class="guide-instructions">
-                        <span class="instruction-title">How to use:</span>
-                        <br>1. Tap the location button in the action bar to change your location
-                        <br>2. Use the search bar to find specific birds by name
-                        <br>3. Tap the filter icon to adjust observation time periods (7, 14, or 30 days)
-                        <br>4. Tap any bird in the list to select it for your trip
-                        <br>5. Use the action bar buttons to access Species Map, Hotspots, and other features
-                    </div>
-                </div>
-                
-                <div class="guide-section">
-                    <h3 class="guide-section-title">Action Bar Navigation</h3>
-                    <p class="guide-text">
-                        The action bar on the Plan screen provides quick access to key features: Location button (Set Start/current address), Species Map button, and Hotspots button for exploring birding locations and data.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">Action Bar Buttons:</span>
-                        <br>• Location (Set Start): Opens location picker to set your starting location
-                        <br>• Species Map: Opens Species Map screen showing recent eBird data
-                        <br>• Hotspots: Opens the Hotspot Browser to explore birding locations
-                    </div>
-                </div>
-                
-                <div class="guide-section">
-                    <h3 class="guide-section-title">Bird Identification (ID Tab)</h3>
-                    <p class="guide-text">
-                        The ID tab contains AI-powered bird identification tools that help you identify birds you encounter in the field. These tools use advanced machine learning to analyze bird sounds and images for accurate species identification. Note: The bird database supporting these features is currently incomplete, so some species may not be recognized or may have limited information.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">Bird Sounds Detection:</span>
-                        <br>1. Navigate to ID → Bird Sounds Detection
-                        <br>2. Configure detection settings:
-                        <br>   • Choose sensitivity level: Low (conservative), Medium (balanced), or High (detects more but may include false positives)
-                        <br>   • Enable "Regional Species Filter" to boost confidence for local birds
-                        <br>3. Toggle the switch to "On" to start real-time listening
-                        <br>4. Grant microphone and notification permissions when prompted
-                        <br>5. The app uses Cornell BirdNET AI with enhanced sensitivity (3-5% confidence threshold)
-                        <br>6. Detected species appear in a scrollable list with:
-                        <br>   • Common name only (no scientific names for clarity)
-                        <br>   • Confidence percentage for each detection
-                        <br>   • Time stamp of each detection
-                        <br>7. Lock screen notifications appear for each detected bird
-                        <br>8. Only unique species are kept (no duplicates per session)
-                        <br>9. Toggle "Off" to end the session
-                        <br>10. If birds were detected and you have active trips, choose to:
-                        <br>   • Add birds to an existing trip location (preserves all planned stops)
-                        <br>   • Keep as separate session trip
-                        <br>11. Each session creates one aggregated trip log with all detected species
-                        <br>12. Battery Saver automatically stops after 30 minutes of no detections
-                    </div>
-                    
-                    <div class="guide-instructions">
-                        <span class="instruction-title">Bird Image Detection:</span>
-                        <br>1. Navigate to ID → Bird Photo Detection
-                        <br>2. Select photos from your gallery or take new ones with the camera
-                        <br>3. Choose multiple photos for batch analysis
-                        <br>4. AI analyzes each image and provides species suggestions
-                        <br>5. View results grouped by species or individually by photo
-                        <br>6. Each detection includes confidence scoring
-                        <br>7. Tap "Create New Trip" to begin trip integration:
-                        <br>   • If you have active trips, choose to add birds to existing locations
-                        <br>   • Location picker preserves all planned hotspots
-                        <br>   • Or create a new trip with custom location settings
-                        <br>8. For best results, use clear, well-lit photos with prominent birds
-                    </div>
-                    
-                    <div class="guide-instructions">
-                        <span class="instruction-title">AR Bird Identification (Enhanced Dual-Mode):</span>
-                        <br>1. Navigate to ID → AR Bird Identification
-                        <br>2. Grant camera AND microphone permissions when prompted
-                        <br>3. Tap "Start Detection" to begin dual-mode identification
-                        <br>4. Point your camera at birds while the system automatically listens for sounds
-                        <br>5. Dual-mode detection features:
-                        <br>   • Visual camera detection for birds in viewfinder
-                        <br>   • Real-time audio detection for bird sounds
-                        <br>   • Fused detection when birds are both seen and heard
-                        <br>   • Smart detection labels showing "Seen" and/or "Heard" icons
-                        <br>6. Each bird gets a floating card showing:
-                        <br>   • Common name and scientific name
-                        <br>   • Confidence percentage
-                        <br>   • Draggable floating cards that can be moved around the screen
-                        <br>7. Interactive features:
-                        <br>   • Tap bird thumbnails in overlays to open detailed species cards
-                        <br>   • Use "Dismiss" button to remove incorrect detections from screen
-                        <br>   • Use "Save to Trip" button to add birds to trip log and dismiss overlay
-                        <br>   • Multiple birds can be detected with independent overlay interaction
-                        <br>8. Photo capture options:
-                        <br>   • Camera button to capture AR photos with overlays
-                        <br>   • Save with detected species to trip log or without species to photo library
-                        <br>   • Manual species addition if no birds detected in photo
-                        <br>   • Select multiple species from searchable eBird taxonomy
-                        <br>9. Advanced settings:
-                        <br>   • Adjust confidence thresholds from very low (0.1%) to very high (80%)
-                        <br>   • Enable/disable bounding boxes, confidence scores, and visual elements
-                        <br>   • Toggle battery optimization for longer sessions
-                        <br>10. Camera management:
-                        <br>   • Works with both front and back cameras with automatic switching
-                        <br>   • Switches between Expo Camera and Vision Camera for optimal compatibility
-                        <br>   • Automatic camera switching and error recovery
-                    </div>
-                </div>
-                
-                <div class="guide-section">
-                    <h3 class="guide-section-title">AI Bird ID Assistant</h3>
-                    <p class="guide-text">
-                        The AI Bird ID Assistant is an intelligent conversational AI that helps answer questions about birds, identification, behavior, habitat, and more. This advanced assistant provides detailed responses and excels at species comparisons, field mark descriptions, and complex queries about bird behavior and ecology.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">How to use the AI Assistant:</span>
-                        <br>1. Navigate to the Assistant tab
-                        <br>2. Type your question in the chat interface
-                        <br>3. Have natural conversations with follow-up questions
-                        <br>4. Ask questions like:
-                        <br>   • "What does a Cardinal look like?"
-                        <br>   • "What's the difference between Cooper's Hawk and Sharp-shinned Hawk?"
-                        <br>   • "What birds are robin-sized with yellow bellies?"
-                        <br>   • "Where do woodpeckers typically nest?"
-                        <br>5. Review the detailed responses with comprehensive information
-                        <br>6. Tap bird names in responses to see detailed species information
-                        <br>
-                        <br><span class="instruction-title">New Conversation Interface:</span>
-                        <br>• Multiple questions and answers in a flowing conversation
-                        <br>• Each message appears in its own bubble for easy reading
-                        <br>• Bird species appear as clickable links with match percentages
-                        <br>• Confidence indicators show the AI's certainty level
-                        <br>• Full conversation history is maintained throughout your session
-                        <br>
-                        <br><span class="instruction-title">eBird Integration:</span>
-                        <br>• When you ask about birds "near me" or "in my area" with location services enabled
-                        <br>• Assistant includes real-time eBird sighting data within 25km
-                        <br>• Shows recent observations, popular birding locations, and best places to look
-                        <br>• Provides information about recent birding activity in your area
-                        <br>
-                        <br><span class="instruction-title">Important Notes:</span>
-                        <br>• AI bird identification is experimental - always verify results
-                        <br>• The assistant has access to comprehensive North American bird data
-                        <br>• Works best with specific, detailed questions
-                        <br>• Always cross-reference with field guides or expert birders
-                    </div>
-                </div>
-                
-                <div class="guide-section">
-                    <h3 class="guide-section-title">Trip Logs & Life List</h3>
-                    <p class="guide-text">
-                        Track your birding progress with comprehensive trip logs and automatically build your Life List as you discover new species. The "Add Sighting" button lets you quickly log birds encountered outside planned trips.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">Using Trip Logs:</span>
-                        <br>1. Access active and completed trips from the Trip Logs tab
-                        <br>2. Mark birds as seen by tapping checkboxes in your trip itinerary
-                        <br>3. Add notes, counts, and photos to your sightings
-                        <br>4. Use the floating "Add Sighting" button for quick entries outside planned trips
-                        <br>5. Select birds, choose location on interactive map, and give custom location names
-                        <br>6. All sightings automatically added to Life List and Big Month count
-                        <br>7. Export trips to eBird for citizen science contributions
-                    </div>
-                    
-                    <div class="guide-instructions">
-                        <span class="instruction-title">How to use your Life List:</span>
-                        <br>1. Navigate to My Trips > Life List from the bottom navigation
-                        <br>2. Toggle between "Birds" and "Hotspots" views at the top
-                        <br>3. Use the search bar to find specific species or locations
-                        <br>4. Apply time filters to view:
-                        <br>   • All Time - Your complete life list
-                        <br>   • Year - Birds seen this year
-                        <br>   • 6 Months - Recent sightings
-                        <br>   • 3 Months - Most recent activity
-                        <br>5. Tap any bird thumbnail to view detailed species information
-                        <br>6. Click on any bird name to see detailed sighting information
-                        <br>7. View statistics including rarity scores and first sighting dates
-                        <br>   • First sighting date and location
-                        <br>   • Number of times spotted
-                        <br>   • Rarity indicators for significant sightings
-                        <br>   • Your photos (if any)
-                        <br>   • Related species you've seen
-                        <br>8. Navigate to original trip logs from sighting details
-                        <br>9. Benefit from automatic duplicate detection and removal
-                    </div>
-                </div>
-                
-                <div class="guide-section">
-                    <h3 class="guide-section-title">Learning & Progress</h3>
-                    <p class="guide-text">
-                        The Learn tab provides structured learning activities for birders of all levels, with location-based bird selection and interactive quizzes with progress tracking.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">Learning Features:</span>
-                        <br>• Location-based bird selection from real eBird data (5 birds at a time)
-                        <br>• Interactive quizzes with multiple choice questions
-                        <br>• Must achieve 80% to advance to next set of birds
-                        <br>• Progress tracking with points and streaks
-                        <br>• Comprehensive bird information and identification tips
-                        <br>• Reset option to start fresh learning journey
-                    </div>
-                </div>
-                
-                <div class="guide-section">
-                    <h3 class="guide-section-title">Bird Challenges & Gamification</h3>
-                    <p class="guide-text">
-                        Bird Challenges are gamified activities that encourage you to go birding and use the app's features in real-world situations. Access challenges through Learn > Bird Challenges to track progress and earn points.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">Challenge Types:</span>
-                        <br>• Daily challenges - Reset at midnight, include identification tasks and sound detection goals
-                        <br>• Weekly challenges - Reset Mondays, focus on species diversity and habitat exploration
-                        <br>• Monthly challenges - Reset on 1st, include migration tracking and behavior studies
-                        <br>• Automatic progress tracking through normal app usage
-                        <br>• Real-time updates with completion alerts and point earning
-                        <br>• Field-based activities encouraging exploration of different habitats
-                    </div>
-                </div>
-                
-                <div class="guide-section">
-                    <h3 class="guide-section-title">Research Features: Behavior Logging & Migration Tracking</h3>
-                    <p class="guide-text">
-                        Advanced research tools allow you to record detailed scientific observations of bird behaviors and migration patterns, contributing to monthly research challenges and scientific understanding.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">Behavior Logging:</span>
-                        <br>• Access through ID > Behavior Logging
-                        <br>• Select from 14 behavior categories (Feeding, Nesting, Social Interaction, etc.)
-                        <br>• Use built-in timer to track observation duration
-                        <br>• Add location names, weather conditions, and detailed descriptions
-                        <br>• View logs through Logs > Behavior Logs with comprehensive statistics
-                        <br>• Standalone activity independent of trip logs
-                        <br>
-                        <br><span class="instruction-title">Migration Tracking:</span>
-                        <br>• Access through ID > Migration Tracking
-                        <br>• Record migration status (Actively Migrating, Staging/Resting, etc.)
-                        <br>• Document flock size, direction, altitude, and environmental conditions
-                        <br>• Choose from migratory species including waterfowl, raptors, and songbirds
-                        <br>• View migration statistics by season and direction
-                        <br>• Contributes to understanding bird movement patterns
-                    </div>
-                </div>
-                
-                <div class="guide-section">
-                    <h3 class="guide-section-title">Tell Your Story - Birding Journals</h3>
-                    <p class="guide-text">
-                        Create comprehensive journals of your birding experiences, combining trip logs, photos, and personal narratives into shareable stories perfect for documenting memorable trips and sharing with fellow birders.
-                    </p>
-                    <div class="guide-instructions">
-                        <span class="instruction-title">Story Creation:</span>
-                        <br>• Navigate to Trips > Trip Logs and tap "Tell Your Story"
-                        <br>• Set date ranges to filter your birding data
-                        <br>• Enter descriptive story titles and personal narratives
-                        <br>• Select trips, behavior logs, and migration logs to include
-                        <br>• Add additional photos beyond those in trip logs
-                        <br>• Automatic generation of species lists and behavior summaries
-                        <br>• Export as detailed text files or share simplified versions
-                        <br>• Story management through accessible Stories List
+                        <ul class="guide-detail-list">
+                            <li>Tap the location button in the action bar to change your starting location.</li>
+                            <li>Use the search bar to find specific birds by name.</li>
+                            <li>Tap the filter icon to adjust the observation lookback window (7, 14, or 30 days).</li>
+                            <li>Tap any bird in the list to select it for a trip.</li>
+                            <li>Use the action bar's Species Map and Hotspots buttons to explore the area further.</li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="guide-section">
-                    <h3 class="guide-section-title">Bird Thumbnails & Visual Aids</h3>
-                    <p class="guide-text">
-                        Throughout the app, bird thumbnails from iNaturalist.org appear next to species names to help with visual identification. These images are cached for offline viewing and properly credited to photographers.
-                    </p>
+                    <h3 class="guide-section-title">ID Tab — Bird Identification</h3>
+                    <p class="guide-text">AI-powered identification tools for birds you encounter in the field. All results are experimental and should be verified with field guides or expert birders.</p>
                     <div class="guide-instructions">
-                        <span class="instruction-title">Thumbnail Features:</span>
-                        <br>• Appear in Plan screen, Trip Plans, Trip Logs, Life List, and State Goals screens
-                        <br>• Tap any thumbnail to open comprehensive bird information card
-                        <br>• Cards include habitat, identification features, behavior, and external links
-                        <br>• Advanced name matching handles various bird naming conventions
-                        <br>• Hybrid species support for complete eBird taxonomy coverage
-                        <br>• Manage image downloads in More > Settings > Image Cache Management
+                        <ul class="guide-detail-list">
+                            <li>Bird Sounds Detection: real-time audio listening using the Cornell BirdNET model. Choose a sensitivity level, grant microphone/notification permissions, and detected species appear live with confidence scores. Detections build a trip log you can save or merge into an existing trip. If you've paired the optional directional mic array accessory, tap the location icon next to a detected species to see which direction it's coming from (see "Directional Mic Array" below).</li>
+                            <li>Bird Image Detection: select up to 20 photos (or take new ones) for batch AI analysis; results are grouped by species with confidence scores.</li>
+                            <li>AR Bird Identification: point your camera at a bird for live species identification with a confidence score overlay, in continuous, tap-to-detect, or manual capture modes.</li>
+                            <li>AI Bird ID Assistant: a conversational assistant for identification questions, comparisons, habitat, and behavior — ask things like "What does a Cardinal look like?" or "How do I tell Cooper's Hawk from Sharp-shinned Hawk?"</li>
+                            <li>Behavior Logging and Migration Tracking: dedicated forms for recording detailed field observations, separate from trip logging (see below).</li>
+                        </ul>
                     </div>
                 </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Directional Mic Array (Optional Hardware Accessory)</h3>
+                    <p class="guide-text">Pair a separately-built ESP32-S3 4-microphone accessory to see which direction a detected bird call is coming from during Bird Sounds Detection.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Requires the standalone hardware accessory — see More &gt; Settings &gt; Mic Array for firmware/wiring instructions. Not needed for any other app feature.</li>
+                            <li>Enable it from More &gt; Settings &gt; Mic Array, then join the accessory's "PeregrineMicArray" Wi-Fi network when prompted.</li>
+                            <li>Once connected, start a Bird Sounds Detection session as normal, then tap the location icon next to any detected species to track its direction — an arrow shows the azimuth (relative to the mic array's own forward-facing mark, not true north) along with a getting closer/farther/steady trend.</li>
+                            <li>Direction only updates when the app confirms a fresh detection of the species you're tracking, not on every sound the array picks up — so it can lag slightly behind, by design, rather than jumping around on unrelated noise.</li>
+                            <li>The "Direction Sensitivity" slider in the Mic Array settings screen controls how confident a reading needs to be before it's shown at all — lower it for more frequent (noisier) updates, raise it for fewer but more reliable ones.</li>
+                            <li>Left/right direction only — the accessory can't determine front/back or true compass heading, and there's no distance or elevation measurement.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Learn Tab</h3>
+                    <p class="guide-text">Structured learning activities for birders of all levels, with progress tracking and points.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Learn About Birds: a flashcard + quiz loop covering common species near you, sourced from real eBird observations in your area.</li>
+                            <li>Practice Observing: a guided listen → observe → describe → compare exercise using real-time sound detection.</li>
+                            <li>Plan Your Trips: a simplified, guided trip-planning wizard for new users (no route optimization — see "Trip Planning" below for the full-featured version).</li>
+                            <li>Bird Challenges: daily, weekly, and monthly challenges that automatically track your progress as you use the app.</li>
+                            <li>Your combined points (learning activities + challenge points) advance a birder badge from New Birder up through Birding Expert.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Trip Planning</h3>
+                    <p class="guide-text">Select birds, set a duration, and generate an optimized multi-stop itinerary.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Select birds from the Plan tab or Hotspot Browser.</li>
+                            <li>Set trip duration and locations per day.</li>
+                            <li>Optionally exclude already-seen birds or already-visited hotspots, or start the route from your current location instead of your search location.</li>
+                            <li>Tap "Plan My Birding Trip" for manual selection, or "Auto-Plan" to let the app pick locations automatically.</li>
+                            <li>Review the generated itinerary — day-by-day stops, estimated travel time, and likely birds at each location — then save it.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">App Navigation</h3>
+                    <p class="guide-text">Five bottom tabs: Learn, Plan, ID, Log, and More.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Learn — guided activities and challenges (see above).</li>
+                            <li>Plan — select birds and plan trips.</li>
+                            <li>ID — AI-powered bird identification tools.</li>
+                            <li>Log — Trip Logs, Trip Map, Life List, State Birds, Big Month, Behavior Logs, Migration Logs, Tell Your Story, and Photos.</li>
+                            <li>More — Settings and Help &amp; Info.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Trip Map</h3>
+                    <p class="guide-text">A visual overview of your birding trips on an interactive map, showing only locations where you've actually logged sightings.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Navigate to Log &gt; Trip Map and load the map to see your logged locations as markers.</li>
+                            <li>Each marker shows the location name and how many birds were logged there.</li>
+                            <li>Tap a trip in the list below the map to highlight just that trip's locations.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Trip Logs</h3>
+                    <p class="guide-text">View and manage all your saved birding trips, mark birds as seen, and add notes/photos.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Tap any saved trip to view its details and check off birds as you see them.</li>
+                            <li>Add notes, counts, and photos to any sighting.</li>
+                            <li>Use the "Add Sighting" flow to log birds outside of planned trips — pick a location on the map, name it, and save.</li>
+                            <li>Mark a trip complete when you've finished it; completed sightings roll up into your Life List automatically.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Import &amp; Export</h3>
+                    <p class="guide-text">Trips can be exported as JSON files (for sharing with other app users), shared as plain text via the standard iOS share sheet, or added to your calendar as day-by-day events. PDF export is not currently available.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Export: open a trip, use the share action, and choose JSON file, plain-text summary, or Add to Calendar.</li>
+                            <li>Add to Calendar creates one all-day event per day of the trip, listing that day's stops and target birds, in a "Birding Trips" calendar.</li>
+                            <li>Import: from Trip Logs, use the import button and select a .json trip file — trip and bird metadata are preserved, but not photos or personal notes/seen status (see Data Backup &amp; Migration below for a format that keeps everything, meant for moving your own data between your own devices rather than sharing).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Data Backup &amp; Migration</h3>
+                    <p class="guide-text">A full export of everything on this device — every trip (with photos and personal notes/seen status intact, unlike the sanitized trip JSON export above), behavior and migration logs, stories, hotspot notes, challenge progress, and app settings — as one file, for moving to a new phone.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Access it from More &gt; Settings &gt; Data Backup &amp; Migration.</li>
+                            <li>Export All Data generates the file and opens the share sheet — AirDrop it to your new phone, save it to Files/iCloud Drive, or email it to yourself.</li>
+                            <li>On your new phone (with the app installed), use Import All Data and select the file.</li>
+                            <li>Importing REPLACES all data currently on that device — it's meant for setting up a new phone, not merging two devices' data together. If the device you're importing into already has data you care about, export a backup of that first.</li>
+                            <li>This is separate from per-trip JSON export/import above, which is meant for sharing individual trips with other app users, not full-device migration.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Species Map</h3>
+                    <p class="guide-text">Shows recent eBird observations on an interactive map, similar to a coverage map, to help you explore sightings across your area.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Access it from the Species Map button in the Plan tab's action bar.</li>
+                            <li>Explore observation markers to help plan where to go birding next.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Behavior Logging</h3>
+                    <p class="guide-text">Record detailed observations of bird behaviors — feeding, nesting, social interaction, and 11 other categories — for research and monthly challenges.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Go to ID &gt; Behavior Logging, select a species, choose a behavior type, and describe what you observed.</li>
+                            <li>Use the built-in timer to record observation duration accurately.</li>
+                            <li>Behavior logs are independent of trips and automatically contribute to monthly "Behavior Observer"-style challenges.</li>
+                            <li>Review past logs in Log &gt; Behavior Logs.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Migration Tracking</h3>
+                    <p class="guide-text">Record migratory bird movements — status, direction, flock size, altitude, and season — for research and monthly challenges.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Go to ID &gt; Migration Tracking, select a species, and record its migration status (actively migrating, staging, arriving, departing, overwintering, at breeding grounds, or vagrant).</li>
+                            <li>The app automatically detects the current season for context.</li>
+                            <li>Migration logs are independent of trips and contribute to monthly migration-tracking challenges.</li>
+                            <li>Review past logs in Log &gt; Migration Logs.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Bird Challenges</h3>
+                    <p class="guide-text">Daily, weekly, and monthly birding challenges that automatically track your progress across the whole app.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Daily challenges (identification, sound detection, photo capture) reset every day.</li>
+                            <li>Weekly challenges (species diversity, habitat exploration, rare-bird discovery) reset every Monday.</li>
+                            <li>Monthly challenges (behavior study, migration tracking) reset on the 1st of each month.</li>
+                            <li>Progress updates automatically as you log sightings, use AI detection, or record behavior/migration observations — no manual tracking needed.</li>
+                            <li>Access challenges from Learn &gt; Bird Challenges to see live progress bars and point totals.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Log Tab: Trip-Based vs. Standalone Observations</h3>
+                    <p class="guide-text">The Log tab separates regular birding-trip activity from focused research logs.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Trip-based: Trip Logs, Trip Map, Life List, State Birds, Big Month, Photos — general birding activity that builds your Life List and can be shared/exported.</li>
+                            <li>Standalone research logs: Behavior Logs and Migration Logs — detailed scientific observations, independent of any trip, that feed the monthly research challenges.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Life List</h3>
+                    <p class="guide-text">A record of every bird species you've marked as seen, across all your trips.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Access from Log &gt; Life List.</li>
+                            <li>Tap any bird's thumbnail to see a detailed species card with identification info and photo sourcing.</li>
+                            <li>Tap a bird entry to see the locations and dates you've spotted it, with a link back to the original trip log.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Big Month</h3>
+                    <p class="guide-text">Automatically tracks unique species you've seen each calendar month, based on when you marked birds as seen in your trip logs.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Access from Log &gt; Big Month.</li>
+                            <li>Each species counts once per month regardless of how many times you see it.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Photo Gallery</h3>
+                    <p class="guide-text">Organizes all photos attached to your bird sightings, browsable by species.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Access from Log &gt; Photos.</li>
+                            <li>Tap any photo to view it full-screen along with species, location, and trip details.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Hotspot Browser</h3>
+                    <p class="guide-text">Explore nearby birding hotspots and the species recently observed there.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Access from the Plan tab's action bar.</li>
+                            <li>Browse hotspots sorted by distance or species count, then add birds from a hotspot directly to your trip plan.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">State Birds Goals</h3>
+                    <p class="guide-text">Track your progress toward seeing every official state bird species from the eBird taxonomy.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Set your home state first in More &gt; Settings.</li>
+                            <li>Access from Log &gt; State Birds — seen birds are marked with a checkmark, unseen birds are grayed out.</li>
+                            <li>Filter to see only seen or only unseen birds.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Settings &amp; More</h3>
+                    <p class="guide-text">The More tab is your hub for app preferences and support.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Settings: home state, metric/imperial units, image thumbnails, notification preferences, and the optional tip jar.</li>
+                            <li>Help &amp; Info: this screen — Quick Start, User Guide, FAQ, and Contact Support.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Data Attribution &amp; Image Sources</h3>
+                    <p class="guide-text">Bird observation data comes from eBird.org (a Cornell Lab of Ornithology citizen-science project); bird thumbnail images come from iNaturalist.org, used under Creative Commons licensing with photographer credit shown in the app.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Contribute your own sightings at eBird.org.</li>
+                            <li>Contribute bird photos at iNaturalist.org to help improve coverage for everyone.</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
-
         <div id="contact" class="tab-content">
             <div class="contact-form">
                 <h2 class="guide-section-title">Contact Support</h2>
@@ -751,10 +738,10 @@
                     <div class="form-group">
                         <label for="subject" class="form-label">Subject</label>
                         <select id="subject" class="form-select">
+                            <option value="General Feedback">General Feedback</option>
                             <option value="Bug Report">Bug Report</option>
                             <option value="Feature Request">Feature Request</option>
-                            <option value="General Question">General Question</option>
-                            <option value="Technical Support">Technical Support</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
                     
