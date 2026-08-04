@@ -468,16 +468,27 @@
 
                 <div class="guide-section">
                     <h3 class="guide-section-title">Directional Mic Array (Optional Hardware Accessory)</h3>
-                    <p class="guide-text">Pair a separately-built ESP32-S3 4-microphone accessory to see which direction a detected bird call is coming from during Bird Sounds Detection.</p>
+                    <p class="guide-text">Pair a separately-built ESP32-S3 4-microphone accessory to see which direction a detected bird call is coming from during Bird Sounds Detection. This is a DIY hobbyist build, not a commercial product.</p>
                     <div class="guide-instructions">
                         <ul class="guide-detail-list">
-                            <li>Requires the standalone hardware accessory — see More &gt; Settings &gt; Mic Array for firmware/wiring instructions. Not needed for any other app feature.</li>
+                            <li>Requires the standalone hardware accessory — download the firmware and wiring instructions below. Not needed for any other app feature.</li>
                             <li>Enable it from More &gt; Settings &gt; Mic Array, then join the accessory's "PeregrineMicArray" Wi-Fi network when prompted.</li>
                             <li>Once connected, start a Bird Sounds Detection session as normal, then tap the location icon next to any detected species to track its direction — an arrow shows the azimuth (relative to the mic array's own forward-facing mark, not true north) along with a getting closer/farther/steady trend.</li>
                             <li>Direction only updates when the app confirms a fresh detection of the species you're tracking, not on every sound the array picks up — so it can lag slightly behind, by design, rather than jumping around on unrelated noise.</li>
                             <li>The "Direction Sensitivity" slider in the Mic Array settings screen controls how confident a reading needs to be before it's shown at all — lower it for more frequent (noisier) updates, raise it for fewer but more reliable ones.</li>
-                            <li>Left/right direction only — the accessory can't determine front/back or true compass heading, and there's no distance or elevation measurement.</li>
+                            <li>Radar Mode: instead of tracking one species at a time, shows a live bearing for up to 4 currently-calling species at once, each isolated by that species' typical call frequency so a busy multi-bird soundscape doesn't collapse into a single loudest-sound reading. Toggle it on from the Bird Sounds Detection screen while the array is connected; it runs alongside single-species tracking, not instead of it.</li>
+                            <li>Left/right direction only — the main array can't determine front/back or true compass heading, and there's no distance or elevation measurement.</li>
+                            <li>Rear Sensor (optional, requires building a second single-mic unit): mounted facing the opposite direction from the main array, it flags when a reading might actually be behind the array instead of where it's pointing — the main array genuinely can't tell front from back on its own. Enable it separately in More &gt; Settings &gt; Mic Array; a "may be behind you" marker appears on tracked/radar readings when triggered.</li>
+                            <li>Learned Frequency Bands: the app remembers the actual call frequency range measured for each species you've tracked, and — once "Seed Tracking from Learned Data" is turned on in the Mic Array settings screen — uses that real history instead of a general per-species estimate once enough confirmed detections have accumulated. Recording happens automatically in the background regardless of the toggle, so learned data is ready the moment you turn it on.</li>
                         </ul>
+                    </div>
+                    <div class="guide-instructions" id="firmware-download">
+                        <span class="instruction-title">Firmware &amp; Wiring Download</span>
+                        Both the main array and the optional rear sensor are Arduino IDE sketches for an ESP32-S3 board. The download includes full wiring diagrams, parts lists, and setup/calibration steps for each.
+                        <br><br>
+                        <a href="peregrine-mic-array-firmware.zip" class="header-link" style="color: var(--primary); border-color: var(--primary); display: inline-block;">
+                            <i class="fas fa-download"></i>&nbsp; Download Firmware (.zip)
+                        </a>
                     </div>
                 </div>
 
@@ -544,6 +555,8 @@
                             <li>Add notes, counts, and photos to any sighting.</li>
                             <li>Use the "Add Sighting" flow to log birds outside of planned trips — pick a location on the map, name it, and save.</li>
                             <li>Mark a trip complete when you've finished it; completed sightings roll up into your Life List automatically.</li>
+                            <li>Use the search bar at the top of Trip Logs to quickly find a trip by name, location, or species seen.</li>
+                            <li>If you've logged the same outing twice (e.g. once manually and once via eBird import), use More &gt; Settings &gt; Advanced &gt; Find &amp; Combine Similar Trips to review same-day, same-location matches and merge them — every sighting and photo from each trip is kept, nothing is discarded.</li>
                         </ul>
                     </div>
                 </div>
@@ -565,7 +578,7 @@
                     <p class="guide-text">A full export of everything on this device — every trip (with photos and personal notes/seen status intact, unlike the sanitized trip JSON export above), behavior and migration logs, stories, hotspot notes, challenge progress, and app settings — as one file, for moving to a new phone.</p>
                     <div class="guide-instructions">
                         <ul class="guide-detail-list">
-                            <li>Access it from More &gt; Settings &gt; Data Backup &amp; Migration.</li>
+                            <li>Access it from More &gt; Settings &gt; Advanced &gt; Data Backup &amp; Migration.</li>
                             <li>Export All Data generates the file and opens the share sheet — AirDrop it to your new phone, save it to Files/iCloud Drive, or email it to yourself.</li>
                             <li>On your new phone (with the app installed), use Import All Data and select the file.</li>
                             <li>Importing REPLACES all data currently on that device — it's meant for setting up a new phone, not merging two devices' data together. If the device you're importing into already has data you care about, export a backup of that first.</li>
@@ -699,6 +712,7 @@
                     <div class="guide-instructions">
                         <ul class="guide-detail-list">
                             <li>Settings: home state, metric/imperial units, image thumbnails, notification preferences, and the optional tip jar.</li>
+                            <li>Settings &gt; Advanced (collapsed by default): trip cleanup tools (Find &amp; Combine Similar Trips, Remove Duplicate Trips), Image Cache Management, Data Backup &amp; Migration, and Clear All Data.</li>
                             <li>Help &amp; Info: this screen — Quick Start, User Guide, FAQ, and Contact Support.</li>
                         </ul>
                     </div>
