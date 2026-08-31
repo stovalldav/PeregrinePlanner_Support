@@ -459,8 +459,15 @@
                         <ul class="guide-detail-list">
                             <li>Bird Sounds Detection: real-time audio listening using the Cornell BirdNET model. Choose a sensitivity level, grant microphone/notification permissions, and detected species appear live with confidence scores. Detections build a trip log you can save or merge into an existing trip. If you've paired the optional directional mic array accessory, tap the location icon next to a detected species to see which direction it's coming from (see "Directional Mic Array" below).</li>
                             <li>Bird Image Detection: select up to 20 photos (or take new ones) for batch AI analysis; results are grouped by species with confidence scores.</li>
-                            <li>AR Bird Identification: point your camera at a bird for live species identification with a confidence score overlay, in continuous, tap-to-detect, or manual capture modes.</li>
-                            <li>AI Bird ID Assistant: a conversational assistant for identification questions, comparisons, habitat, and behavior — ask things like "What does a Cardinal look like?" or "How do I tell Cooper's Hawk from Sharp-shinned Hawk?"</li>
+                            <li>AR Bird Identification: point your camera at a bird for live species identification with a confidence score overlay, in continuous, tap-to-detect, or manual capture modes. If location is available, a detection may also show "Not recently reported near you" — meaning that species hasn't been reported in eBird activity near you in the last two weeks, worth a second look before confirming. This never changes the confidence score itself.
+                                <ul class="guide-detail-list">
+                                    <li>Camera presets tune the live camera for a shooting situation: Large Soaring Birds, Medium Birds &ndash; Moderate Distance, Hummingbirds in Flight, Perched or On the Ground, or Auto. Each sets a shutter-speed ceiling, exposure compensation, and white balance so fast subjects stay sharp. (Because iPhones don't expose an aperture or an auto-ISO ceiling to apps, the ISO figures shown are targets the camera trends toward, not hard limits.)</li>
+                                    <li>Digiscoping preset: turns autofocus off and locks the lens at infinity so a spotting scope's own focus knob is the only focus control — phone autofocus otherwise hunts against the scope's narrow field of view. Your preset choice is remembered between sessions.</li>
+                                    <li>Every capture that clears the confidence threshold is kept (not just one per species), up to a dozen of the best per species, and all of them save to the trip log.</li>
+                                    <li>Manual identification: in tap-to-detect or manual capture mode, a shot that falls below the confidence threshold isn't discarded — it goes to a "Needs ID" strip. Tap it to pick from the model's other guesses or search the full species list, or discard it. There's also an "Add Species Manually" button that takes a photo and lets you name the bird yourself when the model can't. Manually identified birds save like any other detection.</li>
+                                </ul>
+                            </li>
+                            <li>AI Bird ID Assistant: a conversational assistant for identification questions, comparisons, habitat, and behavior — ask things like "What does a Cardinal look like?" or "How do I tell Cooper's Hawk from Sharp-shinned Hawk?" It remembers what you were just talking about, so a follow-up like "what about its habitat?" works, and it can check your own trip logs ("Have I seen a Painted Bunting?"). On Apple Intelligence-capable devices answers are more natural and tagged "Enhanced by Apple Intelligence"; otherwise it uses the app's built-in bird database.</li>
                             <li>Behavior Logging and Migration Tracking: dedicated forms for recording detailed field observations, separate from trip logging (see below).</li>
                         </ul>
                     </div>
@@ -472,23 +479,55 @@
                     <div class="guide-instructions">
                         <ul class="guide-detail-list">
                             <li>Requires the standalone hardware accessory — download the firmware and wiring instructions below. Not needed for any other app feature.</li>
-                            <li>Enable it from More &gt; Settings &gt; Mic Array, then join the accessory's "PeregrineMicArray" Wi-Fi network when prompted.</li>
+                            <li>Enable it from More &gt; Settings &gt; Mic Array, then join the array's Wi-Fi network in your device's Wi-Fi settings — "PeregrineMicArray" / "birding123" for the original front array, or whatever network name and password was configured on a camera-node accessory that hosts its own network instead.</li>
                             <li>Once connected, start a Bird Sounds Detection session as normal, then tap the location icon next to any detected species to track its direction — an arrow shows the azimuth (relative to the mic array's own forward-facing mark, not true north) along with a getting closer/farther/steady trend.</li>
                             <li>Direction only updates when the app confirms a fresh detection of the species you're tracking, not on every sound the array picks up — so it can lag slightly behind, by design, rather than jumping around on unrelated noise.</li>
                             <li>The "Direction Sensitivity" slider in the Mic Array settings screen controls how confident a reading needs to be before it's shown at all — lower it for more frequent (noisier) updates, raise it for fewer but more reliable ones.</li>
                             <li>Radar Mode: instead of tracking one species at a time, shows a live bearing for up to 4 currently-calling species at once, each isolated by that species' typical call frequency so a busy multi-bird soundscape doesn't collapse into a single loudest-sound reading. Toggle it on from the Bird Sounds Detection screen while the array is connected; it runs alongside single-species tracking, not instead of it.</li>
-                            <li>Left/right direction only — the main array can't determine front/back or true compass heading, and there's no distance or elevation measurement.</li>
-                            <li>Rear Sensor (optional, requires building a second single-mic unit): mounted facing the opposite direction from the main array, it flags when a reading might actually be behind the array instead of where it's pointing — the main array genuinely can't tell front from back on its own. Enable it separately in More &gt; Settings &gt; Mic Array; a "may be behind you" marker appears on tracked/radar readings when triggered.</li>
-                            <li>Learned Frequency Bands: the app remembers the actual call frequency range measured for each species you've tracked, and — once "Seed Tracking from Learned Data" is turned on in the Mic Array settings screen — uses that real history instead of a general per-species estimate once enough confirmed detections have accumulated. Recording happens automatically in the background regardless of the toggle, so learned data is ready the moment you turn it on.</li>
+                            <li>Sound source: while the mic array (or any connected fleet node) is available, Bird Sounds Detection shows a "Sound source" picker — choose whether the Primary array or a specific Additional Node feeds the screen. Direction tracking and Radar Mode follow whichever source you pick.</li>
+                            <li>Mic Array Map: once two or more GPS-equipped nodes are connected, a map view (reachable from Bird Sounds Detection) plots each node's real position and current bearing and, when their bearings line up, an estimated position for the sound — the geolocated counterpart to the phone-centered direction arrow.</li>
+                            <li>Self-Test: the Mic Array settings screen has a clap test — clap near one side of the array and confirm the azimuth number moves before you head into the field.</li>
+                            <li>GPS status: a node with a GPS module shows a live fix / no-fix readout with satellite counts and antenna/sky-view guidance, so a node that never acquired a fix is obvious before you rely on it.</li>
+                            <li>Left/right direction only — the array can't determine front/back or true compass heading, and there's no distance or elevation measurement.</li>
+                            <li>Learned Frequency Bands: the app remembers the actual call frequency range measured for each species you've tracked, and — once "Seed Tracking from Learned Data" is turned on in the Mic Array settings screen — uses that real history instead of a general per-species estimate once enough confirmed detections have accumulated. Recording happens automatically in the background regardless of the toggle, so learned data is ready the moment you turn it on. "Reset Learned Data" in the same screen clears it.</li>
                         </ul>
                     </div>
                     <div class="guide-instructions" id="firmware-download">
                         <span class="instruction-title">Firmware &amp; Wiring Download</span>
-                        Both the main array and the optional rear sensor are Arduino IDE sketches for an ESP32-S3 board. The download includes full wiring diagrams, parts lists, and setup/calibration steps for each.
+                        The mic array and camera-node firmware are Arduino IDE sketches for an ESP32-S3 board. The download includes full wiring diagrams, parts lists, and setup/calibration steps.
                         <br><br>
                         <a href="peregrine-mic-array-firmware.zip" class="header-link" style="color: var(--primary); border-color: var(--primary); display: inline-block;">
                             <i class="fas fa-download"></i>&nbsp; Download Firmware (.zip)
                         </a>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Multi-Node Fleet &amp; Camera Nodes</h3>
+                    <p class="guide-text">Beyond the single front array, the app can run a small fleet of DIY nodes — extra mic arrays and camera-equipped nodes — at the same time. All of this is optional and needs the separately-built hardware.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Manage Additional Nodes: More &gt; Settings &gt; Mic Array &gt; Additional Mic Array Nodes. Add a node by name, type (mic-only or camera), and network address, or tap Auto-Discover to find nodes already on your shared Wi-Fi — discovery also works over Bluetooth before anything is connected. A node whose IP address changes is re-matched automatically rather than showing up as a new one.</li>
+                            <li>Heading Source (set per node, and for the Primary array in its own settings screen): Fixed Pin (stand at the node and tap "Set from my current location" to capture its position and facing from your phone's GPS and compass — used whenever the node's own GPS has no fix, and the recommended choice for a placed node whose GPS is unreliable), Phone Proxy (the node is carried with your phone and borrows its live GPS position and compass heading), Manual Heading Only (records a mounting heading but no position, so the node won't appear on the map), or Compass (reserved for future hardware — no effect yet). A real node GPS fix always takes over automatically when one is available, and a Fixed Pin re-syncs from that fix if the node is later moved.</li>
+                            <li>Camera nodes — capture mode: Auto (the node photographs a bird on its own when its audio/motion detection fires) or Manual only. "Take Photo Now" works in either mode.</li>
+                            <li>Camera nodes — video: Start/Stop Video from the node's controls (Mic Array settings for the Primary, or Mic Array Nodes &gt; Camera Controls for additional nodes). Recording runs on the node itself and keeps going even if you leave the screen.</li>
+                            <li>Camera nodes — Live Preview: a rough live image for confirming a camera is aimed and focused while you physically set it up. It is not smooth video, and it is unavailable while the node is recording.</li>
+                            <li>Camera Node Captures (photo inbox): auto-captured photos wait here for review. For each one, Save adds it to a trip with the on-device species guess, "Not a Bird" routes it into a Tell Your Story journal instead, and Discard deletes it.</li>
+                            <li>Camera Node Videos (video inbox): recorded clips wait here — play a clip inline, share it out through the iOS share sheet, or Save it into a trip as a sighting you identify yourself (no automatic species ID runs on video).</li>
+                            <li>Field Debug (Mic Array Nodes &gt; Field Debug): turn on remote logging per node and watch a live tail of what each node reports, filter or search the lines, and share the full or filtered log out of the app. It also shows per-node AI classify latency once the Bird Sounds Detection model has been loaded.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3 class="guide-section-title">Trip Trail Recording</h3>
+                    <p class="guide-text">Records the GPS path you actually walk during a trip, separate from the stops you log.</p>
+                    <div class="guide-instructions">
+                        <ul class="guide-detail-list">
+                            <li>Recording starts automatically when you tap "Start Trip" on a saved trip and stops when you tap "Finish Trip".</li>
+                            <li>View it afterward from the trip's detail screen via "View Trip Trail" — your path is drawn as a line, and any fleet nodes that were reporting a position during the trip appear as pins where they were placed.</li>
+                            <li>This is per-trip and distinct from Log &gt; Trip Map, which plots your logged locations across every trip.</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -657,6 +696,7 @@
                             <li>Access from Log &gt; Life List.</li>
                             <li>Tap any bird's thumbnail to see a detailed species card with identification info and photo sourcing.</li>
                             <li>Tap a bird entry to see the locations and dates you've spotted it, with a link back to the original trip log.</li>
+                            <li>Tap the share icon to export your full life list as a CSV (species, scientific name, first-seen date, sighting count) — handy for comparing against your eBird life list.</li>
                         </ul>
                     </div>
                 </div>
@@ -678,7 +718,8 @@
                     <div class="guide-instructions">
                         <ul class="guide-detail-list">
                             <li>Access from Log &gt; Photos.</li>
-                            <li>Tap any photo to view it full-screen along with species, location, and trip details.</li>
+                            <li>Tap any photo to view it full-screen along with species, location, and trip details; swipe left/right to move through the set.</li>
+                            <li>Switch between grid and list layout, and use the sort control (the up/down arrows in the toolbar) to order photos by newest, oldest, species A&ndash;Z or Z&ndash;A, or by which species has the most photos. Your choice is remembered.</li>
                         </ul>
                     </div>
                 </div>
@@ -711,9 +752,13 @@
                     <p class="guide-text">The More tab is your hub for app preferences and support.</p>
                     <div class="guide-instructions">
                         <ul class="guide-detail-list">
-                            <li>Settings: home state, metric/imperial units, image thumbnails, notification preferences, and the optional tip jar.</li>
-                            <li>Settings &gt; Advanced (collapsed by default): trip cleanup tools (Find &amp; Combine Similar Trips, Remove Duplicate Trips), Image Cache Management, Data Backup &amp; Migration, and Clear All Data.</li>
-                            <li>Help &amp; Info: this screen — Quick Start, User Guide, FAQ, and Contact Support.</li>
+                            <li>Profile: your display name (shown as "exported by" on trips you share as JSON) and your home state (used by State Birds Goals, and as a fallback species source for Learn About Birds).</li>
+                            <li>App Settings toggles: Beginner Mode (simplifies rarity info for new birders), Show Rarity Scores (star indicators on bird lists), Use Metric Units (kilometers instead of miles), Share Exact Locations (include precise GPS coordinates in exported trips), Notifications (bird-detection alerts), Auto-Remove Unseen Birds (drop still-unseen birds automatically when you complete a trip), and Bird Image Thumbnails (download iNaturalist photos — off shows letter placeholders).</li>
+                            <li>AI Bird ID Assistant: the Smart Assistant toggle — on uses Apple Intelligence for more natural answers where the device supports it, off always uses the built-in bird database.</li>
+                            <li>Mic Array (Hardware Accessory): opens the setup and status screen for the optional directional microphone array — see "Directional Mic Array" and "Multi-Node Fleet &amp; Camera Nodes" above.</li>
+                            <li>Your Birding Stats: a quick count of total trips, completed trips, birds seen, and unique species. Support the App: an optional tip jar.</li>
+                            <li>Settings &gt; Advanced (collapsed by default): Find &amp; Combine Similar Trips, Remove Duplicate Trips, Re-check for Previous App Data (re-offers importing data from an earlier version of the app), Image Cache Management, Data Backup &amp; Migration, and Clear All Data.</li>
+                            <li>Help &amp; Info: this screen — Quick Start, User Guide, FAQ, and Contact Support, plus a keyword search box and, on Apple Intelligence devices, a plain-language question box.</li>
                         </ul>
                     </div>
                 </div>
