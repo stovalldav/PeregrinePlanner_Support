@@ -4,339 +4,311 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peregrine Planner - Privacy Policy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Shares the redesigned palette with index.html. */
         :root {
-            --primary: #4CAF50;
-            --secondary: #FF9800;
-            --dark: #333333;
-            --gray: #757575;
-            --gray-dark: #555555;
-            --gray-light: #DDDDDD;
-            --light: #F5F5F5;
-            --white: #FFFFFF;
-            --lightest-gray: #f7f9fc;
+            --bg: #F6F7F4;
+            --surface: #FFFFFF;
+            --border: #D9DED4;
+            --text: #1E2420;
+            --text-dim: #55605A;
+            --accent: #2F7A4F;
+            --accent-contrast: #FFFFFF;
+            --accent-2: #B07A1E;
+            --shadow: 0 1px 2px rgba(30, 36, 32, 0.06), 0 8px 24px rgba(30, 36, 32, 0.05);
+            --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+            --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) {
+                --bg: #14171A;
+                --surface: #1C2024;
+                --border: #333A3F;
+                --text: #E7EBE6;
+                --text-dim: #9AA7A0;
+                --accent: #58A97B;
+                --accent-contrast: #0F1214;
+                --accent-2: #E7B25C;
+                --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+            }
         }
+        :root[data-theme="dark"] {
+            --bg: #14171A;
+            --surface: #1C2024;
+            --border: #333A3F;
+            --text: #E7EBE6;
+            --text-dim: #9AA7A0;
+            --accent: #58A97B;
+            --accent-contrast: #0F1214;
+            --accent-2: #E7B25C;
+            --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.62;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
+        .container { max-width: 820px; margin: 0 auto; padding: 0 20px; }
 
         header {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 16px;
-            position: relative;
-            text-align: center;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 22px 0;
         }
-
-        .header-title {
-            font-size: 24px;
-            font-weight: bold;
+        .header-inner {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
         }
-        
-        .header-links {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        
         .header-link {
-            color: var(--white);
+            color: var(--text-dim);
             text-decoration: none;
-            font-size: 14px;
-            padding: 4px 8px;
-            border: 1px solid rgba(255,255,255,0.5);
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            transition: color 0.15s ease, border-color 0.15s ease;
         }
-        
-        .header-link:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
+        .header-link:hover { color: var(--accent); border-color: var(--accent); }
 
         .privacy-policy {
-            background-color: var(--white);
-            padding: 40px;
-            margin: 20px 0;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+            padding: 36px;
+            margin: 28px 0 80px;
+            border-radius: 14px;
         }
-
         .privacy-policy h1 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            text-align: center;
+            font-family: var(--serif);
+            font-weight: 600;
+            letter-spacing: -0.015em;
+            text-wrap: balance;
+            margin-bottom: 16px;
         }
-
-        .privacy-policy .last-updated {
-            font-style: italic;
-            color: var(--gray);
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
+        .privacy-policy .last-updated { font-style: italic; color: var(--text-dim); margin-bottom: 28px; }
         .privacy-policy h2 {
-            color: var(--primary);
-            border-bottom: 1px solid var(--gray-light);
+            font-family: var(--serif);
+            font-weight: 600;
+            color: var(--accent);
+            border-bottom: 1px solid var(--border);
             padding-bottom: 8px;
             margin: 30px 0 15px;
         }
-
-        .privacy-policy h3 {
-            color: var(--secondary);
-            margin: 20px 0 10px;
-        }
-
-        .privacy-policy p {
-            margin-bottom: 15px;
-        }
-
-        .privacy-policy ul {
-            margin-bottom: 15px;
-            margin-left: 20px;
-        }
-
-        .privacy-policy li {
-            margin-bottom: 8px;
-        }
-
-        .privacy-policy a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .privacy-policy a:hover {
-            text-decoration: underline;
-        }
+        .privacy-policy h3 { color: var(--accent-2); margin: 20px 0 10px; }
+        .privacy-policy p { margin-bottom: 15px; color: var(--text-dim); }
+        .privacy-policy ul { margin-bottom: 15px; margin-left: 20px; color: var(--text-dim); }
+        .privacy-policy li { margin-bottom: 8px; }
+        .privacy-policy strong { color: var(--text); }
+        .privacy-policy a { color: var(--accent); text-decoration: none; }
+        .privacy-policy a:hover { text-decoration: underline; }
 
         .back-to-top {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: var(--primary);
-            color: var(--white);
-            width: 40px;
-            height: 40px;
+            bottom: 22px;
+            right: 22px;
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--border);
             border-radius: 50%;
+            background: var(--surface);
+            color: var(--text);
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            opacity: 1;
-            transition: opacity 0.3s ease;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
         }
-        
+        .back-to-top.visible { opacity: 1; pointer-events: auto; }
+        .back-to-top svg { width: 18px; height: 18px; fill: currentColor; }
+
         @media (max-width: 768px) {
-            .privacy-policy {
-                padding: 20px;
-            }
+            .container, .header-inner { padding: 0 16px; }
+            .privacy-policy { padding: 22px; }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="header-links">
+        <div class="header-inner">
             <a href="index.html" class="header-link">← Back to Help</a>
         </div>
-        <h1 class="header-title">Privacy Policy</h1>
     </header>
 
     <div class="container">
         <div class="privacy-policy">
             <h1>Privacy Policy for Peregrine Planner</h1>
-            <p class="last-updated">Last Updated: July 8, 2025</p>
+            <p class="last-updated">Last Updated: September 3, 2026</p>
 
-            <h2>Introduction</h2>
-            <p>Welcome to Peregrine Planner's Privacy Policy. Your privacy is critically important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application ("App") and visit our website hosted on GitHub Pages ("Website"). By accessing or using the App or Website, you consent to the practices described in this policy.</p>
+            <h2>The short version</h2>
+            <p>Peregrine Planner is a hobby project by an individual developer. There are no user
+            accounts, no login, and no server run by the developer. Everything you create in the
+            app &mdash; trips, sightings, photos, notes, behavior and migration logs, stories,
+            hotspot notes, challenge progress, and settings &mdash; is stored <strong>only on your
+            device</strong>. None of it is transmitted to the developer or to any analytics service.
+            The app has no ads, no trackers, and no third-party analytics SDKs.</p>
+            <p>The app does talk to a few outside services to do its job (mainly eBird for bird
+            observation data). Those, and the device permissions the app asks for, are described
+            below.</p>
 
-            <h2>Information We Collect</h2>
-            
-            <h3>Information You Provide</h3>
-            <p>We may collect information you provide directly through the App or Website, including:</p>
+            <h2>What the app stores, and where</h2>
+            <p>All of your content lives in the app's own local storage on your device:</p>
             <ul>
-                <li><strong>Account Information</strong>: Your name, email address, and profile picture when you create an account</li>
-                <li><strong>User Content</strong>: Bird sightings, trip logs, notes, photos, and any other content you create, upload, or store in the App</li>
-                <li><strong>Feedback and Support</strong>: Information you provide when contacting us for support or submitting feedback</li>
+                <li><strong>Birding data</strong>: trips and itineraries, logged sightings, photos
+                you attach, notes and counts, behavior and migration logs, "Tell Your Story"
+                journals, hotspot notes, and Life List / Big Month / State Birds progress.</li>
+                <li><strong>Preferences</strong>: your display name (used only as "exported by" in
+                trip files you choose to share), home state, and the app's setting toggles.</li>
+                <li><strong>Caches</strong>: bird thumbnail images downloaded from iNaturalist are
+                cached locally for offline viewing and can be cleared in Settings.</li>
+            </ul>
+            <p>There is no cloud sync and no automatic backup. Moving data to a new phone is a
+            manual action you take: Settings &gt; Advanced &gt; Data Backup &amp; Migration exports
+            a single file that you transfer yourself (AirDrop, Files, iCloud Drive, or email). The
+            developer never receives that file.</p>
+
+            <h2>Outside services the app contacts</h2>
+            <p>To function, the app makes network requests to the following services. These requests
+            are made directly from your device over HTTPS; the developer does not sit in the middle
+            and does not log them.</p>
+            <ul>
+                <li><strong>eBird API</strong> (Cornell Lab of Ornithology, <code>api.ebird.org</code>):
+                the app sends a location (coordinates or a region/state code) and time window to
+                retrieve recent bird observations, hotspots, and official state-bird lists. This is
+                the core data source for the Plan tab, Species Map, Hotspot Browser, State Birds,
+                and Learn About Birds. Your use of eBird data is subject to eBird's own terms and
+                the Cornell Lab privacy statement, linked at the end of this policy.</li>
+                <li><strong>iNaturalist API</strong> (<code>api.inaturalist.org</code>): the app
+                sends a species name to fetch a thumbnail photo and attribution. You can turn this
+                off entirely with the "Bird Image Thumbnails" setting, in which case no requests are
+                made to iNaturalist and letter placeholders are shown instead.</li>
+                <li><strong>Wikipedia REST API</strong> (<code>en.wikipedia.org</code>): the AI Bird
+                ID Assistant may send a species name to fetch a short summary paragraph to include
+                in an answer. Only species names are sent; your questions and trip data are not.</li>
+                <li><strong>Apple</strong>: optional in-app tips are processed by Apple's App Store
+                (StoreKit). Apple handles the payment; the developer receives only anonymized
+                aggregate sales figures from Apple and never sees your name, card, or contact
+                details. On devices that support Apple Intelligence, the assistant's on-device model
+                may be used to phrase answers &mdash; that processing happens on your device and
+                nothing is sent to Apple for it.</li>
+                <li><strong>Maps</strong>: map views and "open in Maps" links use Apple Maps, subject
+                to Apple's Maps privacy practices.</li>
+            </ul>
+            <p>The app does not send your sightings, photos, logs, notes, or location history to any
+            of these services. It only sends the minimum needed for a given lookup (typically a
+            coordinate or a species name).</p>
+
+            <h2>Device permissions</h2>
+            <p>iOS will ask your permission before the app can use any of these. Each is used only
+            for the feature named, and the data stays on your device:</p>
+            <ul>
+                <li><strong>Location</strong>: to center "nearby" bird observations on where you are
+                and to plan trip routes from your current location. Coordinates are sent to the
+                eBird API as described above; location history is not stored or uploaded.</li>
+                <li><strong>Microphone</strong>: for real-time bird sound identification. Audio is
+                analyzed on your device by an on-device model (BirdNET) and is not recorded to a
+                file or uploaded.</li>
+                <li><strong>Camera</strong>: for photo and AR bird identification. Image analysis
+                runs on your device.</li>
+                <li><strong>Photo Library</strong>: to let you pick existing photos for
+                identification and to save bird photos you capture.</li>
+                <li><strong>Local Network &amp; Bluetooth</strong>: only used if you build and pair
+                the optional DIY directional microphone array accessory. The app talks to that
+                accessory over your local Wi-Fi and Bluetooth; the accessory has no internet
+                connection and sends nothing offsite.</li>
+                <li><strong>Calendars</strong>: only if you use "Add to Calendar" on a trip, which
+                writes trip days into a calendar you choose.</li>
             </ul>
 
-            <h3>Information Collected Automatically</h3>
-            <p>When you use our App or Website, we may automatically collect:</p>
+            <h2>Contributing your sightings to eBird</h2>
+            <p>The app displays eBird data but does not upload anything to eBird on your behalf. If
+            you want your observations to become part of eBird, you enter them at eBird.org yourself.
+            Once data is in eBird it is governed by eBird's policies:</p>
             <ul>
-                <li><strong>Device Information</strong>: Device type, operating system, unique device identifiers, and mobile network information</li>
-                <li><strong>Usage Data</strong>: How you use the App or Website, including screens viewed, features used, and actions taken</li>
-                <li><strong>Location Information</strong>: With your permission, we collect precise GPS location to provide location-based features, including showing nearby bird sightings and creating optimized birding trip routes</li>
+                <li>eBird data are provided for non-commercial research and education.</li>
+                <li>The Cornell Lab does not use or share your personal information for commercial
+                purposes; your contact information is available only to Cornell Lab staff and
+                volunteer regional reviewers.</li>
+                <li>Observation locations (latitude/longitude) and your name may be displayed on
+                eBird checklists; name display can be turned off in your eBird account.</li>
             </ul>
 
-            <h3>Information from Third Parties</h3>
+            <h2>The support website</h2>
+            <p>This website is a set of static pages hosted on GitHub Pages. It sets no cookies and
+            includes no analytics or tracking scripts. GitHub may log basic request information
+            (such as IP address) as described in the
+            <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.
+            The "Contact" form does not submit anywhere &mdash; it assembles a message and opens
+            your own email app so you can send it to
+            <a href="mailto:peregrineplanner@gmail.com">peregrineplanner@gmail.com</a>. If you email
+            for support, that email is retained in the developer's ordinary mailbox for as long as
+            needed to respond.</p>
+
+            <h2>Data retention and deletion</h2>
+            <p>Because your data is only on your device, you are in control of it:</p>
             <ul>
-                <li><strong>eBird Data</strong>: We use bird observation data from eBird, a project of the Cornell Lab of Ornithology, to provide information about bird sightings in your area. This data is subject to eBird's own terms and privacy policy, which can be found at <a href="https://privacy.cornell.edu/university-privacy-statement" target="_blank">eBird's Terms of Use and Privacy Policy</a></li>
+                <li>Delete individual trips, sightings, logs, and photos within the app.</li>
+                <li>Settings &gt; Advanced &gt; Clear All Data wipes the app's stored content.</li>
+                <li>Deleting the app removes all of its local data and caches.</li>
             </ul>
+            <p>There is no account to close and no data held by the developer to request or delete.
+            A support email you send can be deleted on request.</p>
 
-            <h2>How We Use Your Information</h2>
-            <p>We use your information for the following purposes:</p>
+            <h2>Children's privacy</h2>
+            <p>The app is not directed to children under 13 and does not knowingly collect personal
+            information from anyone. It collects nothing centrally in any case.</p>
+
+            <h2>Security</h2>
+            <p>Local data is protected by iOS app sandboxing and device encryption. Network
+            requests to the services listed above are made over HTTPS. No method of storage or
+            transmission is perfectly secure.</p>
+
+            <h2>Changes to this policy</h2>
+            <p>If this policy changes, the "Last Updated" date above will change. Material changes
+            will be noted in the app's release notes or here.</p>
+
+            <h2>Contact</h2>
+            <p>Questions about this policy: <a href="mailto:peregrineplanner@gmail.com">peregrineplanner@gmail.com</a></p>
+
+            <h2>eBird references</h2>
             <ul>
-                <li>To create and maintain your account</li>
-                <li>To provide, maintain, and improve our App and Website features</li>
-                <li>To process and manage your bird sightings, trip logs, and other content</li>
-                <li>To customize your experience based on your preferences and location</li>
-                <li>To communicate with you about updates, features, and support requests</li>
-                <li>To analyze usage patterns to improve our App and Website</li>
-                <li>To create anonymized, aggregated data sets that help improve birding data</li>
+                <li><a href="https://www.birds.cornell.edu/home/ebird-data-access-terms-of-use/" target="_blank" rel="noopener">eBird Data Access Terms of Use</a></li>
+                <li><a href="https://support.ebird.org/en/support/solutions/articles/48001078113-ebird-data-privacy-and-data-use" target="_blank" rel="noopener">eBird Data Privacy and Data Use</a></li>
+                <li><a href="https://privacy.cornell.edu/university-privacy-statement" target="_blank" rel="noopener">Cornell University / Cornell Lab of Ornithology Privacy Statement</a></li>
+                <li><a href="https://support.ebird.org/en/support/solutions/articles/48000625567-ebird-community-guidelines" target="_blank" rel="noopener">eBird Community Guidelines</a></li>
             </ul>
-
-            <h2>Data Sharing and Disclosure</h2>
-            <p>We do not sell your personal information. We may share your information in the following circumstances:</p>
-
-            <h3>Service Providers</h3>
-            <p>We may share information with third-party service providers who help us operate, provide, improve, or secure our App and Website, such as cloud storage providers and analytics services.</p>
-
-            <h3>eBird Data Contribution</h3>
-            <p>If you choose to contribute your bird sightings to eBird using our "Export for eBird" feature:</p>
-            <ul>
-                <li>Your selected bird observations, including species, date, location, and optional photos will be formatted for submission to eBird</li>
-                <li>You control when and whether to upload this data to eBird</li>
-                <li>Once uploaded to eBird, your data becomes subject to <a href="https://privacy.cornell.edu/university-privacy-statement" target="_blank">eBird's data policies</a></li>
-                <li>This shared data helps support global bird conservation and research</li>
-            </ul>
-
-            <h3>Legal Requirements</h3>
-            <p>We may disclose your information if required to do so by law or in response to valid requests by public authorities (e.g., a court or government agency).</p>
-
-            <h2>Data Security</h2>
-            <p>We implement reasonable security measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure, so we cannot guarantee absolute security.</p>
-
-            <h2>Your Rights and Choices</h2>
-            <p>Depending on your location, you may have certain rights regarding your personal information:</p>
-            <ul>
-                <li><strong>Access and Update</strong>: You can access and update your account information through the App's Profile settings</li>
-                <li><strong>Location Services</strong>: You can enable or disable location services through your device settings or when prompted by the App</li>
-                <li><strong>Push Notifications</strong>: You can manage notification preferences in the App settings or your device settings</li>
-                <li><strong>Export Preferences</strong>: You can control whether photos are included in exports in your Profile settings</li>
-                <li><strong>Data Deletion</strong>: You can request deletion of your account and associated data by contacting us at peregrineplanner@gmail.com</li>
-            </ul>
-
-            <h2>Data Storage and Retention</h2>
-            <ul>
-                <li><strong>Local Storage</strong>: Bird sightings, trip data, and photos are stored locally on your device</li>
-                <li><strong>Retention</strong>: We retain your information as long as your account is active or as needed to provide services</li>
-                <li><strong>Deletion</strong>: After account deletion, we will delete or anonymize your information, except where required to retain it by law</li>
-            </ul>
-
-            <h2>Children's Privacy</h2>
-            <p>Our App and Website are not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us.</p>
-
-            <h2>International Data Transfers</h2>
-            <p>Your information may be transferred to and processed in countries other than your country of residence, which may have different data protection laws. We ensure appropriate safeguards are in place to protect your information.</p>
-
-            <h2>GitHub Pages Website</h2>
-            <p>Our Website is hosted on GitHub Pages. When you visit our Website:</p>
-            <ul>
-                <li>GitHub may collect certain information as described in the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank">GitHub Privacy Statement</a></li>
-                <li>We do not use cookies or tracking technologies on our GitHub Pages Website</li>
-                <li>The Website is informational and does not collect personal information beyond what may be submitted through the contact form</li>
-            </ul>
-
-            <h2>AI Model Usage and Data Training</h2>
-            <p>Peregrine Planner incorporates artificial intelligence (AI) models to enhance bird identification and user experience. Please be aware of the following regarding AI usage:</p>
-            
-            <h3>AI Bird Identification Features</h3>
-            <ul>
-                <li><strong>Sound Detection</strong>: We use Cornell's BirdNET AI model for real-time bird sound identification. This model analyzes audio data locally on your device to identify bird species from their sounds.</li>
-                <li><strong>Photo Identification</strong>: Our AI analyzes images you provide to suggest bird species based on visual features. This processing occurs locally on your device.</li>
-                <li><strong>Enhanced Processing</strong>: Optional enhanced processing features may use additional AI models for improved accuracy, including noise reduction and consensus scoring.</li>
-            </ul>
-            
-            <h3>Data Training and Privacy</h3>
-            <ul>
-                <li><strong>No Training Data Usage</strong>: Your personal bird identification data, photos, audio recordings, and other user-generated content are NEVER used to train AI models or shared with AI model developers.</li>
-                <li><strong>Local Processing</strong>: Bird identification processing occurs locally on your device whenever possible, meaning your data doesn't leave your device for AI analysis.</li>
-                <li><strong>Third-Party AI Models</strong>: We use established AI models (such as BirdNET) that have been trained on publicly available datasets. We do not contribute your personal data to these training datasets.</li>
-                <li><strong>Experimental Features</strong>: AI identification features are experimental and should always be validated against field guides or expert birders. Results are provided as suggestions, not definitive identifications.</li>
-            </ul>
-            
-            <h3>AI Model Limitations</h3>
-            <ul>
-                <li>AI identification accuracy depends on various factors including audio quality, image clarity, lighting conditions, and environmental factors</li>
-                <li>The bird database supporting AI features may be incomplete, and some species may not be recognized</li>
-                <li>Confidence scores indicate the model's certainty but should not be considered absolute measures of accuracy</li>
-                <li>Regional filtering features may improve accuracy for local species but may miss rare or out-of-range birds</li>
-            </ul>
-
-            <h2>eBird Data Usage</h2>
-            <p>Peregrine Planner uses bird observation data from eBird, which is managed by the Cornell Lab of Ornithology. Please be aware that:</p>
-            <ul>
-                <li>Bird sighting data provided in the App comes from eBird's database of observations</li>
-                <li>The App accesses recent eBird data to show birds that have been reported near your location</li>
-                <li>eBird is among the world's largest biodiversity-related science projects, with millions of bird sightings contributed by birders globally. eBird is managed by the Cornell Lab of Ornithology and collects data documenting bird distribution, abundance, habitat use, and trends through checklist data collected within a scientific framework.</li>
-            </ul>
-
-            <h3>eBird Data Terms and Privacy</h3>
-            <p>When using eBird data through our App or contributing your sightings to eBird:</p>
-            <ul>
-                <li>All eBird data are provided for non-commercial use in research and education. Thousands of participants freely provide data to eBird, and in this same spirit, the Cornell Lab of Ornithology makes these data freely available.</li>
-                <li>The Cornell Lab will never use or share your personal information for commercial purposes. Your contact information is only available to the team at the Cornell Lab of Ornithology and volunteer regional reviewers.</li>
-                <li>When you export sightings to eBird, you contribute to a global citizen science project that helps track bird populations, migration patterns, and habitat needs.</li>
-                <li>Raw data, including latitude and longitude of observation locations, are freely shared with researchers upon request. eBird checklists will display name and location data, though name display can be turned off by the user.</li>
-            </ul>
-
-            <p>For complete information, please review:</p>
-            <ul>
-                <li><a href="https://www.birds.cornell.edu/home/ebird-data-access-terms-of-use/" target="_blank">eBird Data Access Terms of Use</a></li>
-                <li><a href="https://support.ebird.org/en/support/solutions/articles/48001078113-ebird-data-privacy-and-data-use" target="_blank">eBird Data Privacy and Data Use</a></li>
-                <li><a href="https://privacy.cornell.edu/university-privacy-statement" target="_blank">Cornell Lab of Ornithology Privacy Policy</a></li>
-                <li><a href="https://support.ebird.org/en/support/solutions/articles/48000625567-ebird-community-guidelines" target="_blank">eBird Community Guidelines</a></li>
-            </ul>
-
-            <h2>Changes to This Privacy Policy</h2>
-            <p>We may update this Privacy Policy from time to time. The updated version will be indicated by an updated "Last Updated" date. If we make material changes, we will provide notice through the App or by other means.</p>
-
-            <h2>Contact Us</h2>
-            <p>If you have questions or concerns about this Privacy Policy, please contact us at:</p>
-            <p>Email: <a href="mailto:peregrineplanner@gmail.com">peregrineplanner@gmail.com</a></p>
         </div>
     </div>
 
-    <a href="#" id="backToTop" class="back-to-top">
-        <i class="fas fa-arrow-up"></i>
-    </a>
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5l7 7-1.4 1.4L13 8.8V20h-2V8.8l-4.6 4.6L5 12z"/></svg>
+    </button>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const backToTop = document.getElementById('backToTop');
-            
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTop.style.opacity = '1';
-                } else {
-                    backToTop.style.opacity = '0';
-                }
+        document.addEventListener('DOMContentLoaded', function () {
+            var backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', function () {
+                backToTop.classList.toggle('visible', window.pageYOffset > 320);
             });
-            
-            backToTop.addEventListener('click', (e) => {
-                e.preventDefault();
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+            backToTop.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
     </script>
-</body> </html>
+</body>
+</html>
