@@ -54,6 +54,7 @@ window.HELP_CONTENT = {
       "description": "AI-powered identification tools for birds you encounter in the field, as an in-screen mode switch (Sound / Photo / AR / Ask). All results are experimental and should be verified with field guides or expert birders.",
       "details": [
         "Sound: real-time audio listening using the Cornell BirdNET model. Choose a sensitivity level, grant microphone and notification permissions, and detected species appear live with confidence scores. Detections build a trip log you can save or merge into an existing trip. If you've paired the optional directional mic array accessory, tap the location icon next to a detected species to see which direction it's coming from.",
+        "Sound ID Model (Settings › App Settings): BirdNET 2.4 is built in and is the default. BirdNET+ 3.0 (Developer Preview) is an experimental option covering about 9,800 bird species — picking it downloads it once (about 70 MB), and it's then used for Sound, AR's sound matching, and Observe Mode. Its results can differ from 2.4's and may change between previews. If it isn't available when you start listening, the app uses BirdNET 2.4 and says so on the Sound screen.",
         "Photo: select up to 20 photos (or take new ones) for batch AI analysis; results are grouped by species with confidence scores.",
         "AR: point your camera at a bird for live species identification with a confidence-score overlay, in continuous, tap-to-detect, or manual capture modes. If location is available, a detection may also show “Not recently reported near you” — meaning that species hasn't been reported in eBird activity near you in the last two weeks. That never changes the confidence score itself, just flags it as worth a second look.",
         "AR camera presets tune the live camera for a shooting situation: Large Soaring Birds, Medium Birds – Moderate Distance, Hummingbirds in Flight, Perched or On the Ground, Digiscoping, or Auto. Each sets a shutter-speed ceiling, exposure compensation, and white balance; Digiscoping also turns autofocus off and locks the lens at infinity so a spotting scope's own focus knob is the only focus control. Your choice is remembered between sessions.",
@@ -70,14 +71,16 @@ window.HELP_CONTENT = {
         "Enable it from Settings > Mic Array, then join the array's Wi-Fi network in your device's Wi-Fi settings — “PeregrineMicArray” / “birding123” for the original front array, or whatever network name and password was configured on a camera-node accessory that hosts its own network instead.",
         "Once connected, start a Sound detection session as normal, then tap the location icon next to any detected species to track its direction — an arrow shows the azimuth (relative to the mic array's own forward-facing mark, not true north) along with a getting closer / farther / steady trend.",
         "Direction only updates when the app confirms a fresh detection of the species you're tracking, not on every sound the array picks up — so it can lag slightly behind, by design, rather than jumping around on unrelated noise.",
-        "The “Direction Sensitivity” slider in the Mic Array settings screen controls how confident a reading needs to be before it's shown at all — lower it for more frequent (noisier) updates, raise it for fewer but more reliable ones.",
+        "The “Direction Sensitivity” slider — in the Mic Array tab's Camera screen, tap into the Primary Array's own row — controls how confident a reading needs to be before it's shown at all — lower it for more frequent (noisier) updates, raise it for fewer but more reliable ones.",
         "Radar Mode: instead of tracking one species at a time, shows a live bearing for up to 4 currently-calling species at once, each isolated by that species' typical call frequency so a busy multi-bird soundscape doesn't collapse into a single loudest-sound reading. Toggle it on from the Sound detection screen while the array is connected; it runs alongside single-species tracking, not instead of it.",
-        "Sound source: while the mic array (or any connected fleet node) is available, Sound detection shows a “Sound source” picker — choose whether the Primary array or a specific Additional Node feeds the screen. Direction tracking and Radar Mode follow whichever source you pick.",
+        "Sound source: while the mic array is enabled, Sound detection shows a “Sound source” picker — the Primary array, any connected Additional Node, or Phone mic (your phone's own microphone, even with the array connected). Direction tracking and Radar Mode follow whichever source you pick. If the node you picked isn't connected when you start, the app falls back to the Primary array, then the phone mic.",
+        "Using Merlin (or another sound ID app) at the same time: pick a node or the Primary array as the source, start listening, then switch to the other app. While listening to a node, Peregrine Planner keeps running in the background without touching the phone's microphone or interrupting other apps' audio, so the other app can use the phone mic while node detections (and Fleet-Wide Classification) keep coming in. With Phone mic as the source, both apps would want the same microphone — don't run them together that way.",
+        "Fleet-Wide Classification (Experimental): once 2 or more nodes are connected, an opt-in toggle on the Sound detection screen classifies every connected node's audio at once instead of just the picked source, and cross-correlates matching detections from different nodes into one fused location — shown as a distance-and-direction line (e.g. “~120m NE from you”) alongside the usual single-node arrow, whenever 2 or more nodes agree. It's off by default and uses more battery and processing, so try it and see how your device handles it.",
         "Mic Array Map: once two or more GPS-equipped nodes are connected, a map view (reachable from Sound detection) plots each node's real position and current bearing and, when their bearings line up, an estimated position for the sound — the geolocated counterpart to the phone-centered direction arrow.",
-        "Self-Test: the Mic Array settings screen has a clap test — clap near one side of the array and confirm the azimuth number moves before you head into the field.",
+        "Self-Test: a clap test lives on the Primary Array's own row in the Mic Array tab's Camera screen — clap near one side of the array and confirm the azimuth number moves before you head into the field.",
         "GPS status: a node with a GPS module shows a live fix / no-fix readout with satellite counts and antenna / sky-view guidance, so a node that never acquired a fix is obvious before you rely on it.",
-        "Left / right direction only — the array can't determine front / back or true compass heading, and there's no distance or elevation measurement.",
-        "Learned Frequency Bands: the app remembers the actual call frequency range measured for each species you've tracked, and — once “Seed Tracking from Learned Data” is turned on in the Mic Array settings screen — uses that real history instead of a general per-species estimate once enough confirmed detections have accumulated. Recording happens automatically in the background regardless of the toggle. “Reset Learned Data” in the same screen clears it."
+        "Left / right direction only — a single node can't tell front from back (the Mic Array Map draws the other possibility as a faint dashed line), and there's no distance or elevation measurement. Two nodes placed a few meters apart facing different ways can resolve front / back — see “Paired nodes” below.",
+        "Learned Frequency Bands: the app remembers the actual call frequency range measured for each species you've tracked, and — once “Seed Tracking from Learned Data” is turned on in Settings > Mic Array — uses that real history instead of a general per-species estimate once enough confirmed detections have accumulated. Recording happens automatically in the background regardless of the toggle. “Reset Learned Data” in the same screen clears it."
       ],
       "downloadHref": "peregrine-mic-array-firmware.zip",
       "downloadLabel": "Download Firmware (.zip)"
@@ -86,15 +89,40 @@ window.HELP_CONTENT = {
       "title": "Multi-Node Fleet & Camera Nodes",
       "description": "Beyond the single front array, the app can run a small fleet of DIY nodes — extra mic arrays and camera-equipped nodes — at the same time. All of this is optional and needs the separately-built hardware.",
       "details": [
-        "Manage Additional Nodes: Settings > Mic Array > Additional Mic Array Nodes. Add a node by name, type (mic-only or camera), and network address, or tap Auto-Discover to find nodes already on your shared Wi-Fi — discovery also works over Bluetooth before anything is connected. A node whose IP address changes is re-matched automatically rather than showing up as a new one.",
-        "Heading Source (set per node, and for the Primary array in its own settings screen): Fixed Pin (stand at the node and tap “Set from my current location” to capture its position and facing from your phone's GPS and compass — used whenever the node's own GPS has no fix), Phone Proxy (the node is carried with your phone and borrows its live GPS position and compass heading), Manual Heading Only (records a mounting heading but no position, so the node won't appear on the map), or Compass (reserved for future hardware). A real node GPS fix always takes over automatically when one is available, and a Fixed Pin re-syncs from that fix if the node is later moved.",
-        "Camera section of the Mic Array tab: the field screen for the camera side of the hardware — live capture for the Primary array and every declared camera node in one place, plus the two review inboxes. (Feeder Cam Mode and its Home Assistant URLs stay in Settings > Mic Array.)",
-        "Camera nodes — capture mode: from the Mic Array tab's Camera section, set each node to Auto (it photographs a bird on its own when its audio / motion detection fires) or Manual only. “Take Photo Now” works in either mode.",
-        "Camera nodes — video: Start / Stop Video from the Mic Array tab's Camera section. Recording runs on the node itself and keeps going even if you leave the screen.",
+        "The Mic Array tab has three segments — Fleet, Map, and Camera. Fleet manages every node and its connection/hardware settings; Map plots positioned nodes and estimated source locations; Camera is the field screen for live photo/video capture. The old “Setup” segment is gone — only the accessory's on/off switch, Learned Frequency Bands, and the firmware download stay in Settings > Mic Array now.",
+        "Manage Additional Nodes: Mic Array tab > Fleet. Add a node by name, type (mic-only or camera), and network address, or tap Auto-Discover to find nodes already on your shared Wi-Fi — discovery also works over Bluetooth before anything is connected. A node whose IP address changes is re-matched automatically rather than showing up as a new one.",
+        "Primary Array configuration: on the Fleet screen, tap the Primary Array row (it shows “Not connected — tap to set it up” until it is) to reach its connection status, Direction Sensitivity, Self-Test, GPS status, Heading Source, Feeder Cam Mode, and Wi-Fi & Role settings, all in one screen — the same screen is also embedded directly in the Camera tab so it's reachable from either place.",
+        "Paired nodes: two nodes (or more) within about 25 m of each other are combined automatically. Place them 2–5 m apart with their mic pairs facing about 90° apart (never nearly parallel) and they resolve front from back, which one node can't. The Mic Array Map then draws one thick bearing line with a ±uncertainty wedge for the pair, a status line under the map says whether front/back was resolved, and the Bird Sounds screen shows a “Paired nodes” bearing. If the two disagree too much it says “ambiguous” and shows both possibilities rather than guessing; if a sound is close enough, it shows where their lines cross.",
+        "Heading Source (set per node from its Edit screen on Fleet, and for the Primary array from its own row there): Fixed Pin (stand at the node and tap “Set from my current location” to capture its position and facing from your phone's GPS and compass — used whenever the node's own GPS has no fix), Phone Proxy (the node is carried with your phone and borrows its live GPS position and compass heading), Manual Heading Only (records a mounting heading but no position, so the node won't appear on the map), or Compass (the node's own onboard BNO055 compass on a 2-mic Cam or Mic Array build with the compass enabled — stays right if the node is bumped or turned; its position comes from its own GPS, or from an optional pinned position while it has no fix; corrected to true north using your phone's compass, with a mounting-offset field if the compass board isn't square to the mic pair). A real node GPS fix always takes over automatically when one is available, and a Fixed Pin re-syncs from that fix if the node is later moved.",
+        "Wi-Fi & Role: reached from a node's row (Primary on the Fleet screen, or an Additional Node's Edit screen). Sets the node's role — host its own network, join one as a client, or fall back between the two — a priority-ordered list of Wi-Fi networks to try, with a per-network on/off switch so you can retire one without losing its saved password, and the node's access-point password (a per-chip default is shown until you set your own; the same screen also shows a Bluetooth-discovered node's default password with a copy button before you've even connected). Applying a change reboots the node.",
+        "If a Wi-Fi change leaves a node unable to reach any of its enabled networks, it automatically reverts to its previous working settings after about 3 minutes, with no separate warning that it happened — so if you meant to permanently switch off the network you're currently using, confirm another enabled candidate is genuinely in range first, or the node will just quietly revert back to it.",
+        "Camera on/off: each node's card on the Camera screen has a “Camera” switch that fully powers the camera down — frees up that node's processing time, memory, and camera hardware for GPS-fix acquisition or attentive sound capture. Turning it off immediately stops any recording or live preview in progress; Take Photo Now, Start Video, and Live Preview are unavailable while it's off, and it comes back on automatically the next time the node reboots.",
+        "Camera nodes — presence sensor: a 2-mic camera node can take an optional DFRobot C4002 mmWave presence sensor. It then shows up in the Camera Console like a security node's sensor — presence badge, distance and movement readout, Detection range — and Presence Capture can photograph each visitor, including one that never makes a sound.",
+        "Camera nodes — capture mode: from the Camera screen, set each node to Auto (it photographs a bird on its own when its audio / motion detection fires) or Manual only. “Take Photo Now” works in either mode.",
+        "Camera nodes — video: Start / Stop Video from the Camera screen. Recording runs on the node itself and keeps going even if you leave the screen.",
         "Camera nodes — Live Preview: a rough live image for confirming a camera is aimed and focused while you physically set it up. It is not smooth video, and it is unavailable while the node is recording.",
         "Camera Node Captures (photo inbox): auto-captured photos wait here for review. For each one, Save adds it to a trip with the on-device species guess, “Not a Bird” routes it into a Tell Your Story journal instead, and Discard deletes it.",
         "Camera Node Videos (video inbox): recorded clips wait here — play a clip inline, share it out through the iOS share sheet, or Save it into a trip as a sighting you identify yourself (no automatic species ID runs on video).",
-        "Field Debug (Mic Array Nodes > Field Debug): turn on remote logging per node and watch a live tail of what each node reports, filter or search the lines, and share the full or filtered log out of the app. It also shows per-node AI classify latency once the Sound detection model has been loaded."
+        "Field Debug (Mic Array tab > Fleet > Field Debug): turn on remote logging per node and watch a live tail of what each node reports, filter or search the lines, and share the full or filtered log out of the app. It also shows per-node AI classify latency once the Sound detection model has been loaded."
+      ]
+    },
+    {
+      "title": "Camping & Home Security Node (Optional Hardware Accessory)",
+      "description": "A camera node built with a presence sensor and a speaker can also stand in as an unattended camping or home security camera. This needs that specific hardware build — an ordinary mic array or camera node doesn't have a Node Mode picker at all.",
+      "details": [
+        "Camera Console (Mic Array tab > Camera): a security-console view of every camera — a tile per node with its latest image, a live “PRESENCE · distance” badge when someone's detected, and an Off / Camping / Home switch that arms every security node at once. Below the tiles: Snapshot all, Siren all, Hold to talk to all, and a Recent Activity timeline of presence detections and captures across every node. Tap a tile for that node's full view: a larger picture that refreshes every few seconds (tap Live for real live video), a distance bar with whether they're approaching or moving away, Hold to talk, Siren / Stop, Snapshot, Record, and the node's own settings. The gear button opens Camera Setup, where the detailed per-node configuration lives.",
+        "Presence alerts: while a node is in Camping Security or Home Security mode, a detection alerts your phone — a full-screen alert with the node's picture and Hold to talk / Sound siren / View live if the app is open, or a notification if it's in the background. At most one alert per node every 30 seconds, and distances are shown in feet. Turn them off with the Presence Alerts switch on a node's page. Alerts only arrive while the app is running and connected to the node; with the app fully closed, use Home Assistant's own notifications (Home Security mode).",
+        "Node Mode appears when you tap a qualifying node's tile in the Camera Console (Mic Array tab > Camera), with three choices: Birding (behaves exactly like an ordinary camera node), Camping Security (unattended monitoring away from home), and Home Security (reports to your home's Home Assistant).",
+        "Presence detection works the same in every mode: the node's own mmWave sensor captures a photo (or a short burst) and notifies the app the moment it detects something nearby, with no need for a sound trigger. The node's card shows “Last presence: … ago” once it's fired at least once. Either DFRobot sensor works — the C4001 (up to ~82 ft) or the C4002 (up to ~36 ft) — and the node detects which one is fitted by itself.",
+        "Movement and speed: while someone's in range, the node's page, its Camera Console tile, and the alert show a live reading about once a second — “Approaching · 2.1 mph”, “Moving away · 1.3 mph”, “Standing still”, or “Moving across”, alongside the distance. The radar only measures movement toward or away from the node, so someone walking straight across in front of it reads as still or “moving across”, not with a speed. “Clearing…” means the sensor has lost them and is counting down before it reports the area clear — it doesn't alert during that. A C4001 node shows speed but not which way.",
+        "Detection range and Clear after: on the node's Camera Console page (and its section in Camera Setup), the Detection range slider sets how far out the sensor counts anything, in feet. Set it to the far edge of the area you want watched — the radar sees through interior walls, so on its full range it can pick up people moving in the next room. Clear after (C4002 only) sets how many seconds it keeps reporting someone after losing them. Both are saved on the node itself, so they survive a power cut even with no phone around, and the distance bar scales to the range you set.",
+        "Presence sensor offline: if the sensor stops reporting (unplugged, unpowered, or a loose wire), the node's tile and page say “Presence sensor offline” in amber, and an armed node sends a one-time notification. Everything else on the node keeps working, and it clears on its own once the sensor reports again.",
+        "Automatic Alarm (Camping Security mode only, off by default): when on, the node sounds its own siren the instant presence is detected, with no phone involvement — meant only for a genuinely isolated site, since an always-on automatic siren is a real nuisance risk around other campers. Leave it off unless you're truly alone out there.",
+        "Siren: a button on the node's page (and “Siren all” on the Camera Console) that fires the siren immediately, in any mode — for a deliberate warning or just to test it. The node stops the tone on its own after a short time even if you never send a second command.",
+        "Speak through the node: hold the “Hold to talk” button on the node's page (or on a presence alert) to stream your own voice live out of its speaker; release to stop. A more direct, human alternative to an automatic siren.",
+        "Home Assistant integration (Home Security mode): open the node's “Home Assistant” row to enter your MQTT broker's host, port, and (if needed) username and password. Once connected, the node adds a presence sensor, a Sound Alarm button, and a camera on/off switch to Home Assistant automatically — no YAML required for those three. In this mode, the decision to sound the alarm automatically is meant to live in a Home Assistant automation of your own instead of the on-device toggle, since Home Assistant can factor in things the node can't, like whether anyone's phone shows home or whether your house alarm is armed.",
+        "Home Assistant camera feed: the live camera image is the one piece that still needs a one-time manual step — add a YAML `generic` camera entry pointing at the node's own snapshot address (the same approach already used for Feeder Cam Mode). Home Assistant's automatic MQTT setup can't discover a camera feed the way it can the other three entities.",
+        "Storage: a node with an SD card inserted stores photos on it (and can record video) exactly like any other camera node. Without a card, it keeps a small rotating set of the most recent photos in memory instead — still capture only, and that set is lost if the node restarts."
       ]
     },
     {
@@ -138,7 +166,7 @@ window.HELP_CONTENT = {
         "Plan — notable birds near you, recent reports, and trip planning.",
         "Identify — Sound, Photo, AR, and Ask identification tools on one screen.",
         "Log — Trip Logs, Trip Map, Life List, State Birds, Big Month, and Photos via the title menu; Behaviors, Migration, and Tell Your Story via the ••• button.",
-        "Mic Array — only visible when “Enable Mic Array Integration” is on in Settings; brings the directional mic array, the fleet, and the camera nodes together.",
+        "Mic Array — only visible when “Enable Mic Array Integration” is on in Settings; three segments (Fleet, Map, Camera) bring the directional mic array, the fleet, and the camera nodes together.",
         "Gear button (every tab, top-right) — Settings and this Help & Info screen."
       ]
     },
@@ -283,7 +311,7 @@ window.HELP_CONTENT = {
         "App Settings toggles: Show Rarity Scores (star / difficulty indicators on bird lists), Bird Detection Alerts (notify when a species is detected during a Sound session), Auto-Remove Unseen Birds (drop still-unseen birds automatically when you complete a trip), and Bird Image Thumbnails (download iNaturalist photos — off shows letter placeholders).",
         "Appearance: the app follows your device's Light or Dark setting automatically — there is no separate in-app toggle.",
         "AI Bird ID Assistant: the Smart Assistant toggle — on uses Apple Intelligence for more natural answers where the device supports it, off always uses the built-in bird database.",
-        "Mic Array (Hardware Accessory): “Enable Mic Array Integration” turns on the optional directional microphone array and its setup / status screen. While it's on, Mic Array is also a bottom tab; while it's off, that tab is hidden and nothing about the accessory is shown.",
+        "Mic Array (Hardware Accessory): “Enable Mic Array Integration” turns on the optional directional microphone array. While it's on, Mic Array is also a bottom tab (Fleet / Map / Camera segments) where every node's own connection, sensitivity, GPS, heading, and Wi-Fi settings actually live; while it's off, that tab is hidden and nothing about the accessory is shown. This Settings screen itself only keeps the on/off switch, Learned Frequency Bands, and the firmware download.",
         "Your Birding Stats: a quick count of total trips, completed trips, birds seen, and unique species. Support the App: an optional tip jar.",
         "Settings > Advanced (collapsed by default): Find & Combine Similar Trips, Remove Duplicate Trips, Re-check for Previous App Data, Image Cache Management, Data Backup & Migration, and Clear All Data.",
         "Help & Info: this screen — Quick Start, User Guide, FAQ, and Contact Support, plus a keyword search box and, on Apple Intelligence devices, a plain-language question box."
@@ -374,66 +402,76 @@ window.HELP_CONTENT = {
         },
         {
           "id": "14",
+          "question": "What is the BirdNET+ 3.0 Developer Preview option?",
+          "answer": "An experimental, newer BirdNET sound model you can switch to in Settings › App Settings › Sound ID Model. It recognizes about 9,800 bird species (BirdNET 2.4, the built-in default, about 6,500). Picking it downloads it once — about 70 MB, so Wi-Fi is a good idea — and the Sound screen shows “Model: BirdNET+ 3.0” while it's in use. It's a developer preview from the BirdNET team: results can differ from 2.4 and may change in later previews, and confidence scores aren't directly comparable between the two models. “Remove download” in the same screen switches back to 2.4 and lets iOS reclaim the space; if iOS has cleared the download to free storage, the app falls back to 2.4 until you download it again."
+        },
+        {
+          "id": "15",
+          "question": "Why did sound detection confidence numbers change?",
+          "answer": "As of version 7.9 they're true probabilities. The built-in BirdNET 2.4 model outputs raw scores that need converting to a 0–100% confidence (BirdNET's own software does this); earlier versions skipped that step, so confidence percentages were misleading and the Low / Medium / High sensitivity settings barely differed. Now Medium keeps detections of 25% confidence and up (BirdNET's own default), Low only 50% and up, and High 10% and up — so expect a few more detections than before at Medium."
+        },
+        {
+          "id": "16",
           "question": "What are the smart features of AI sound detection?",
           "answer": "Identify > Sound filters out non-bird sounds (human voices, traffic, machinery, other animals) automatically, so your detection list contains only actual bird species. It sends lock-screen notifications for new detections and supports enhanced processing mode for improved accuracy via cross-window voting."
         },
         {
-          "id": "15",
+          "id": "17",
           "question": "How do I use AI bird photo identification?",
           "answer": "Go to Identify > Photo to identify birds from your photos. Select up to 20 photos from your gallery, or take new ones with the camera. The AI analyzes each image and groups results by species with confidence scores. For best results, use clear, well-lit photos showing the bird prominently. Save results to a new or existing trip. Remember AI identification is experimental and should be verified with field guides."
         },
         {
-          "id": "16",
+          "id": "18",
           "question": "How do I use AR Bird Identification?",
           "answer": "Go to Identify > AR and grant camera permissions to begin. Point your camera at a bird to see a live species name and confidence score. Choose continuous detection (automatic, on a timer), tap-to-detect, or manual capture mode, and adjust the confidence threshold to control sensitivity. Pick a camera preset (Large Soaring Birds, Hummingbirds in Flight, Perched or On the Ground, Digiscoping, or Auto) to tune shutter speed, exposure, white balance, and focus for the situation. Every capture that clears the threshold is kept, and shots that don't clear it — plus the “Add Species Manually” button — let you name the bird yourself. When you're done, save your session's detections to a trip log."
         },
         {
-          "id": "17",
+          "id": "19",
           "question": "What do the AR Bird Identification camera presets do?",
           "answer": "They tune the live camera for a shooting situation. Large Soaring Birds, Medium Birds – Moderate Distance, and Hummingbirds in Flight each set a fast shutter-speed ceiling and a slight negative exposure compensation to freeze motion and protect highlights; Perched or On the Ground uses a slower ceiling and neutral exposure; Auto applies no manual control. Large Soaring Birds also locks white balance to daylight. Because iPhones have a fixed aperture and give apps no way to cap auto-ISO, the ISO ranges shown are targets the camera trends toward via the shutter ceiling, not enforced limits. Your chosen preset is remembered between sessions."
         },
         {
-          "id": "18",
+          "id": "20",
           "question": "How does the Digiscoping preset work?",
           "answer": "Digiscoping (holding or clamping the phone to a spotting scope's eyepiece) is the one AR camera preset that turns autofocus off — it locks the phone's lens at infinity so the scope's own focus knob is the only focus control. Phone autofocus otherwise hunts against the scope's narrow field of view. It also caps shutter speed to help with the shake that high magnification amplifies. Select it from the camera preset menu in the AR controls."
         },
         {
-          "id": "19",
+          "id": "21",
           "question": "The AR camera saw a bird but the confidence was too low — can I still keep and identify it?",
           "answer": "Yes, in tap-to-detect or manual capture mode. A shot that falls below the confidence threshold goes to a “Needs ID” strip instead of being discarded. Tap the thumbnail to choose from the model's other top guesses, search the full species list, or discard it. There's also an “Add Species Manually” button that takes a photo and lets you name the bird yourself when the model can't identify it at all. Manually identified birds save to the trip log like any other AR detection. (Continuous mode still discards its own below-threshold frames so the strip doesn't fill up.)"
         },
         {
-          "id": "20",
+          "id": "22",
           "question": "Can I keep more than one AR photo of the same bird?",
           "answer": "Yes. AR Bird Identification keeps every capture that clears the confidence threshold — up to a dozen of the strongest per species — and saves them all to the trip log, rather than keeping only a single best frame. The Photos screen shows every photo attached to a sighting."
         },
         {
-          "id": "21",
+          "id": "23",
           "question": "What does “Not recently reported near you” mean on an AR detection?",
           "answer": "It means that species hasn't shown up in real eBird activity within about 50 km of your location in the last two weeks — a signal worth a second look before confirming the ID. It only appears when location is available, and it never changes the confidence score itself — it's a separate flag alongside the model's real output."
         },
         {
-          "id": "22",
+          "id": "24",
           "question": "Why did my AI bird identification confidence seem low or uncertain?",
           "answer": "Confidence scores reflect the model's own certainty and are affected by real-world factors like background noise, image lighting / clarity, and how distinctive the species' call or appearance is. Low confidence doesn't necessarily mean the identification is wrong — but always cross-check with a field guide, especially for rare or unusual sightings."
         },
         {
-          "id": "23",
+          "id": "25",
           "question": "Can I correct or dismiss an incorrect AI detection?",
           "answer": "Yes — in Sound and Photo detection, tap “Not this” on a detected species to remove it from your session results before saving. In AR, tap a detection card to remove it."
         },
         {
-          "id": "24",
+          "id": "26",
           "question": "What is the AI Bird ID Assistant and how do I use it?",
           "answer": "The AI Bird ID Assistant is a conversational assistant that helps answer questions about bird identification, behavior, and habitat. Open it from Identify > Ask to have natural conversations about birds — ask questions like “What does a Cardinal look like?” or “How can I tell the difference between Cooper's Hawk and Sharp-shinned Hawk?” Bird species mentioned in responses appear as clickable cards showing photos and details, with a confidence indicator on each answer."
         },
         {
-          "id": "25",
+          "id": "27",
           "question": "What types of questions can I ask the AI Bird ID Assistant?",
           "answer": "The assistant handles species identification (“What does a Robin look like?”), species comparisons (“What's the difference between Cooper's Hawk and Sharp-shinned Hawk?”), habitat questions (“Where do Cardinals live?”), behavioral questions (“How do woodpeckers behave?”), and general questions about bird sounds. It draws on a local database of ~1,300 North American and European species. For best results, be specific in your questions."
         },
         {
-          "id": "26",
+          "id": "28",
           "question": "What is the AI Bird ID Assistant's knowledge based on?",
           "answer": "The assistant draws on a local database of roughly 1,300 North American and European bird species (identification features, size, habitat, behavior, similar species) plus optional Wikipedia summaries, and can answer questions about your own trip logs (“Have I seen a Painted Bunting?”). It does not currently cross-reference real-time eBird sightings for “birds near me” style questions — for local sighting data, use the Plan tab or Species Map instead. On Apple Intelligence-capable devices its answers are more natural and tagged “Enhanced by Apple Intelligence”; otherwise it automatically uses the built-in bird database."
         }
@@ -443,152 +481,152 @@ window.HELP_CONTENT = {
       "name": "Trips, logging & learning",
       "faqs": [
         {
-          "id": "27",
+          "id": "29",
           "question": "How do I log birds I've seen during my trip?",
           "answer": "Open your active trip from Trip Logs, find the bird in your itinerary, and tap the checkbox next to it to mark it as seen. You can also add notes and the number of birds spotted. These sightings automatically appear in your Life List. You can also use the “Add Sighting” button in Trip Logs to log birds outside of planned trips."
         },
         {
-          "id": "28",
+          "id": "30",
           "question": "How do I use the Add Sighting feature?",
           "answer": "Add Sighting lets you log birds you see outside your planned trips. From Trip Logs, tap “Add Sighting”, select the birds you spotted, then tap “Select on Map” to choose the exact location — tap anywhere on the map to set coordinates and give the location a name (e.g. “Central Park Lake” or “My Backyard”). Confirm to add the sighting to your current trip, or create a new one."
         },
         {
-          "id": "29",
+          "id": "31",
           "question": "How do I select and name locations for my bird sightings?",
           "answer": "When adding an ad-hoc sighting, tap “Select on Map” to open the location picker, tap anywhere on the map to set coordinates, then enter a custom name for the location (like “Central Park Lake” or “My Backyard”). Both coordinates and a name are required to save the sighting."
         },
         {
-          "id": "30",
+          "id": "32",
           "question": "What does “Start route from current location” do?",
           "answer": "This option changes how your trip route is planned. Normally trips are optimized starting from your custom search location; enabling this option instead creates a route starting from wherever you currently are, useful when you're searching a specific area but starting your trip from somewhere else. It only appears when your current and search locations differ."
         },
         {
-          "id": "31",
+          "id": "33",
           "question": "How do I view my birding locations on the Trip Map?",
           "answer": "On the Log tab, choose Trip Map from the title menu and load the map to see all your logged birding locations as markers, with the number of birds logged shown per marker. Tap any trip in the list below the map to highlight just that trip's locations and zoom to its area."
         },
         {
-          "id": "32",
+          "id": "34",
           "question": "What is the Life List screen?",
           "answer": "The Life List shows every bird species you've marked as “seen” across all your trips — your personal birding record. Each entry shows a thumbnail image; tap it to open the bird card, or tap the bird's name to see every location and date you've spotted that species, with a link back to the original trip log."
         },
         {
-          "id": "33",
+          "id": "35",
           "question": "How do I search my trip logs?",
           "answer": "Trip Logs has a search bar at the top — type a trip name, a location, or a species you saw, and the list filters live. It searches trip names, notes, start / end locations, individual stop names, and every logged species across all your trips."
         },
         {
-          "id": "34",
+          "id": "36",
           "question": "I logged the same outing twice — can I combine them?",
           "answer": "Yes. Go to Settings > Advanced > Find & Combine Similar Trips. It automatically groups trips that share a date and at least one matching location, so you can review likely duplicates (e.g. one logged manually and one imported from eBird) and merge them. Combining keeps every sighting and photo from each selected trip rather than picking one copy and discarding the rest — the surviving trip ends up with everything. This is different from “Remove Duplicate Trips” nearby, which only catches exact name+date matches and deletes the losing copies outright."
         },
         {
-          "id": "35",
+          "id": "37",
           "question": "What is the State Goals feature?",
           "answer": "State Goals tracks your progress toward seeing every official state bird from the eBird taxonomy. Set your home state in Settings, then on the Log tab choose State Birds from the title menu to see which you've spotted (checkmarked) and which remain, along with your overall completion percentage."
         },
         {
-          "id": "36",
+          "id": "38",
           "question": "How are sound-identified birds added to my trip logs and life list?",
           "answer": "Birds identified through sound detection are automatically added to a session trip log with the detection method, confidence score, and timestamp. When your session ends, you can merge these into an existing trip or keep them as their own trip. All sound-identified birds appear in your Life List and Big Month tracking like any other sighting."
         },
         {
-          "id": "37",
+          "id": "39",
           "question": "How does AI detection integrate with my existing trip plans?",
           "answer": "When you finish a Sound, Photo, or AR session and have other active trips, the app offers to merge your detections into one of them via a trip picker, or keep the session as its own separate trip. Nothing in your existing planned locations is removed or overwritten."
         },
         {
-          "id": "38",
+          "id": "40",
           "question": "What is the Trip Trail and how do I turn it on?",
           "answer": "The Trip Trail is the GPS path you actually walk during a trip. It records automatically when you tap “Start Trip” on a saved trip and stops when you tap “Finish Trip”. View it later from the trip's detail screen via “View Trip Trail” — your path shows as a line, and any fleet nodes reporting a position during the trip show as pins. It's per-trip, unlike Log > Trip Map, which plots logged locations across all trips."
         },
         {
-          "id": "39",
+          "id": "41",
           "question": "How do I use Behavior Logging to record bird behaviors?",
           "answer": "On the Log tab, tap the ••• button (top-left) and choose Behaviors, then use the Record tab. Select a species, choose from 14 behavior categories (Feeding, Nesting, Social Interaction, Territorial Display, Courtship, Foraging, Preening / Grooming, Flight Behavior, Vocalizing / Singing, Bathing, Roosting / Resting, Aggressive Behavior, Migration Movement, Other), describe what you observed, and record details like duration (using the built-in timer), number of birds, location, and weather. Behavior logs are independent of trips and automatically count toward monthly challenges. Review saved entries on that screen's History tab."
         },
         {
-          "id": "40",
+          "id": "42",
           "question": "How do I use Migration Tracking to record bird movements?",
           "answer": "On the Log tab, tap the ••• button (top-left) and choose Migration, then use the Record tab. Select a species, record its migration status (Actively Migrating, Staging / Resting, Arriving, Departing, Overwintering, At Breeding Grounds, or Vagrant / Off-course), plus flock size, direction, altitude, and time of day. The app automatically detects the current season for context. Migration logs are independent of trips and count toward monthly challenges. Review saved entries on that screen's History tab."
         },
         {
-          "id": "41",
+          "id": "43",
           "question": "How do I access and manage my Behavior and Migration logs?",
           "answer": "On the Log tab, tap the ••• button (top-left) and choose Behaviors or Migration — these are separate from your regular trip logs. Each screen's History tab lists your recorded observations with species, details, timestamps, and location names; swipe a row to delete it."
         },
         {
-          "id": "42",
+          "id": "44",
           "question": "How do I log behavior and migration observations quickly?",
           "answer": "Use the Behaviors and Migration screens on the Log tab (the ••• button, each with a Record and a History tab) for detailed, structured observations — these are the primary way to record behavior / migration data and are what count toward the related monthly challenges."
         },
         {
-          "id": "43",
+          "id": "45",
           "question": "What's the difference between trip-based observations and standalone behavior / migration logs?",
           "answer": "Trip-based observations (Trip Logs, Life List, State Birds, Big Month) are your general birding activity — species you've spotted during outings, contributing to your Life List and shareable exports. Standalone Behaviors and Migration logs are focused research observations recorded independently of trips, contributing specifically to monthly research-style challenges. Use trip logging for regular birding; use the standalone logs when documenting detailed behavior or migration patterns."
         },
         {
-          "id": "44",
+          "id": "46",
           "question": "How do I create and manage birding story journals?",
           "answer": "“Tell Your Story” (the ••• button on the Log tab) lets you create journals combining trip data, photos, and personal narrative. Set a date range to pull in trips, behavior logs, and migration logs from that period, write your narrative, and the app generates species and behavior summaries automatically. Export your story as text, or share a simplified version through the standard share sheet. To make changes later, open the story and tap Edit — you can update the title, narrative, date range, selected trips / logs, and photos at any time."
         },
         {
-          "id": "45",
+          "id": "47",
           "question": "How do Bird Challenges work?",
           "answer": "Bird Challenges are gamified activities encouraging real-world birding. Daily challenges reset each day, weekly challenges reset Mondays, and monthly challenges reset on the 1st. Access them from Learn > Bird Challenges. Progress tracks automatically as you use the app's other features — no manual entry needed."
         },
         {
-          "id": "46",
+          "id": "48",
           "question": "How does automatic challenge progress tracking work?",
           "answer": "The app tracks challenge progress automatically as you use it normally. Marking birds “seen” in trip logs counts toward identification and species-diversity challenges. AI sound / photo / AR detections count toward their respective challenges. Behavior and migration logs count toward monthly research challenges. Habitat type is automatically determined from location names and species data for habitat-exploration challenges. You don't need to do anything extra — just go birding and log your sightings as usual."
         },
         {
-          "id": "47",
+          "id": "49",
           "question": "What types of challenges are available and how do I complete them?",
           "answer": "Daily challenges focus on immediate identification, sound-detection, and photo-capture goals. Weekly challenges focus on species diversity, habitat exploration, and rare-bird discovery. Monthly challenges focus on migration tracking and behavior study, using the Behaviors and Migration screens on the Log tab (each with a Record and a History tab). All progress updates automatically as you use the app's features."
         },
         {
-          "id": "48",
+          "id": "50",
           "question": "How do I view my completed challenges and points?",
           "answer": "Learn > Bird Challenges shows your total points and completed-vs-total count at the top, with each daily / weekly / monthly challenge listed below showing a live progress bar, points value, and completion status."
         },
         {
-          "id": "49",
+          "id": "51",
           "question": "How does habitat detection work for the Habitat Explorer challenge?",
           "answer": "When you log a bird with a location, the app automatically classifies the habitat type (woodland, water, or urban) using the species' known habitat data and the location name, without any manual input needed."
         },
         {
-          "id": "50",
+          "id": "52",
           "question": "How does the interactive quiz system work in Learn About Birds?",
           "answer": "After marking all 5 birds in a set as learned, you take a 10-question multiple-choice quiz: photo-ID questions (\"which bird is shown?\"), field-mark questions (\"which bird has these marks?\"), plus key-feature and habitat questions. Wrong answers are drawn from each species' listed confusion species where possible. Score at least 80% to pass. The results screen lists which birds you missed and offers to re-quiz just those; missed birds also drop back for a quicker repeat, while learned birds return later on a spaced-review schedule."
         },
         {
-          "id": "51",
+          "id": "53",
           "question": "What is location-based learning and how does it adapt to my area?",
           "answer": "Learn About Birds fetches real eBird observations from your current (or custom) location and selects 5 birds at a time from species actually found in your area, so you're studying birds you're likely to actually encounter. Changing your location updates the content."
         },
         {
-          "id": "52",
+          "id": "54",
           "question": "How do I track my learning progress?",
           "answer": "The Learn tab's progress card shows birds mastered (moved into spaced review), species on your Life List, and your best day-streak. Your badge (New Birder → Birding Expert) is based on all of those plus challenges and activities completed — not just replayed points. A day counts toward your streak whenever you open the Learn tab or finish an activity."
         },
         {
-          "id": "53",
+          "id": "55",
           "question": "Can I mark birds as learned directly from the bird cards?",
           "answer": "Yes — each bird's detail view in Learn About Birds has a “Mark as Learned” button, plus “Open full species card” and “Ask the assistant about this bird”."
         },
         {
-          "id": "54",
+          "id": "56",
           "question": "How do I use Observe Mode and its challenge system?",
           "answer": "Observe Mode (Learn > Practice Observing) is a guided listen → observe → describe → compare exercise. You must complete two full rounds (listen for a bird, then describe what you see) in a session to finish the activity — this reinforces consistent identification skills rather than a single lucky guess."
         },
         {
-          "id": "55",
+          "id": "57",
           "question": "How does the Learn tab help me become a better birder?",
           "answer": "Four activities build different skills — Learn About Birds (recognition, with spaced review), Practice Observing (linking a sound to a bird in the field), Plan Your Trips (the guided trip walkthrough), and Bird Challenges. A Practice & Ask row then drops you straight into the assistant or Sound / Photo / AR identification. Your badge and daily streak reflect real progress: birds mastered, species seen, challenges and activities done."
         },
         {
-          "id": "56",
+          "id": "58",
           "question": "How do I use hotspot notes to enhance my birding locations?",
           "answer": "While browsing hotspots, you can add a personal note about a location — access points, best viewing spots, seasonal patterns, or other observations. Notes are saved locally and persist across sessions."
         }
@@ -598,72 +636,72 @@ window.HELP_CONTENT = {
       "name": "Data, photos & backup",
       "faqs": [
         {
-          "id": "57",
+          "id": "59",
           "question": "How can I export or share my birding trips?",
           "answer": "Open a trip in Trip Logs and use the share action to export it as a JSON file (importable by other app users), a plain-text summary shareable via email / messaging / any app that accepts the iOS share sheet, or Add to Calendar to create one all-day event per trip day. PDF export is not currently available."
         },
         {
-          "id": "58",
+          "id": "60",
           "question": "How do I export my trips to share with friends?",
           "answer": "Open a saved trip in Trip Logs and use the share action to export it as a JSON file or plain-text summary, then share it via email, messaging apps, or any other sharing method. Recipients can import your JSON export using the Import Trip feature."
         },
         {
-          "id": "59",
+          "id": "61",
           "question": "How do I import a trip from a file?",
           "answer": "From Trip Logs, tap the import button and select a trip file (.json format) from your device. Any photos included in the file are automatically saved and linked to their corresponding bird sightings, along with all metadata (date, location, species)."
         },
         {
-          "id": "60",
+          "id": "62",
           "question": "How do photos work with trip imports and exports?",
           "answer": "The per-trip JSON export (for sharing a trip with other app users) intentionally leaves photos and personal notes / seen-status out, keeping it a clean, shareable trip plan. If you want an export that includes your photos — for backing up or moving to a new phone — use Data Backup & Migration in Settings instead, which captures everything."
         },
         {
-          "id": "61",
+          "id": "63",
           "question": "Can I export my life list to compare against eBird?",
           "answer": "Yes. Open Life List and tap the share icon — this exports your full life list (not just the currently-selected filter) as a CSV with common name, scientific name, first-seen date, and sighting count, one row per species. Open it alongside an eBird life list export to compare which species appear on each."
         },
         {
-          "id": "62",
+          "id": "64",
           "question": "Is my birding data backed up anywhere?",
           "answer": "All your trips, sightings, logs, photos, and settings are stored locally on your device — there is currently no automatic cloud sync. To back up everything or move to a new phone, use Data Backup & Migration in Settings, which exports all of it (including photos) as one file."
         },
         {
-          "id": "63",
+          "id": "65",
           "question": "How do I move all my data to a new phone?",
           "answer": "Go to Settings > Advanced > Data Backup & Migration and tap Export All Data — this bundles every trip, sighting, photo, behavior / migration log, story, hotspot note, challenge progress record, and setting into one file, which you can AirDrop, save to Files / iCloud Drive, or email to yourself. On your new phone, once the app is installed, use Import All Data and select that file. Note that importing replaces whatever's currently on the destination device rather than merging — export a backup of that device first if it has data you don't want to lose."
         },
         {
-          "id": "64",
+          "id": "66",
           "question": "How do I change the sort order on the Photos screen?",
           "answer": "On the Log tab choose Photos from the title menu, then use the up / down arrows in the toolbar. You can sort by newest first, oldest first, species A–Z, species Z–A, or by which species has the most photos. Your choice is saved between visits. The button next to it switches between grid and list layout."
         },
         {
-          "id": "65",
+          "id": "67",
           "question": "What are the bird thumbnail images and bird cards?",
           "answer": "Peregrine Planner shows small thumbnail images next to bird names throughout the app, sourced from iNaturalist.org (cached for offline viewing). Tap the photo to open the bird's card: a full-size image with attribution, and — for the roughly 1,200 species in the app's bundled database — size, distinguishing field marks, habitat, behavior, seasonal patterns, and similar (confusion) species, plus quick links to eBird, Wikipedia, and iNaturalist. A few very recently renamed or split species, and any bird not yet in the database, show the photo and links only."
         },
         {
-          "id": "66",
+          "id": "68",
           "question": "Why don't some birds show thumbnail images, and what are placeholder bubbles?",
           "answer": "Not all bird species have photos available in the iNaturalist database, which is the source for bird thumbnails. When no image is available, you'll see a placeholder bubble with the first letter of the bird's name — tapping it still opens the bird card with whatever identification information is available. Coverage improves over time as more photographers contribute to iNaturalist."
         },
         {
-          "id": "67",
+          "id": "69",
           "question": "How do I access detailed bird information cards?",
           "answer": "Tap the bird's thumbnail photo (or letter placeholder) wherever one appears — the Plan list, trip logs, Life List, Big Month, State Birds, the Hotspot Browser, and the Learn tab. Tapping just the photo opens the card; tapping elsewhere on the row still does the row's normal action (selecting the bird, opening its sighting history, and so on). The card shows the species' size, field marks, habitat, behavior, seasonal patterns, and similar species from the bundled database, along with eBird / Wikipedia / iNaturalist links."
         },
         {
-          "id": "68",
+          "id": "70",
           "question": "How do I manage the image cache and storage?",
           "answer": "Peregrine Planner automatically caches bird thumbnail images from iNaturalist for faster loading and offline viewing. You can disable bird image thumbnails entirely in Settings if you want to reduce data usage — when disabled, you'll see simple letter placeholders instead of photos."
         },
         {
-          "id": "69",
+          "id": "71",
           "question": "Where does the bird data come from?",
           "answer": "All bird observation data comes from eBird.org, one of the world's largest biodiversity citizen-science projects, managed by the Cornell Lab of Ornithology. Bird thumbnail images come from iNaturalist.org."
         },
         {
-          "id": "70",
+          "id": "72",
           "question": "How can I contribute my bird sightings to eBird?",
           "answer": "eBird.org is where the app's own observation data comes from, and it's easy to contribute back: log your sightings in Peregrine Planner, then visit eBird.org directly to record the same observations there using their site or app. This helps support a global citizen-science project tracking bird populations and migration."
         }
@@ -673,69 +711,149 @@ window.HELP_CONTENT = {
       "name": "Mic array & camera nodes",
       "faqs": [
         {
-          "id": "71",
+          "id": "73",
           "question": "What is the directional mic array accessory?",
           "answer": "It's an optional, separately-built ESP32-S3 4-microphone hardware accessory that adds direction-finding to Sound detection. Once paired, tap the location icon next to a detected species during a listening session to see an arrow pointing toward it (left / right only, relative to the accessory's own forward mark) plus a getting closer / farther / steady trend. Set it up from Settings > Mic Array; when it's enabled, Mic Array also becomes its own tab. Firmware and wiring for anyone building the hardware are in the User Guide's Directional Mic Array section."
         },
         {
-          "id": "72",
+          "id": "74",
           "question": "Where do I find the Mic Array in the app?",
           "answer": "When “Enable Mic Array Integration” is turned on in Settings, Mic Array is its own bottom tab, bringing the directional mic array, the fleet, and the camera nodes together. When the setting is off, that tab is hidden and none of the mic-array UI appears — so if you don't have the DIY hardware, you never see it. The enable switch itself always lives in Settings > Mic Array."
         },
         {
-          "id": "73",
+          "id": "75",
           "question": "Why does the mic array's direction arrow update slowly or not at all?",
-          "answer": "The direction only refreshes when the app confirms a fresh detection of the specific species you're tracking, not on every sound the array hears — this keeps it from jumping around on background noise or other birds, at the cost of updating less often than raw audio would. If it's not showing anything, confirm the accessory shows “Connected” in Settings > Mic Array, and try lowering the “Direction Sensitivity” slider there, which controls how confident a reading needs to be before it's shown at all."
+          "answer": "The direction only refreshes when the app confirms a fresh detection of the specific species you're tracking, not on every sound the array hears — this keeps it from jumping around on background noise or other birds, at the cost of updating less often than raw audio would. If it's not showing anything, confirm the accessory shows “Connected” on the Mic Array tab's Fleet screen, and try lowering the “Direction Sensitivity” slider on the Primary Array's own row there, which controls how confident a reading needs to be before it's shown at all."
         },
         {
-          "id": "74",
+          "id": "76",
           "question": "What is Radar Mode in the directional mic array?",
           "answer": "Radar Mode shows a live bearing for up to 4 species calling at the same time, instead of tracking just one. It works by isolating each species' typical call frequency range separately, so a busy multi-bird soundscape is more likely to produce a distinct direction per species rather than one reading for whichever call happens to be loudest. Toggle it on in Sound detection once the mic array is connected — it runs alongside single-species tracking, not instead of it."
         },
         {
-          "id": "75",
+          "id": "77",
           "question": "What's the difference between the direction arrow, Radar Mode, and the Mic Array Map?",
           "answer": "The direction arrow tracks one species at a time and points left / right relative to the array's own forward mark. Radar Mode shows a live bearing for up to 4 species at once, each separated by call frequency, still relative to the array. The Mic Array Map is different: once two or more GPS-equipped nodes are connected, it plots each node's real map position and bearing and — when their bearings line up — an estimated map position for the sound. Reach it from the Sound detection screen."
         },
         {
-          "id": "76",
+          "id": "78",
+          "question": "What is Fleet-Wide Classification and the “N nodes agree” line under a tracked species?",
+          "answer": "It's an experimental, opt-in mode on the Sound detection screen (a toggle that appears once 2 or more nodes are connected) that classifies every connected node's audio at once, instead of only the one picked as the sound source. When 2 or more nodes independently confirm the same species within a couple of seconds of each other, their bearings are cross-correlated into one real fused location, shown as a line like “~120m NE from you (3 nodes agree)” next to the usual single-node arrow — a step up from any one node's own relative bearing. It's off by default because it uses more battery and processing than the normal single-source mode; turn it on and see how your device and fleet handle it. With fewer than 2 corroborating nodes, everything behaves exactly as it did before."
+        },
+        {
+          "id": "79",
           "question": "What are Learned Frequency Bands in the Mic Array settings?",
           "answer": "Directional tracking narrows in on a species' typical call frequency to isolate it from background noise, starting from a general per-species estimate. The app also keeps a running average of the real frequency range it actually measures each time you track that species, and — once “Seed Tracking from Learned Data” is turned on — uses that real history instead of the general estimate once at least 3 confirmed detections have accumulated for it. Measurement happens automatically in the background whether or not the toggle is on, and can be cleared with “Reset Learned Data” in the same settings screen."
         },
         {
-          "id": "77",
-          "question": "How do I choose which mic array node feeds Sound detection?",
-          "answer": "When the mic array or another connected fleet node is available, a “Sound source” picker appears on the Sound detection screen. Pick the Primary array or a specific Additional Node — real-time detection, single-species direction tracking, and Radar Mode all follow whichever source you select."
-        },
-        {
-          "id": "78",
-          "question": "How do I add a second mic array or a camera node?",
-          "answer": "Go to Settings > Mic Array > Additional Mic Array Nodes. Tap Add Node to enter a name, type (mic-only or camera), and network address, or tap Auto-Discover Nodes to find hardware already joined to your shared Wi-Fi — discovery also works over Bluetooth before any node is connected. The original front array stays on the main Mic Array screen; this list is only for additional units. A node whose IP address changes on your network is re-matched to its existing entry automatically."
-        },
-        {
-          "id": "79",
-          "question": "Why does a mic array node need a “heading source”?",
-          "answer": "To place a node on the Mic Array Map, the app needs to know where it is and which way it's facing. Fixed Pin is the usual choice for a placed node: stand at it and tap “Set from my current location” to capture both its position and its facing from your phone's GPS and compass. It's used only while the node's own GPS has no fix — a real node fix always takes over automatically, and the pin re-syncs from that fix if the node is later moved. Phone Proxy instead borrows the phone's live GPS and compass (only right when the node is carried with you). Manual Heading Only records a mounting heading but no position, so that node won't appear on the map. Compass is reserved for future hardware. You set this per node when adding it, and for the Primary array in its own Mic Array settings screen."
-        },
-        {
           "id": "80",
-          "question": "My camera node's GPS won't get a fix. Can I still use the Mic Array Map?",
-          "answer": "Yes — set that node's Heading Source to “Fixed Pin”, stand next to the node, and tap “Set from my current location” to capture its position and facing from your phone. The node then plots on the Mic Array Map and contributes to triangulation using that pinned location, even with its own GPS dead. If the node's GPS ever does get a fix, the app switches to the real position automatically and updates the stored pin. Everything else about the node — sound detection, direction tracking, photo and video capture — works regardless of GPS."
+          "question": "How do I choose which mic array node feeds Sound detection?",
+          "answer": "While the mic array is enabled, a “Sound source” picker appears on the Sound detection screen. Pick the Primary array, a specific Additional Node, or Phone mic to use your phone's own microphone even while the array is connected — real-time detection, single-species direction tracking, and Radar Mode all follow whichever source you select."
         },
         {
           "id": "81",
-          "question": "How do camera nodes capture photos, and where do they go?",
-          "answer": "Open the Mic Array tab's Camera section — the field screen for the camera side of the mic-array hardware. There you can set each node (the Primary array and any declared camera node) to Auto capture (it photographs a bird itself when its own audio / motion detection fires) or Manual only; “Take Photo Now” works in either mode. Captured photos land in the Camera Node Captures inbox on that same screen, where you can Save a photo to a trip with the on-device species guess, choose “Not a Bird” to route it into a Tell Your Story journal, or Discard it."
+          "question": "Can I run Merlin or another bird sound app at the same time?",
+          "answer": "Yes, as long as Peregrine Planner is listening to a node rather than the phone. Pick a node (or the Primary array) as the Sound source, start listening, then open the other app. While listening to a node, this app keeps running in the background without using the phone's microphone or pausing other apps' audio, so the other app gets the phone mic and node detections — including Fleet-Wide Classification — keep arriving. If the Sound source is Phone mic, both apps would compete for the same microphone, so don't run them together that way. If the picked node isn't connected when you start, the app falls back to the phone mic — check the source before switching apps."
         },
         {
           "id": "82",
-          "question": "How do I record and save video from a camera node?",
-          "answer": "Open the Mic Array tab's Camera section and use Start Video / Stop Recording on the node's card. Recording runs on the node itself and continues even if you leave the screen. Finished clips appear in the Camera Node Videos inbox on the same screen, where you can play a clip, share it through the iOS share sheet, or Save it into a trip as a sighting you identify yourself — no automatic species identification runs on video."
+          "question": "How do I add a second mic array or a camera node?",
+          "answer": "Go to the Mic Array tab's Fleet screen. Tap Add Node to enter a name, type (mic-only or camera), and network address, or tap Auto-Discover Nodes to find hardware already joined to your shared Wi-Fi — discovery also works over Bluetooth before any node is connected. The original front array is the Primary Array row at the top of the same screen; the list below it is for additional units. A node whose IP address changes on your network is re-matched to its existing entry automatically."
         },
         {
           "id": "83",
+          "question": "Can the nodes tell how high a bird is?",
+          "answer": "Yes, if one node in a close group stands on end. A node's two mics only measure along the line between them, so a flat node measures left/right; stand one vertically (mic line pointing up) and it measures how far above or below level a sound is. On a node with a BNO055 compass and its Heading Source set to Compass, the app detects this automatically — its settings show “Flat”, “Tilted 17° up” or “Vertical” — and it also corrects for a node that simply leans a few degrees. A good layout is two flat nodes with mic lines 90° apart plus one vertical node, all within about 16 ft. The Mic Array Map then shows the elevation (e.g. “35° up”), and a height in feet when there's also a distance, such as the paired nodes' own close-range fix or a far node's crossing bearing. Set “Mic axis on compass board” once per node (the axis printed on the BNO055 board that runs toward the right-hand mic); if a sound on the right reads as left, pick the opposite axis."
+        },
+        {
+          "id": "84",
+          "question": "Why pair two nodes a few meters apart?",
+          "answer": "A node's two mics can tell how far left or right a sound is, but not whether it's in front of the node or behind it — both give exactly the same reading. Put two nodes 2–5 m apart with their mic pairs facing different ways (about 90° apart is best; never nearly parallel) and only the real direction agrees between them, so the app can tell front from back. It also evens out accuracy, because a node is least precise for sounds along its own mic line and the other node covers that direction well. Both nodes need a working heading source (a compass, or a Fixed Pin) and both need to hear the call. The Mic Array Map shows the result as one thick line with an uncertainty wedge, and says “ambiguous” instead of guessing when the two don't clearly agree."
+        },
+        {
+          "id": "85",
+          "question": "Why does a mic array node need a “heading source”?",
+          "answer": "To place a node on the Mic Array Map, the app needs to know where it is and which way it's facing. Fixed Pin is the usual choice for a placed node: stand at it and tap “Set from my current location” to capture both its position and its facing from your phone's GPS and compass. It's used only while the node's own GPS has no fix — a real node fix always takes over automatically, and the pin re-syncs from that fix if the node is later moved. Phone Proxy instead borrows the phone's live GPS and compass (only right when the node is carried with you). Manual Heading Only records a mounting heading but no position, so that node won't appear on the map. Compass uses the node's own onboard compass (on builds that have one) and stays right if the node is bumped or turned, and its position comes from its own GPS — or, while the node has no fix, from an optional position you pin by standing at it and tapping “Set position from my current location”. You set this per node from its Edit screen on the Fleet screen, and for the Primary array from its own row there."
+        },
+        {
+          "id": "86",
+          "question": "How do I change a node's Wi-Fi networks, role, or access-point password?",
+          "answer": "Open the “Wi-Fi & Role” screen from a node's row — the Primary Array's own row on the Fleet screen, or an Additional Node's Edit screen. There you can set the node's role (host its own network, join one as a client, or fall back between the two), edit its priority-ordered list of Wi-Fi networks to try — including a per-network on/off switch so you can retire one without deleting its saved password — and its access-point password (a per-chip default is shown until you set your own, and a Bluetooth-discovered node's default password is shown with a copy button even before you've connected). Tap “Apply & reboot node” to send the change; the node restarts to pick it up."
+        },
+        {
+          "id": "87",
+          "question": "I turned off a Wi-Fi network on a node, but it still connects to it. What happened?",
+          "answer": "If the node can't reach any of its still-enabled networks after the change, it automatically reverts to its previous working settings about 3 minutes after rebooting — a safety net so a bad remote change can't permanently lock you out of a node. If the network you disabled was the only one actually in range at the time, that safety net silently undoes your change with no separate warning that it happened. Before disabling the network you're currently using, confirm another enabled candidate is genuinely reachable — otherwise wait for the revert, fix the other candidate, and try again."
+        },
+        {
+          "id": "88",
+          "question": "My camera node's GPS won't get a fix. Can I still use the Mic Array Map?",
+          "answer": "Yes. If the node has an onboard compass, keep its Heading Source on “Compass” and pin its position (stand at it and tap “Set position from my current location”) — it keeps its live compass heading and uses the pinned spot until its GPS gets a fix. Otherwise, set that node's Heading Source to “Fixed Pin”, stand next to the node, and tap “Set from my current location” to capture its position and facing from your phone. The node then plots on the Mic Array Map and contributes to triangulation using that pinned location, even with its own GPS dead. If the node's GPS ever does get a fix, the app switches to the real position automatically and updates the stored pin. Everything else about the node — sound detection, direction tracking, photo and video capture — works regardless of GPS."
+        },
+        {
+          "id": "89",
+          "question": "How do camera nodes capture photos, and where do they go?",
+          "answer": "Open the Mic Array tab's Camera segment and tap the gear for Camera Setup — the field screen for the camera side of the mic-array hardware. There you can set each node (the Primary array and any declared camera node) to Auto capture (it photographs a bird itself when its own audio / motion detection fires) or Manual only; “Take Photo Now” works in either mode, as long as that node's Camera switch is on (see the next question). Captured photos land in the Camera Node Captures inbox on that same screen, where you can Save a photo to a trip with the on-device species guess, choose “Not a Bird” to route it into a Tell Your Story journal, or Discard it."
+        },
+        {
+          "id": "90",
+          "question": "How do I record and save video from a camera node?",
+          "answer": "Open the Mic Array tab's Camera segment (the Camera Console), tap the node, and use Record / Stop rec — or Start Video / Stop Recording on the node's card in Camera Setup (the gear). Recording runs on the node itself and continues even if you leave the screen. Finished clips appear in the Camera Node Videos inbox on the same screen, where you can play a clip, share it through the iOS share sheet, or Save it into a trip as a sighting you identify yourself — no automatic species identification runs on video."
+        },
+        {
+          "id": "91",
+          "question": "Can I turn off a camera node's camera to save power or free up processing?",
+          "answer": "Yes — each node's card in Camera Setup (Mic Array tab > Camera, then the gear) has a “Camera” switch. Turning it off fully shuts the camera down (not just pausing captures), freeing that node's processing time, memory, and camera hardware for GPS-fix acquisition or attentive sound capture — useful if a node is struggling to get a GPS fix or you want its full attention on audio. Turning it off immediately stops any recording or live preview already in progress, and Take Photo Now / Start Video / Live Preview stay unavailable until you turn it back on. It's not a saved setting — the camera comes back on automatically the next time the node reboots."
+        },
+        {
+          "id": "92",
           "question": "What is Field Debug for?",
-          "answer": "Field Debug (Mic Array Nodes > Field Debug) is a troubleshooting screen for the hardware accessories. Turn on remote logging per node to see a live tail of what each node reports, filter or search those lines, and share the full or filtered log out of the app for later analysis — useful for chasing GPS or Wi-Fi issues without tethering a node to a laptop. It also shows per-node AI classify latency once the Sound detection model has been loaded."
+          "answer": "Field Debug (Mic Array tab > Fleet > Field Debug) is a troubleshooting screen for the hardware accessories. Turn on remote logging per node to see a live tail of what each node reports, filter or search those lines, and share the full or filtered log out of the app for later analysis — useful for chasing GPS or Wi-Fi issues without tethering a node to a laptop. It also shows per-node AI classify latency once the Sound detection model has been loaded."
+        },
+        {
+          "id": "93",
+          "question": "What is Node Mode, and why don't I see it on my camera node?",
+          "answer": "Node Mode only appears on a camera node built with a presence sensor and a speaker — a “camping/home security” hardware variant, not the standard camera node. If your build doesn't have those parts, the app has no Node Mode control to show, and everything else about that node works exactly as an ordinary camera node. On a qualifying node, Node Mode is on its card in the Mic Array tab's Camera screen: Birding (an ordinary camera node), Camping Security (unattended monitoring in the field, with an on-device Automatic Alarm toggle), or Home Security (reports to Home Assistant)."
+        },
+        {
+          "id": "94",
+          "question": "What's the difference between Automatic Alarm and the Sound Alarm button?",
+          "answer": "Sound Alarm is a manual button on the node's card — tap it any time, in any Node Mode, to sound the siren immediately (e.g. to test it or to deliberately warn something off). Automatic Alarm is a separate toggle that only exists in Camping Security mode; when it's on, the node sounds the siren on its own the instant its presence sensor fires, with no app involvement at all. It's off by default and meant only for a genuinely isolated site — leave it off around other campers, since an unconditional automatic siren is a real nuisance risk. Either way, the node stops the tone on its own after a short time."
+        },
+        {
+          "id": "95",
+          "question": "How do presence alerts work, and why didn't I get one?",
+          "answer": "A security-capable camera node alerts your phone when its presence sensor detects someone — but only while that node is in Camping Security or Home Security mode (Birding just logs it in Recent Activity), only while Presence Alerts is on, and at most once per node every 30 seconds. With the app open you get a full-screen alert with the node's picture and Hold to talk / Sound siren / View live; in the background, a notification. The app has to be running and connected to the node to hear the detection at all — if iOS has suspended it, nothing arrives. With the app closed, use Home Assistant's own notifications in Home Security mode."
+        },
+        {
+          "id": "96",
+          "question": "Can a security node tell which way someone is walking and how fast?",
+          "answer": "Partly. The node's radar measures movement toward or away from it, so you'll see “Approaching” or “Moving away” with a speed in mph, “Standing still”, or “Moving across” for someone who's moving but not getting closer or farther. It can't tell a compass direction of travel, and someone walking straight across in front of it has almost no speed toward or away from it, so it shows no speed for them. A C4001 sensor reports speed but not which way."
+        },
+        {
+          "id": "97",
+          "question": "Why does a security node show presence when no one is there?",
+          "answer": "Usually one of three things. 1) The radar sees through interior walls — set the node's Detection range (on its Camera Console page) to the far edge of the area you actually want watched. 2) Something that moves now and then — a fan, an HVAC vent, curtains in a draft, a pet — is inside that range; aim the node away from it or set the range just short of it. 3) “Clearing…” right after someone leaves is the sensor counting down before it reports clear (set with Clear after); it doesn't send alerts. If it persists, Field Debug's log shows the distance of every detection — something that keeps coming back at exactly the same distance is a fixed object, not a person."
+        },
+        {
+          "id": "98",
+          "question": "What does “Clearing…” mean on a security node?",
+          "answer": "The sensor has lost whoever it was tracking and is counting down before it reports the area clear — how long is the node's “Clear after” setting (5 seconds by default, C4002 only). Nothing is actually being detected then, so it doesn't alert, photograph, or sound the siren during that time."
+        },
+        {
+          "id": "99",
+          "question": "How does “speak through the node” work?",
+          "answer": "On a security-capable camera node's page in the Camera Console (or right on a presence alert), hold the “Hold to talk” button and talk — your phone's microphone streams live to the node's speaker for as long as you hold it, and stops the moment you release. It works in any Node Mode and is a more direct, human alternative to sounding an automatic siren."
+        },
+        {
+          "id": "100",
+          "question": "How do I connect a camera node to Home Assistant?",
+          "answer": "Set that node's Node Mode to Home Security, then open its “Home Assistant” row on the Camera screen and enter your MQTT broker's host, port, and username/password if your setup needs them. Once it connects, the node automatically adds a presence sensor, a Sound Alarm button, and a camera on/off switch to Home Assistant — no YAML needed for those three. The one exception is the live camera image itself: add a one-time manual YAML `generic` camera entry pointing at the node's own snapshot address, the same approach this app's Feeder Cam Mode already uses, since Home Assistant's automatic setup can't discover a camera feed that way."
+        },
+        {
+          "id": "101",
+          "question": "In Home Security mode, why is there no Automatic Alarm toggle?",
+          "answer": "That decision is meant to live in Home Assistant instead, once the node is connected there — a Home Assistant automation can factor in things the node itself can't, like whether anyone's phone shows home, whether your house alarm panel is armed, or the time of day, and call the node's Sound Alarm button only when all of that lines up. Camping Security mode keeps its own on-device Automatic Alarm toggle specifically because a genuinely isolated campsite has no Home Assistant to delegate that decision to."
         }
       ]
     },
@@ -743,37 +861,37 @@ window.HELP_CONTENT = {
       "name": "Settings & app basics",
       "faqs": [
         {
-          "id": "84",
+          "id": "102",
           "question": "How do I search Help & Info, and what does “Enhanced by Apple Intelligence” mean?",
           "answer": "Use the search box at the top of Help & Info to instantly find matching guide sections and FAQ answers by keyword — this always works, no AI involved. On devices with Apple Intelligence available and turned on, an “Ask a question about using this app” button also appears, opening a chat where you can ask in plain language (e.g. “how do I export my trip data?”) and get an answer grounded in this same Help & Info content. The AI Bird ID Assistant (Identify > Ask) works the same way for bird questions: when Apple Intelligence is available, its answers are tagged “Enhanced by Apple Intelligence”; otherwise it automatically falls back to the app's built-in bird database. You can turn the smart assistant off in Settings if you'd rather it always use the built-in database."
         },
         {
-          "id": "85",
+          "id": "103",
           "question": "What are the notification settings for?",
           "answer": "The “Bird Detection Alerts” toggle in Settings controls whether the app posts a notification when a species is detected during a Sound session, showing the species name and confidence percentage."
         },
         {
-          "id": "86",
+          "id": "104",
           "question": "How do I set my home state and why does it matter?",
           "answer": "Set your home state in Settings. It's used by the State Birds Goals feature to filter the official state bird checklist, and by Learn About Birds as a fallback source of local species when eBird observation data isn't available for your exact location."
         },
         {
-          "id": "87",
+          "id": "105",
           "question": "What is “Auto-Remove Unseen Birds”?",
           "answer": "A toggle in Settings. When on, marking a trip complete automatically removes any birds in that trip you never marked as seen, so a completed trip reflects only what you actually observed. When off, unseen birds stay in the completed trip."
         },
         {
-          "id": "88",
+          "id": "106",
           "question": "What does “Re-check for Previous App Data” do?",
           "answer": "It's in Settings > Advanced, and only appears if data from an earlier version of the app is detected on the device. Tapping it re-offers the one-time import prompt for that older data; force-quit and reopen the app to see the prompt again."
         },
         {
-          "id": "89",
+          "id": "107",
           "question": "How do I report a bug or suggest a feature?",
           "answer": "Open Help & Info from the gear button at the top-right of any tab and choose Contact Support. Fill out the form and it opens your email app with a message to peregrineplanner@gmail.com ready to send. The same form on the support website works the same way."
         },
         {
-          "id": "90",
+          "id": "108",
           "question": "How can I support the app?",
           "answer": "The app includes an optional tip jar where you can support ongoing development. Access it from Settings under “Support the App”."
         }
