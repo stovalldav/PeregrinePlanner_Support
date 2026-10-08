@@ -133,6 +133,10 @@ window.HELP_CONTENT = {
         "Birds tab — Heard: every bird Bird Sounds detects appears on the display, newest first, tagged PEREGRINE with its confidence and which node heard it — a bird not on your life list before this session is marked “LIFER”. Birds Merlin identifies on your iPhone appear here too, tagged MERLIN (see below). Tap one for its bird card: the app's field-guide notes plus a photo. Swipe a bird left to remove it, or tap Clear (under the list) twice to empty the whole list.",
         "Birds tab — Targets: while a trip is being logged (Start Trip on the phone), the trip's target birds for where you are now, with “n of N seen”. Tap a box to check a bird off (or un-check it), or tap its name to open its card and “Seen it — check off here”. Sound ID checks birds off by itself as it hears them. “New location (I've moved)” starts a fresh checklist where you're standing. Checks made on the display are saved on it and sent to the phone in order whenever it's reachable, so they still count if the phone is out of range or the display is turned off in between.",
         "Birds tab — Trip: what you've seen at each location on this trip, newest first, so you can look back at earlier stops while you're out. Tap a bird for its card.",
+        "Stop maps: Birds tab › Trip › “Map & trip stops” shows a map of each planned stop, with your position (a blue dot and how accurate it is), the stop (an orange ring) and, with the scope compass fitted, which way the scope points. Each map is 4 × 5 km around the stop, north up, standard or satellite (the Map / Satellite button). Drag to move around; + and − zoom between the whole map, 2 km, 1 km, 500 m and 250 m across the screen; the target button centres on you. ◀ ▶ at the bottom flip through the trip's stops, so you can look at them before you go. The line at the bottom says how far and which way the stop is.",
+        "Trips on the display: the Trips button on the map lists your planned trips (today or later) and their stops. Start trip starts one, as in the app; tap a stop to look at its map; I'm here says you've arrived (it starts the trip if needed). These work with the phone out of reach too and reach it when it's back.",
+        "Which trips get maps: maps are only made for the trips you pick — turn Maps on for a trip on the display (Trips) or in the app (the display's node in Mic Array › Fleet › Trip maps on the display). The trip you're logging always has them. The phone makes each stop's maps while it has internet, then copies them to the display's SD card while the app is open (about 10 minutes a stop for both styles; each stop's overview comes first, then the close-up detail from the stop outward). Downloads pause while you're using the display and carry on when you put it down. Progress shows on the display's Trips screen (all maps, and each stop's %) and in the app.",
+        "Your position on the map: shown while a trip is being logged — also with the phone locked in your pocket (iOS shows the blue location indicator). Settings › Trip GPS Updates sets how often the phone checks where you are: every second is the most accurate; every 10 s, 30 s, 1 or 2 minutes save battery (the GPS rests in between).",
         "Birds tab — Cards: every bird card saved on the display's SD card, alphabetically. Tap the search box and type any part of a bird's common or scientific name (case, spaces and punctuation don't matter — “capped chick” finds Black-capped Chickadee) to narrow the list, then tap a bird to open its card. It reads straight from the SD card, so it works with no phone at all. Cards saved before this view existed may show a name rebuilt from the file (“Black Capped Chickadee”) until the display sees the real name — loading bird cards again from the phone fixes them all. Don't know the name? Tap Filter (next to the search box) and pick a size — Tiny under 5 in (kinglet), Small 5–7 in (sparrow), Medium 7–11 in (robin), Large 11–20 in (crow), Huge over 20 in (goose) — and the colors you saw; the list keeps only birds that have every color you picked. Colors come from each card's field marks for the body, head, breast and back (not wing bars, eye rings or the bill), male or female. The Filter button shows how many choices are on; Clear filter in the panel resets it. Filter and name search work together.",
         "Bird cards on the SD card: with a microSD card in the display, cards are saved on it, so tapping a bird opens its card instantly, even with no phone signal. Before you head out, while the phone has internet, open the display's node in Mic Array › Fleet › “Bird cards on the display”, choose the Area — where you are now, the Plan screen's search area, or a planned trip (its target birds plus everything reported on eBird around each stop) — and the radius (25 or 50 km), and tap “Load bird cards for this area”. It loads the trip's targets plus every species reported on eBird there in the last 30 days, most-reported first. The display downloads each card through the app, about 1–2 seconds each, so keep the app open and the phone online until it says Done. Cards you open later are saved too. Without an SD card, cards come from the phone each time.",
         "Merlin's birds on the display: the display can show what the Merlin app identifies, read from your iPhone's notifications over Bluetooth. Pair it once: on the iPhone, open Settings › Bluetooth, tap PPScope and allow notifications (if PPScope doesn't appear there, connect to it once from a Bluetooth app such as nRF Connect, then tap it under My Devices). Then run Merlin's Sound ID in the background — with the phone locked or another app open — so its birds arrive as notifications. Merlin rewrites a single notification for each new bird, which iOS doesn't pass on to accessories, so the display clears each Merlin notification on the phone as soon as it has read it; that's what makes Merlin post a fresh one for the next bird. Your birds stay in Merlin's own list. The Session tab shows the iPhone link (“receiving” when working), how many notifications have arrived and how many were Merlin's, and has “Forget iPhone pairing”. Only Merlin's notifications are used; every other app's are ignored and never stored.",
@@ -879,7 +883,7 @@ window.HELP_CONTENT = {
         {
           "id": "101",
           "question": "Does the Scope Display work without the phone?",
-          "answer": "Partly. Hold to talk (straight from the display to a security node's speaker) and camera snapshots (fetched straight from each node) keep working with the phone off. Bird cards already loaded onto the display's SD card open with no phone, and trip checks you make on the display are saved and sent to the phone later. Merlin's birds come from the iPhone over Bluetooth, so they need the phone nearby but not the Peregrine app. Detections, cards not yet on the SD card, radar targets, fleet status, presence alerts and the siren are relayed by the app, so they need it running — in the foreground, or in the background during a node listening session."
+          "answer": "Partly. Hold to talk (straight from the display to a security node's speaker) and camera snapshots (fetched straight from each node) keep working with the phone off. Bird cards and stop maps already on the display's SD card open with no phone, and trip checks, Start trip and I'm here made on the display are saved and sent to the phone later. Merlin's birds come from the iPhone over Bluetooth, so they need the phone nearby but not the Peregrine app. Detections, cards not yet on the SD card, radar targets, fleet status, presence alerts and the siren are relayed by the app, so they need it running — in the foreground, or in the background during a node listening session."
         },
         {
           "id": "102",
@@ -938,21 +942,41 @@ window.HELP_CONTENT = {
         },
         {
           "id": "113",
+          "question": "How do I see a map of a trip stop on the Scope Display?",
+          "answer": "Open the display's Birds tab › Trip › “Map & trip stops”, tap Trips and tap a stop. Use ◀ ▶ to flip through the trip's stops, drag to move around, and + / − to zoom (from the whole 4 × 5 km map down to 250 m across the screen). Map / Satellite switches the style. The trip needs Maps turned on (on the display's Trips screen, or in the app under the display's node › Trip maps on the display), and its maps need to have reached the display — see the % on the Trips screen."
+        },
+        {
+          "id": "114",
+          "question": "Why does a stop map on the Scope Display say it isn't ready, or stay at 0%?",
+          "answer": "Maps are made on the phone, while it has internet, and copied to the display while the Peregrine app is open (in front) and the display is connected — about 10 minutes a stop for both map styles. Check that Maps is turned on for that trip, open the app and leave it in front, and leave the display alone for a while: downloads pause while you're touching it. A stop map the phone hasn't made yet says so."
+        },
+        {
+          "id": "115",
+          "question": "Why doesn't my position show on the Scope Display's map?",
+          "answer": "Your position is only sent while a trip is being logged — tap Start trip (or I'm here at a stop) on the display's Trips screen or in the app. It keeps updating with the phone locked. If the dot is grey, the last position is old; if the line says “off map”, you're outside the 4 × 5 km map. Settings › Trip GPS Updates sets how often the phone checks — a longer interval saves battery but the dot moves less often."
+        },
+        {
+          "id": "116",
+          "question": "What does Settings › Trip GPS Updates do?",
+          "answer": "It sets how often the phone checks where you are while a trip records its path or the Scope Display shows where you are: every second (most accurate, most battery), or every 10 s, 30 s, 1 or 2 minutes, with the GPS resting in between to save battery. Trip recording keeps going with the phone locked; iOS shows the blue location indicator while it does."
+        },
+        {
+          "id": "117",
           "question": "How do I look up a bird card on the Scope Display?",
           "answer": "Open the Birds tab › Cards. It lists every card saved on the display's SD card; tap the search box and type part of the bird's name (common or scientific) to narrow it down, then tap the bird. It works with no phone. If you don't know the name, tap Filter next to the search box and pick a size and the colors you saw — only birds with all of those colors stay in the list. A bird that isn't in the list hasn't been saved yet — load cards for your area from the phone first (Mic Array › Fleet › the display's node › Bird cards on the display), or tap the bird in Heard or Targets while the phone is connected."
         },
         {
-          "id": "114",
+          "id": "118",
           "question": "How do I see Merlin's birds on the Scope Display?",
           "answer": "Pair the display with your iPhone once: Settings › Bluetooth › tap PPScope › allow notifications (if PPScope isn't listed, connect to it once with a Bluetooth app such as nRF Connect, then tap it under My Devices). The display's Session tab should say “receiving”. Then run Merlin's Sound ID in the background — phone locked or another app open — and each bird it identifies appears in the display's Heard list tagged MERLIN. When Merlin hears several birds at once, each becomes its own entry."
         },
         {
-          "id": "115",
+          "id": "119",
           "question": "Why do Merlin's notifications disappear from my phone when the Scope Display is connected?",
           "answer": "The display clears them on purpose. Merlin keeps one notification and rewrites it for each new bird, and iOS doesn't tell Bluetooth accessories about the rewrite — so without clearing, the display would only ever see Merlin's first bird. Once the display has read a Merlin notification it clears it, and Merlin posts a fresh one for the next bird. Your birds are still in Merlin's own list. Other apps' notifications are never touched."
         },
         {
-          "id": "116",
+          "id": "120",
           "question": "Merlin shows birds on my phone, but none reach the Scope Display. What should I check?",
           "answer": "1) The display's Session tab should say “receiving”; if it says not paired or not allowed, pair it (Settings › Bluetooth › PPScope › allow notifications). 2) Merlin must post real notifications: keep it running in the background (phone locked or another app open) and make sure Merlin's notifications are allowed in iPhone Settings › Notifications. Birds Merlin shows on its own screen while it's open aren't notifications. 3) The Session tab's notification count should rise when any app notifies — if it never does, tap “Forget iPhone pairing”, forget PPScope on the iPhone too, and pair again."
         }
@@ -962,37 +986,37 @@ window.HELP_CONTENT = {
       "name": "Settings & app basics",
       "faqs": [
         {
-          "id": "117",
+          "id": "121",
           "question": "How do I search Help & Info, and what does “Enhanced by Apple Intelligence” mean?",
           "answer": "Use the search box at the top of Help & Info to instantly find matching guide sections and FAQ answers by keyword — this always works, no AI involved. On devices with Apple Intelligence available and turned on, an “Ask a question about using this app” button also appears, opening a chat where you can ask in plain language (e.g. “how do I export my trip data?”) and get an answer grounded in this same Help & Info content. The AI Bird ID Assistant (Identify > Ask) works the same way for bird questions: when Apple Intelligence is available, its answers are tagged “Enhanced by Apple Intelligence”; otherwise it automatically falls back to the app's built-in bird database. You can turn the smart assistant off in Settings if you'd rather it always use the built-in database."
         },
         {
-          "id": "118",
+          "id": "122",
           "question": "What are the notification settings for?",
           "answer": "The “Bird Detection Alerts” toggle in Settings controls whether the app posts a notification when a species is detected during a Sound session, showing the species name and confidence percentage."
         },
         {
-          "id": "119",
+          "id": "123",
           "question": "How do I set my home state and why does it matter?",
           "answer": "Set your home state in Settings. It's used by the State Birds Goals feature to filter the official state bird checklist, and by Learn About Birds as a fallback source of local species when eBird observation data isn't available for your exact location."
         },
         {
-          "id": "120",
+          "id": "124",
           "question": "What is “Auto-Remove Unseen Birds”?",
           "answer": "A toggle in Settings. When on, marking a trip complete automatically removes any birds in that trip you never marked as seen, so a completed trip reflects only what you actually observed. When off, unseen birds stay in the completed trip."
         },
         {
-          "id": "121",
+          "id": "125",
           "question": "What does “Re-check for Previous App Data” do?",
           "answer": "It's in Settings > Advanced, and only appears if data from an earlier version of the app is detected on the device. Tapping it re-offers the one-time import prompt for that older data; force-quit and reopen the app to see the prompt again."
         },
         {
-          "id": "122",
+          "id": "126",
           "question": "How do I report a bug or suggest a feature?",
           "answer": "Open Help & Info from the gear button at the top-right of any tab and choose Contact Support. Fill out the form and it opens your email app with a message to peregrineplanner@gmail.com ready to send. The same form on the support website works the same way."
         },
         {
-          "id": "123",
+          "id": "127",
           "question": "How can I support the app?",
           "answer": "The app includes an optional tip jar where you can support ongoing development. Access it from Settings under “Support the App”."
         }
