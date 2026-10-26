@@ -54,12 +54,14 @@ window.HELP_CONTENT = {
       "description": "AI-powered identification tools for birds you encounter in the field, as an in-screen mode switch (Sound / Photo / AR / Ask). All results are experimental and should be verified with field guides or expert birders.",
       "details": [
         "Sound: real-time audio listening using the Cornell BirdNET model. Choose a sensitivity level, grant microphone and notification permissions, and detected species appear live with confidence scores. Detections build a trip log you can save or merge into an existing trip. If you've paired the optional directional mic array accessory, tap the location icon next to a detected species to see which direction it's coming from.",
+        "Save last 30 s: Sound always keeps the last 30 seconds of what it's listening to. Tap “Save last 30 s” under the detections to keep that recording with one of the birds just heard, or choose “Unidentified – identify later” to keep it as an unseen “Unidentified sound” entry (it never reaches your life list or an eBird export until you name it). For a new bird that's unusual where you are — flagged notable by eBird, or not reported within about 50 km in the last 2 weeks — it saves the 30 s before plus the next 15 s by itself, once per bird per stop. Recordings appear under “Document this bird” on the sighting (see “Rare-Bird Documentation”).",
         "Sound ID Model (Settings › App Settings): BirdNET 2.4 is built in and is the default. BirdNET+ 3.0 (Developer Preview) is an experimental option covering about 9,800 bird species — picking it downloads it once (about 70 MB), and it's then used for Sound, AR's sound matching, and Observe Mode. Its results can differ from 2.4's and may change between previews. If it isn't available when you start listening, the app uses BirdNET 2.4 and says so on the Sound screen.",
         "Photo: select up to 20 photos (or take new ones) for batch AI analysis; results are grouped by species with confidence scores.",
         "AR: point your camera at a bird for live species identification with a confidence-score overlay, in manual capture (the default the first time), tap-to-detect, or continuous modes. If location is available, a detection may also show “Not recently reported near you” — meaning that species hasn't been reported in eBird activity near you in the last two weeks. That never changes the confidence score itself, just flags it as worth a second look.",
         "AR camera presets tune the live camera for a shooting situation: Large Soaring Birds, Medium Birds – Moderate Distance, Hummingbirds in Flight, Perched or On the Ground, Digiscoping, or Auto. Each sets a shutter-speed ceiling, exposure compensation, and white balance; Digiscoping also turns autofocus off and locks the lens at infinity so a spotting scope's own focus knob is the only focus control. Your choice is remembered between sessions.",
         "AR keeps every capture that clears the confidence threshold (up to a dozen of the best per species), and all of them save to the trip log. In tap-to-detect or manual capture mode, a shot below the threshold goes to a “Needs ID” strip instead of being discarded — tap it to pick another guess, search the full species list, or discard it. “Add Species Manually” lets you name a bird the model can't.",
         "AR remembers your settings between visits — mode, confidence threshold, Audio Fusion, camera preset, lens, and zoom. Leaving the AR screen pauses the session instead of ending it: your identified birds and “Needs ID” photos are still there when you come back, until you save or discard (closing the app still ends an unsaved session).",
+        "Video in AR: tap the video button in the bottom bar to start a clip and tap it again to stop (the timer shows while it records). Photos and identification keep working while it records, and the lens picker is locked until you stop. Clips have no sound — AR never takes the iPhone microphone, so Merlin keeps listening. When you save the session, a clip goes to the bird you identified while it was recording (it plays from that bird in the trip); a clip with no bird goes to the Photos app. The share button exports clips along with photos.",
         "Export AR photos with the share button next to Discard (every photo in the session), the share button on a “Needs ID” photo, or the share button on any full-size photo in a trip or the Gallery — Save to Photos, AirDrop, Files, and so on. Save Session works even with photos still in “Needs ID”: the identified birds go into the trip, and the unidentified photos are saved to your Photos app.",
         "Ask (AI Bird ID Assistant): a conversational assistant for identification questions, comparisons, habitat, and behavior — “What does a Cardinal look like?”, “How do I tell Cooper's Hawk from Sharp-shinned Hawk?” It remembers the conversation, so a follow-up like “what about its habitat?” works, and it can check your own trip logs (“Have I seen a Painted Bunting?”). Answers show a photo card for each bird they’re about, both birds side by side for a comparison — tap one for the full bird card. On Apple Intelligence-capable devices answers are more natural and tagged “Enhanced by Apple Intelligence”; otherwise it uses the app's built-in bird database.",
         "Behavior and migration observations are recorded on the Log tab (the ••• menu → Behaviors / Migration), not here — see “Behavior Logging” and “Migration Tracking” below."
@@ -103,8 +105,8 @@ window.HELP_CONTENT = {
         "Camera nodes — capture mode: from the Camera screen, set each node to Auto (it photographs a bird on its own when its audio / motion detection fires) or Manual only. “Take Photo Now” works in either mode.",
         "Camera nodes — video: Start / Stop Video from the Camera screen. Recording runs on the node itself and keeps going even if you leave the screen.",
         "Camera nodes — Live Preview: a rough live image for confirming a camera is aimed and focused while you physically set it up. It is not smooth video, and it is unavailable while the node is recording.",
-        "Camera Node Captures (photo inbox): auto-captured photos wait here for review. For each one, Save adds it to a trip with the on-device species guess, “Not a Bird” routes it into a Tell Your Story journal instead, and Discard deletes it.",
-        "Camera Node Videos (video inbox): recorded clips wait here — play a clip inline, share it out through the iOS share sheet, or Save it into a trip as a sighting you identify yourself (no automatic species ID runs on video).",
+        "Camera Node Captures (photo inbox): auto-captured photos wait here for review. For each one, Save adds it to a trip with the on-device species guess, “Not a Bird” routes it into a Tell Your Story journal instead, and Discard deletes it. To put several captures into one trip — an existing one or a new one, at a stop you choose — use Trips › Import Trip › “Import from Inbox”.",
+        "Camera Node Videos (video inbox): recorded clips wait here — play a clip inline, share it out through the iOS share sheet, or Save it into a trip as a sighting you identify yourself (no automatic species ID runs on video). Trips › Import Trip › “Import from Inbox” adds clips to a trip you choose.",
         "Field Debug (Mic Array tab > Fleet > Field Debug): turn on remote logging per node and watch a live tail of what each node reports, filter or search the lines, and share the full or filtered log out of the app. It also shows per-node AI classify latency once the Sound detection model has been loaded."
       ]
     },
@@ -128,12 +130,27 @@ window.HELP_CONTENT = {
       ]
     },
     {
+      "title": "Night Flight Calls (Camping Security Node)",
+      "description": "On migration nights thrushes, warblers and sparrows call as they fly over in the dark. A camping-security node with an SD card can record those calls all night by itself; in the morning the app downloads them, identifies them and logs the night for eBird.",
+      "details": [
+        "Turn it on: Mic Array tab › Camera › tap the node › Night Listening. The phone works out tonight's window — 30 minutes after sunset to 30 minutes before sunrise where you are (8 pm to 6 am without a location) — and sends it with the time, since the node has no clock of its own. The camera turns off for the night to save power. The setting is sent again whenever the node reconnects.",
+        "What it records: the node listens in two bands, 2–5 kHz (thrushes, some sparrows) and 6–11 kHz (warblers, sparrows), and keeps a 1.5 s clip (half a second before the call, a second after) for each short sound of 30–400 ms. Longer sounds — insects, wind, traffic — are skipped. The phone can be asleep or away.",
+        "Trigger level: on the node's Night Listening rows, higher means fewer, louder calls. If more than the per-minute limit (20 by default) fire, the node raises its own level until things quiet down for 10 minutes. Its status line shows clips so far tonight and SD space.",
+        "Night Calls (Mic Array tab › Camera › the moon button): tap Download clips for a node, then the app identifies each clip with BirdNET. A guess under 25% is left as “Unknown – low band” or “high band” for you to label. For each clip: play it, look at its spectrogram, then Accept, Other bird… or Not a bird.",
+        "Each night shows a calls-per-hour chart and how many calls each species gave. If more than half of the clips you've reviewed weren't birds, it suggests raising the node's trigger level.",
+        "Log this night as a trip: makes a Night listening trip with one bird per species, its count the number of calls. It exports to eBird as a Stationary count noted as a nocturnal flight call count, not marked complete.",
+        "Clips stay on the node's SD card until you remove them from Night Calls (“Remove this night from the node's SD card”), only after they're on the phone. About 130 KB a clip.",
+        "BirdNET knows the flight calls of some species but not most, so expect plenty of Unknowns. Point the mics up, add foam windscreens and a rain hat — rain and insects cause most false clips."
+      ]
+    },
+    {
       "title": "Scope Display (Optional Hardware Accessory)",
       "description": "A touch display mounted on your spotting scope that shows what the app hears and points the scope at it. It's a DIY build (a Freenove ESP32-S3 4-inch display, optionally with a BNO055 compass on the scope) that joins your mic-array fleet like any other node.",
       "details": [
         "Add it on the Mic Array tab's Fleet screen as a node of type Scope Display, using the IP address shown at the top of the display. The display's “Phone” indicator turns green once the app is connected. If the display later joins a different network (your phone's hotspot instead of home Wi-Fi, say), it announces itself over Bluetooth until the app reconnects — open Mic Array › Fleet and the app finds it at its new address on its own.",
         "Birds tab — Heard: every bird Bird Sounds detects appears on the display, newest first, tagged PEREGRINE with its confidence and which node heard it — a bird not on your life list before this session is marked “LIFER”. Birds Merlin identifies on your iPhone appear here too, tagged MERLIN (see below). Tap one for its bird card: the app's field-guide notes plus a photo. Swipe a bird left to remove it, or tap Clear (under the list) twice to empty the whole list.",
-        "Birds tab — Targets: while a trip is being logged (Start Trip on the phone), the trip's target birds for where you are now, with “n of N seen”. Tap a box to check a bird off (or un-check it), or tap its name to open its card and “Seen it — check off here”. Sound ID checks birds off by itself as it hears them. “New location (I've moved)” starts a fresh checklist where you're standing. Checks made on the display are saved on it and sent to the phone in order whenever it's reachable, so they still count if the phone is out of range or the display is turned off in between.",
+        "Birds tab — Targets: while a trip is being logged (Start Trip on the phone), the trip's target birds for where you are now, with “n of N seen”. Tap a box to check a bird off (or un-check it), or tap its name to open its card and “Seen it — check off here”. Sound ID checks birds off by itself as it hears them. “New location (I've moved)” starts a fresh checklist where you're standing. Checks made on the display are saved on it and sent to the phone in order whenever it's reachable, so they still count if the phone is out of range or the display is turned off in between. Long-press a target's box to add one more to its count (it checks the bird off too).",
+        "Mark / Saw it / Undo: a row of three buttons at the top of Heard and Targets. Mark saves this moment on the trip with the way the scope points, to sort out later; Saw it marks the last bird Sound ID heard as seen too; Undo takes back the last bird logged. Each chirps and flashes “Sent” (or “No phone” if the app isn't linked), and the app answers through the display's speaker. See “Hands-Free Logging”.",
         "Birds tab — Trip: what you've seen at each location on this trip, newest first, so you can look back at earlier stops while you're out. Tap a bird for its card.",
         "Stop maps: Birds tab › Trip › “Map & trip stops” shows a map of each planned stop, with your position (a blue dot and how accurate it is), the stop (an orange ring) and, with the scope compass fitted, which way the scope points. Each map is 4 × 5 km around the stop, north up, standard or satellite (the Map / Satellite button). Drag to move around; + and − zoom between the whole map, 2 km, 1 km, 500 m and 250 m across the screen; the target button centres on you. ◀ ▶ at the bottom flip through the trip's stops, so you can look at them before you go. The line at the bottom says how far and which way the stop is.",
         "Trips on the display: the Trips button on the map lists your planned trips (today or later) and their stops. Start trip starts one, as in the app; tap a stop to look at its map; I'm here says you've arrived (it starts the trip if needed). These work with the phone out of reach too and reach it when it's back.",
@@ -154,6 +171,21 @@ window.HELP_CONTENT = {
       ]
     },
     {
+      "title": "Hands-Free Logging",
+      "description": "Hear what Sound ID finds and log birds by voice while your eyes stay on the scope or the road. Everything goes through the Scope Display's own speaker and microphone — the iPhone's mic is never used, so Merlin keeps listening undisturbed.",
+      "details": [
+        "Spoken alerts (Settings › App Settings › Spoken Alerts): the Scope Display says each new bird, with where it is from where the scope points — “Possible Sora, heard. About 40 degrees right.” Choose Trip targets & unusual birds (the default), Every new species, or Off. In Driving mode, directions are from the way the car is heading instead, and the display doesn't take over the screen with a full-screen card.",
+        "Keep it on the dash: in the car the display sits on the dashboard; at a blind or tower it rides on the scope. It speaks and listens the same way in both.",
+        "Voice commands (Settings › App Settings › Voice Commands, off by default): start every command with “Peregrine”. Say “Peregrine, three Ruddy Ducks”, “Peregrine, two more Mallards”, “Peregrine, Red-tailed Hawk, flyover” (also heard, male, female, juvenile, immature, a pair), “Peregrine, mark” (add a note after it), “Peregrine, saw it”, “Peregrine, undo”, “Peregrine, I'm here” or “Peregrine, new location”. The display answers out loud, and asks “Greater or Lesser Yellowlegs?” when a name fits more than one bird — just say the word that differs. Speech without “Peregrine” at the start is ignored. “Peregrine Falcon” logs a Peregrine Falcon.",
+        "How it listens: the display's microphone already streams to the app; the app recognises speech on the iPhone from that audio, on the device. While you're speaking, the display's audio reaches Sound ID as silence, so your voice isn't identified as a bird. It needs Speech Recognition permission (asked when you turn Voice Commands on). Bird names are matched against the trip's targets first, then birds reported nearby, then every species.",
+        "Buttons on the display: Mark, Saw it and Undo, and long-press a target box to add one to its count — see “Scope Display”.",
+        "Marks: each Mark is saved on the trip with the time, place and the way the scope pointed. The trip's Marks section shows them with the birds logged within a minute, and a note field to fill in what it was later.",
+        "Action button, Back Tap and Shortcuts: the app adds Mark, I Saw It Too, Undo Last Bird, I'm Here and Log a Bird to Shortcuts, so you can put one on the iPhone's Action button or Back Tap. Their replies are spoken through the display too.",
+        "Live Activity: while a trip is being logged, the Lock Screen and Dynamic Island show the stop, species count, time, the last three birds and the last spoken reply, with Mark and Saw it buttons.",
+        "No display with you? “Speak From Phone Without a Display” (Settings › App Settings, off by default) speaks through the phone instead — this can interrupt Merlin. Voice commands always need the display."
+      ]
+    },
+    {
       "title": "Linked Phone (two phones, one trip)",
       "description": "Carry two iPhones — say one for photos and one for Sound ID — and have everything both find logged into one trip on one phone.",
       "details": [
@@ -163,7 +195,7 @@ window.HELP_CONTENT = {
         "AR camera birds go as soon as they're identified, with their first photo; the rest of the photos follow when you save the session. Tapping a bird away, or discarding the session, takes it back off the Home phone. Prefer them only on save? Turn off “Send AR camera birds as they're identified” on the Sender.",
         "On the Home phone they're logged into the trip you're logging (Start Trip, or “I'm here” on a stop), at the current stop, with the time they were actually found and a note saying which phone found them. A bird already on the checklist isn't added twice, so Home can keep running its own Sound ID. When both phones find the same bird, its notes start with a line saying so — e.g. “Identified on both phones: Sound ID on Trip iPhone (Home) and AR camera on Camera iPhone”.",
         "Each new bird from the Sender notifies you on the Home phone (with the screen locked too) and pops up on the Scope Display like Home's own Sound ID detections, with the Sender's name as the source. Either can be turned off under “When a bird arrives” on the Home phone.",
-        "If no trip is being logged on Home, arrivals wait under “From linked phone” in the same settings screen — choose a trip and tap “Add all to this trip”, or delete them. When you save a Sound ID session on Home, the inbox birds the other phone found during it (from 2 minutes before it started to 2 minutes after it ended) go into the same trip automatically — turn off “Add to a saved Sound ID session” if you'd rather add them yourself.",
+        "If no trip is being logged on Home, arrivals wait under “From linked phone” in the same settings screen — choose a trip and tap “Add all to this trip”, or delete them. To pick which birds and where they go, use Trips › Import Trip › “Import from Inbox”: tick the birds, choose any trip (the one from that day is suggested) or a new trip, and a stop — by default each bird goes to the stop you were at when it was found. When you save a Sound ID session on Home, the inbox birds the other phone found during it (from 2 minutes before it started to 2 minutes after it ended) go into the same trip automatically — turn off “Add to a saved Sound ID session” if you'd rather add them yourself.",
         "If the Sender discards birds — a Bird Sounds or AR camera session, or an AR bird tapped away — they're removed from Home too, whether they were logged into a trip or waiting in the inbox. To keep them on Home instead, set “If the other phone discards birds” to “Keep them here” on the Home phone.",
         "The phones connect directly over Wi-Fi/Bluetooth — no Wi-Fi network, hotspot or internet needed — within roughly 30–100 m. A status pill on the Bird Sounds and Bird Image Detection screens shows whether they're linked and how many are waiting to send.",
         "If the link drops — out of range, or iOS pausing the app in the background — nothing is lost: the Sender keeps everything until Home confirms it, and catches up as soon as the phones are back in touch with the app open (“Send now” resends straight away)."
@@ -229,19 +261,37 @@ window.HELP_CONTENT = {
       "details": [
         "Tap any saved trip to view its details and check off birds as you see them.",
         "Add notes, counts, and photos to any sighting.",
+        "Editing photos: open any trip photo full size (in the trip or in Photos) and tap the sliders button. Rotate turns it a quarter at a time; Light has Auto plus Brightness, Contrast, Shadows and Highlights; Crop has Free, Square and Original shapes — drag the corners or the box. Pinch to zoom in and drag to look around while you edit. Save keeps the photo's date and location, and “Revert to Original” undoes every edit. Full-size photos also pinch to zoom (double-tap for 2.5×). To remove a photo, open it full size and tap the trash button — it is deleted from the trip and from your iPhone. Videos have the same trash button in their player, beside Share. A “Needs ID” photo in AR and a photo in Bird Image Detection have “Edit Photo…” on their correction screen.",
         "Use the “Add Sighting” flow to log birds outside of planned trips — pick a location on the map, name it, and save.",
         "Mark a trip complete when you've finished it; completed sightings roll up into your Life List automatically.",
         "Logging Sound ID into a trip: tapping “Start Trip” on a saved trip (or “I'm here…” at one of its stops) makes it the trip being logged — one trip at a time. Its “On This Trip” section shows where you are now. While it's being logged, Bird Sounds detection checks off that trip's target birds as it hears them (and adds any other bird it hears) at your current location, instead of starting a separate trip; “Incorrect” on a detection undoes exactly that entry. If another trip is being logged, tap “Log Sound ID to this trip” to switch. “Finish Trip” stops it.",
         "Moving between locations: when you reach a planned stop, tap “I'm here…” (or the one-tap “You're near … — I'm here” suggestion that appears within about 400 m of a stop). For somewhere that isn't on the plan, tap “I've moved to a new location…” — on the trip or on the Sound ID screen — and pick a nearby eBird hotspot (within 5 km, nearest first), one of the trip's stops, or “Use where I'm standing” under a name you type. Each location gets its own checklist; birds already seen earlier on the trip are flagged as such.",
+        "Birding Mode: on the trip screen, pick how you're birding — Walking, Driving, Blind, Tower / hawk watch, Night listening or Incidental. It sets the eBird protocol on export (Walking and Driving are Traveling, Blind, Tower and Night listening are Stationary). Each stop header shows when you arrived and left and has its own mode menu (“Same as trip” by default), so a walk can include a stop in a blind.",
+        "Effort is measured, not guessed: each stop's start time and duration come from when you arrived and left, and Traveling distance comes from your own trip trail (not the nodes'). A Traveling stop that moved less than 30 m goes out as Stationary.",
+        "Split Long Drives (Settings › App Settings, on by default): in Driving mode a new stop starts every 8 km (“Drive (time)”), or when you've parked for 5 minutes after driving at least half a kilometre (“Parked (time)”), so each piece is its own eBird checklist.",
+        "Checklist Details: opens when you tap Finish Trip, or from “Checklist Details…” under Birding Mode. Set “I reported every species I could identify” (off by default when every bird came from Sound ID) and the number of observers (your two linked phones count as one). It also lists what eBird would flag — a Traveling count over 8 km, a checklist of 24 hours or more, or a Stationary count that drifted more than 50 m, with a one-tap “Switch to Walking”.",
+        "Counts and breeding codes: a bird's count can go down to X (present, not counted). Breeding Code on each seen bird offers eBird's codes; eBird's import has no breeding column, so the code is written into the species comment — set it on eBird after uploading.",
         "Use the search bar at the top of Trip Logs to quickly find a trip by name, location, or species seen.",
         "If you've logged the same outing twice (e.g. once manually and once via eBird import), use Settings > Advanced > Find & Combine Similar Trips to review same-day, same-location matches and merge them — every sighting and photo from each trip is kept, nothing is discarded."
       ]
     },
     {
-      "title": "Import & Export",
-      "description": "Trips can be exported as JSON files (for sharing with other app users), shared as plain text via the standard iOS share sheet, or added to your calendar as day-by-day events. PDF export is not currently available.",
+      "title": "Rare-Bird Documentation",
+      "description": "When you find something unusual, eBird reviewers want evidence. The app gathers it as you go — recordings, photos, where the bird was — and walks you through the written description.",
       "details": [
-        "Export: open a trip, use the share action, and choose JSON file, plain-text summary, or Add to Calendar.",
+        "Recordings: Sound ID keeps the last 30 seconds of audio, saved with “Save last 30 s” or automatically for an unusual new bird (see “Identify Tab”).",
+        "Document this bird: on every seen bird in a trip. It turns orange (“Documentation”) once the bird has a recording or a description, or was confirmed rare. It shows when and where, why the bird is unusual here, the photos, each recording with play, share and a spectrogram, and the direction a mic-array node gave when the clip was saved.",
+        "Description: the questions eBird reviewers ask — size and shape, plumage, vocalizations, behavior, similar species and how you ruled each out, optics and distance, viewing conditions, and your experience with the species. Write only what you saw and heard yourself; dictation works. On Apple Intelligence devices, “Draft from my notes” fills in blank answers from your own sighting notes — check and edit them.",
+        "Prepare evidence packet: makes a zip with a PDF report, the photos, the recordings and their spectrograms, to share with a reviewer or keep.",
+        "eBird export: the species comment gets a short “Documented: …” summary. eBird's import can't carry media, so add the photos and recordings to the checklist on ebird.org after uploading."
+      ]
+    },
+    {
+      "title": "Import & Export",
+      "description": "Trips can be exported for eBird, as JSON files (for sharing with other app users), shared as plain text via the standard iOS share sheet, or added to your calendar as day-by-day events. PDF export is not currently available.",
+      "details": [
+        "Export: open a trip, use the share action, and choose JSON file, plain-text summary, Export as eBird CSV, or Add to Calendar.",
+        "Export as eBird CSV: makes a file in eBird's Record Format, one checklist per stop, ready for ebird.org › Submit › Import data › Record Format (Extended). Upload it there, then add photos and recordings to each checklist on eBird. If a stop has no arrive/leave times (trips logged before 8.1), its time and distance are estimated and the export menu names those stops.",
         "Add to Calendar creates one all-day event per day of the trip, listing that day's stops and target birds, in a “Birding Trips” calendar.",
         "Import: from Trip Logs, use the import button and select a .json trip file — trip and bird metadata are preserved, but not photos or personal notes / seen status (see Data Backup & Migration below for a format that keeps everything).",
         "Import from eBird: on Trip Logs tap the import button and choose “Import from eBird CSV”. It reads two eBird files: the full export (ebird.org › My eBird › Download My Data — every bird on every checklist), or your Life List download (My eBird › Life List › Download — just the checklist where you first saw each species, so those trips hold only the first-seen species). Each checklist becomes its own completed trip; importing the full export later still adds the complete checklists, and Find & Combine can then merge the pairs. Before picking the file you can limit the import to a date range, and/or turn on “Only import trips with new life birds” — then a checklist comes in only if it has at least one species not already on your Life List (the whole checklist comes in, not just the new birds; “sp.”, slash, hybrid, and domestic-type entries don't count as new). Checklists you've already imported, or combined into another trip, are always skipped, so re-importing an updated export only adds what's new."
@@ -356,7 +406,7 @@ window.HELP_CONTENT = {
       "description": "Open Settings from the gear button at the top-right of any tab — your hub for app preferences and support.",
       "details": [
         "Profile: your display name (shown as “exported by” on trips you share as JSON) and your home state (used by State Birds Goals, and as a fallback species source for Learn About Birds).",
-        "App Settings toggles: Show Rarity Scores (star / difficulty indicators on bird lists), Bird Detection Alerts (notify when a species is detected during a Sound session), Auto-Remove Unseen Birds (drop still-unseen birds automatically when you complete a trip), and Bird Image Thumbnails (download iNaturalist photos — off shows letter placeholders).",
+        "App Settings toggles: Show Rarity Scores (star / difficulty indicators on bird lists), Bird Detection Alerts (notify when a species is detected during a Sound session), Auto-Remove Unseen Birds (drop still-unseen birds automatically when you complete a trip), Spoken Alerts, Voice Commands and Speak From Phone Without a Display (see “Hands-Free Logging”), Split Long Drives (a new eBird checklist every 8 km in Driving mode), and Bird Image Thumbnails (download iNaturalist photos — off shows letter placeholders).",
         "Appearance: the app follows your device's Light or Dark setting automatically — there is no separate in-app toggle.",
         "AI Bird ID Assistant: the Smart Assistant toggle — on uses Apple Intelligence for more natural answers where the device supports it, off always uses the built-in bird database.",
         "Mic Array (Hardware Accessory): “Enable Mic Array Integration” turns on the optional directional microphone array. While it's on, Mic Array is also a bottom tab (Fleet / Map / Camera segments) where every node's own connection, sensitivity, GPS, heading, and Wi-Fi settings actually live; while it's off, that tab is hidden and nothing about the accessory is shown. This Settings screen itself only keeps the on/off switch, Learned Frequency Bands, and the firmware download.",
@@ -495,41 +545,56 @@ window.HELP_CONTENT = {
         },
         {
           "id": "23",
+          "question": "Can I edit my photos — rotate, brighten or crop them?",
+          "answer": "Yes. Open a photo full size in a trip or on the Photos screen and tap the sliders button. Rotate turns it left or right; Light has an Auto button plus Brightness, Contrast, Shadows and Highlights; Crop lets you drag the corners or the whole box, free-form or locked to Square or the photo's Original shape. Pinch to zoom in and out while you work. Save keeps the photo's date, location and camera details, and the original is kept, so “Revert to Original” in the editor undoes everything. A “Needs ID” photo on the AR screen, or a photo in Bird Image Detection, has “Edit Photo…” on its correction screen — in Bird Image Detection the edited photo is identified again."
+        },
+        {
+          "id": "24",
+          "question": "How do I delete a photo or video?",
+          "answer": "Open it full size in a trip or on the Photos screen and tap the trash button, then Delete Photo. It's removed from the sighting and from your iPhone, along with any original the editor kept, and can't be undone. If it was the sighting's main photo, the next one takes its place. A “Needs ID” photo on the AR screen is removed with “Remove This Photo” on its correction screen. To delete a video, tap it in the trip to play it, then tap the trash button beside Share."
+        },
+        {
+          "id": "25",
+          "question": "Can I record video on the AR screen?",
+          "answer": "Yes — tap the video button in the AR bottom bar to start and again to stop. The camera keeps identifying while it records. Clips are silent so the iPhone microphone stays free for Merlin. On Save Session, each clip is added to the bird you identified while it was recording, or saved to the Photos app if no bird was identified."
+        },
+        {
+          "id": "26",
           "question": "Will I lose my AR photos if I switch screens?",
           "answer": "No. Leaving the AR screen — another Identify mode or another tab — pauses the session, and your identified birds and “Needs ID” photos are still there when you come back. The session ends only when you save or discard it, or when the app is closed. Your AR settings (mode, confidence, Audio Fusion, preset, lens, and zoom) are remembered too."
         },
         {
-          "id": "24",
+          "id": "27",
           "question": "Can I keep more than one AR photo of the same bird?",
           "answer": "Yes. AR Bird Identification keeps every capture that clears the confidence threshold — up to a dozen of the strongest per species — and saves them all to the trip log, rather than keeping only a single best frame. The Photos screen shows every photo attached to a sighting."
         },
         {
-          "id": "25",
+          "id": "28",
           "question": "What does “Not recently reported near you” mean on an AR detection?",
           "answer": "It means that species hasn't shown up in real eBird activity within about 50 km of your location in the last two weeks — a signal worth a second look before confirming the ID. It only appears when location is available, and it never changes the confidence score itself — it's a separate flag alongside the model's real output."
         },
         {
-          "id": "26",
+          "id": "29",
           "question": "Why did my AI bird identification confidence seem low or uncertain?",
           "answer": "Confidence scores reflect the model's own certainty and are affected by real-world factors like background noise, image lighting / clarity, and how distinctive the species' call or appearance is. Low confidence doesn't necessarily mean the identification is wrong — but always cross-check with a field guide, especially for rare or unusual sightings."
         },
         {
-          "id": "27",
+          "id": "30",
           "question": "Can I correct or dismiss an incorrect AI detection?",
           "answer": "Yes — in Sound and Photo detection, tap “Not this” on a detected species to remove it from your session results before saving. In AR, tap a detection card to remove it."
         },
         {
-          "id": "28",
+          "id": "31",
           "question": "What is the AI Bird ID Assistant and how do I use it?",
           "answer": "The AI Bird ID Assistant is a conversational assistant that helps answer questions about bird identification, behavior, and habitat. Open it from Identify > Ask to have natural conversations about birds — ask questions like “What does a Cardinal look like?” or “How can I tell the difference between Cooper's Hawk and Sharp-shinned Hawk?” Each answer shows a card with a photo and the scientific name for every bird it’s about (both birds when you compare two), so you can see at a glance that it answered about the bird you meant; tap a card for the full bird card. Each answer also shows a confidence indicator."
         },
         {
-          "id": "29",
+          "id": "32",
           "question": "What types of questions can I ask the AI Bird ID Assistant?",
           "answer": "The assistant handles species identification (“What does a Robin look like?”), species comparisons (“What's the difference between Cooper's Hawk and Sharp-shinned Hawk?”), habitat questions (“Where do Cardinals live?”), behavioral questions (“How do woodpeckers behave?”), and general questions about bird sounds. It draws on a local database of ~1,300 North American and European species. For best results, be specific in your questions."
         },
         {
-          "id": "30",
+          "id": "33",
           "question": "What is the AI Bird ID Assistant's knowledge based on?",
           "answer": "The assistant draws on a local database of roughly 1,300 North American and European bird species (identification features, size, habitat, behavior, similar species) plus optional Wikipedia summaries, and can answer questions about your own trip logs (“Have I seen a Painted Bunting?”). It does not currently cross-reference real-time eBird sightings for “birds near me” style questions — for local sighting data, use the Plan tab or Species Map instead. On Apple Intelligence-capable devices its answers are more natural and tagged “Enhanced by Apple Intelligence”; otherwise it automatically uses the built-in bird database."
         }
@@ -539,167 +604,172 @@ window.HELP_CONTENT = {
       "name": "Trips, logging & learning",
       "faqs": [
         {
-          "id": "31",
+          "id": "34",
           "question": "How do I log birds I've seen during my trip?",
           "answer": "Open your active trip from Trip Logs, find the bird in your itinerary, and tap the checkbox next to it to mark it as seen. You can also add notes and the number of birds spotted. These sightings automatically appear in your Life List. You can also use the “Add Sighting” button in Trip Logs to log birds outside of planned trips."
         },
         {
-          "id": "32",
+          "id": "35",
           "question": "How do I use the Add Sighting feature?",
           "answer": "Add Sighting lets you log birds you see outside your planned trips. From Trip Logs, tap “Add Sighting”, select the birds you spotted, then tap “Select on Map” to choose the exact location — tap anywhere on the map to set coordinates and give the location a name (e.g. “Central Park Lake” or “My Backyard”). Confirm to add the sighting to your current trip, or create a new one."
         },
         {
-          "id": "33",
+          "id": "36",
           "question": "How do I select and name locations for my bird sightings?",
           "answer": "When adding an ad-hoc sighting, tap “Select on Map” to open the location picker, tap anywhere on the map to set coordinates, then enter a custom name for the location (like “Central Park Lake” or “My Backyard”). Both coordinates and a name are required to save the sighting."
         },
         {
-          "id": "34",
+          "id": "37",
           "question": "What does “Start route from current location” do?",
           "answer": "This option changes how your trip route is planned. Normally trips are optimized starting from your custom search location; enabling this option instead creates a route starting from wherever you currently are, useful when you're searching a specific area but starting your trip from somewhere else. It only appears when your current and search locations differ."
         },
         {
-          "id": "35",
+          "id": "38",
           "question": "How do I view my birding locations on the Trip Map?",
           "answer": "On the Log tab, choose Trip Map from the title menu and load the map to see all your logged birding locations as markers, with the number of birds logged shown per marker. Tap any trip in the list below the map to highlight just that trip's locations and zoom to its area."
         },
         {
-          "id": "36",
+          "id": "39",
           "question": "What is the Life List screen?",
           "answer": "The Life List shows every bird species you've marked as “seen” across all your trips — your personal birding record. Each entry shows a thumbnail image; tap it to open the bird card, or tap the bird's name to see every location and date you've spotted that species, with a link back to the original trip log."
         },
         {
-          "id": "37",
+          "id": "40",
           "question": "How do I search my trip logs?",
           "answer": "Trip Logs has a search bar at the top — type a trip name, a location, or a species you saw, and the list filters live. It searches trip names, notes, start / end locations, individual stop names, and every logged species across all your trips."
         },
         {
-          "id": "38",
+          "id": "41",
           "question": "I logged the same outing twice — can I combine them?",
           "answer": "Yes. Go to Settings > Advanced > Find & Combine Similar Trips. It automatically groups trips that share a date and at least one matching location, so you can review likely duplicates (e.g. one logged manually and one imported from eBird) and merge them. Combining keeps every sighting and photo from each selected trip rather than picking one copy and discarding the rest — the surviving trip ends up with everything. This is different from “Remove Duplicate Trips” nearby, which only catches exact name+date matches and deletes the losing copies outright."
         },
         {
-          "id": "39",
+          "id": "42",
           "question": "What is the State Goals feature?",
           "answer": "State Goals tracks your progress toward seeing every official state bird from the eBird taxonomy. Set your home state in Settings, then on the Log tab choose State Birds from the title menu to see which you've spotted (checkmarked) and which remain, along with your overall completion percentage."
         },
         {
-          "id": "40",
+          "id": "43",
           "question": "How are sound-identified birds added to my trip logs and life list?",
           "answer": "Birds identified through sound detection are automatically added to a session trip log with the detection method, confidence score, and timestamp. When your session ends, you can merge these into an existing trip or keep them as their own trip. All sound-identified birds appear in your Life List and Big Month tracking like any other sighting."
         },
         {
-          "id": "41",
+          "id": "44",
           "question": "How does AI detection integrate with my existing trip plans?",
           "answer": "When you finish a Sound, Photo, or AR session and have other active trips, the app offers to merge your detections into one of them via a trip picker, or keep the session as its own separate trip. Nothing in your existing planned locations is removed or overwritten."
         },
         {
-          "id": "42",
+          "id": "45",
           "question": "What is the Trip Trail and how do I turn it on?",
           "answer": "The Trip Trail is the GPS path you actually walk during a trip. It records automatically when you tap “Start Trip” on a saved trip and stops when you tap “Finish Trip”. View it later from the trip's detail screen via “View Trip Trail” — your path shows as a line, and any fleet nodes reporting a position during the trip show as pins. It's per-trip, unlike Log > Trip Map, which plots logged locations across all trips."
         },
         {
-          "id": "43",
+          "id": "46",
           "question": "How do I use Behavior Logging to record bird behaviors?",
           "answer": "On the Log tab, tap the ••• button (top-left) and choose Behaviors, then use the Record tab. Select a species, choose from 14 behavior categories (Feeding, Nesting, Social Interaction, Territorial Display, Courtship, Foraging, Preening / Grooming, Flight Behavior, Vocalizing / Singing, Bathing, Roosting / Resting, Aggressive Behavior, Migration Movement, Other), describe what you observed, and record details like duration (using the built-in timer), number of birds, location, and weather. Behavior logs are independent of trips and automatically count toward monthly challenges. Review saved entries on that screen's History tab."
         },
         {
-          "id": "44",
+          "id": "47",
           "question": "How do I use Migration Tracking to record bird movements?",
           "answer": "On the Log tab, tap the ••• button (top-left) and choose Migration, then use the Record tab. Select a species, record its migration status (Actively Migrating, Staging / Resting, Arriving, Departing, Overwintering, At Breeding Grounds, or Vagrant / Off-course), plus flock size, direction, altitude, and time of day. The app automatically detects the current season for context. Migration logs are independent of trips and count toward monthly challenges. Review saved entries on that screen's History tab."
         },
         {
-          "id": "45",
+          "id": "48",
           "question": "How do I access and manage my Behavior and Migration logs?",
           "answer": "On the Log tab, tap the ••• button (top-left) and choose Behaviors or Migration — these are separate from your regular trip logs. Each screen's History tab lists your recorded observations with species, details, timestamps, and location names; swipe a row to delete it."
         },
         {
-          "id": "46",
+          "id": "49",
           "question": "How do I log behavior and migration observations quickly?",
           "answer": "Use the Behaviors and Migration screens on the Log tab (the ••• button, each with a Record and a History tab) for detailed, structured observations — these are the primary way to record behavior / migration data and are what count toward the related monthly challenges."
         },
         {
-          "id": "47",
+          "id": "50",
           "question": "What's the difference between trip-based observations and standalone behavior / migration logs?",
           "answer": "Trip-based observations (Trip Logs, Life List, State Birds, Big Month) are your general birding activity — species you've spotted during outings, contributing to your Life List and shareable exports. Standalone Behaviors and Migration logs are focused research observations recorded independently of trips, contributing specifically to monthly research-style challenges. Use trip logging for regular birding; use the standalone logs when documenting detailed behavior or migration patterns."
         },
         {
-          "id": "48",
+          "id": "51",
           "question": "How do I create and manage birding story journals?",
           "answer": "“Tell Your Story” (the ••• button on the Log tab) lets you create journals combining trip data, photos, and personal narrative. Set a date range to pull in trips, behavior logs, and migration logs from that period, write your narrative, and the app generates species and behavior summaries automatically. Export your story as text, or share a simplified version through the standard share sheet. To make changes later, open the story and tap Edit — you can update the title, narrative, date range, selected trips / logs, and photos at any time."
         },
         {
-          "id": "49",
+          "id": "52",
           "question": "How do Bird Challenges work?",
           "answer": "Bird Challenges are gamified activities encouraging real-world birding. Daily challenges reset each day, weekly challenges reset Mondays, and monthly challenges reset on the 1st. Access them from Learn > Bird Challenges. Progress tracks automatically as you use the app's other features — no manual entry needed."
         },
         {
-          "id": "50",
+          "id": "53",
           "question": "How does automatic challenge progress tracking work?",
           "answer": "The app tracks challenge progress automatically as you use it normally. Marking birds “seen” in trip logs counts toward identification and species-diversity challenges. AI sound / photo / AR detections count toward their respective challenges. Behavior and migration logs count toward monthly research challenges. Habitat type is automatically determined from location names and species data for habitat-exploration challenges. You don't need to do anything extra — just go birding and log your sightings as usual."
         },
         {
-          "id": "51",
+          "id": "54",
           "question": "What types of challenges are available and how do I complete them?",
           "answer": "Daily challenges focus on immediate identification, sound-detection, and photo-capture goals. Weekly challenges focus on species diversity, habitat exploration, and rare-bird discovery. Monthly challenges focus on migration tracking and behavior study, using the Behaviors and Migration screens on the Log tab (each with a Record and a History tab). All progress updates automatically as you use the app's features."
         },
         {
-          "id": "52",
+          "id": "55",
           "question": "How do I view my completed challenges and points?",
           "answer": "Learn > Bird Challenges shows your total points and completed-vs-total count at the top, with each daily / weekly / monthly challenge listed below showing a live progress bar, points value, and completion status."
         },
         {
-          "id": "53",
+          "id": "56",
           "question": "How does habitat detection work for the Habitat Explorer challenge?",
           "answer": "When you log a bird with a location, the app automatically classifies the habitat type (woodland, water, or urban) using the species' known habitat data and the location name, without any manual input needed."
         },
         {
-          "id": "54",
+          "id": "57",
           "question": "How does the interactive quiz system work in Learn About Birds?",
           "answer": "After marking all 5 birds in a set as learned, you take a 10-question multiple-choice quiz: photo-ID questions (\"which bird is shown?\"), field-mark questions (\"which bird has these marks?\"), plus key-feature and habitat questions. Wrong answers are drawn from each species' listed confusion species where possible. Score at least 80% to pass. The results screen lists which birds you missed and offers to re-quiz just those; missed birds also drop back for a quicker repeat, while learned birds return later on a spaced-review schedule."
         },
         {
-          "id": "55",
+          "id": "58",
           "question": "What is location-based learning and how does it adapt to my area?",
           "answer": "Learn About Birds fetches real eBird observations from your current (or custom) location and selects 5 birds at a time from species actually found in your area, so you're studying birds you're likely to actually encounter. Changing your location updates the content."
         },
         {
-          "id": "56",
+          "id": "59",
           "question": "How do I track my learning progress?",
           "answer": "The Learn tab's progress card shows birds mastered (moved into spaced review), species on your Life List, and your best day-streak. Your badge (New Birder → Birding Expert) is based on all of those plus challenges and activities completed — not just replayed points. A day counts toward your streak whenever you open the Learn tab or finish an activity."
         },
         {
-          "id": "57",
+          "id": "60",
           "question": "Can I mark birds as learned directly from the bird cards?",
           "answer": "Yes — each bird's detail view in Learn About Birds has a “Mark as Learned” button, plus “Open full species card” and “Ask the assistant about this bird”."
         },
         {
-          "id": "58",
+          "id": "61",
           "question": "How do I use Observe Mode and its challenge system?",
           "answer": "Observe Mode (Learn > Practice Observing) is a guided listen → observe → describe → compare exercise. You must complete two full rounds (listen for a bird, then describe what you see) in a session to finish the activity — this reinforces consistent identification skills rather than a single lucky guess."
         },
         {
-          "id": "59",
+          "id": "62",
           "question": "How does the Learn tab help me become a better birder?",
           "answer": "Four activities build different skills — Learn About Birds (recognition, with spaced review), Practice Observing (linking a sound to a bird in the field), Plan Your Trips (the guided trip walkthrough), and Bird Challenges. A Practice & Ask row then drops you straight into the assistant or Sound / Photo / AR identification. Your badge and daily streak reflect real progress: birds mastered, species seen, challenges and activities done."
         },
         {
-          "id": "60",
+          "id": "63",
           "question": "How do I use hotspot notes to enhance my birding locations?",
           "answer": "While browsing hotspots, you can add a personal note about a location — access points, best viewing spots, seasonal patterns, or other observations. Notes are saved locally and persist across sessions."
         },
         {
-          "id": "61",
+          "id": "64",
           "question": "How do I get Sound ID to log birds into my trip?",
           "answer": "Open a saved trip and tap “Start Trip” (or “I'm here…” at one of its stops). That trip becomes the one being logged, and Bird Sounds detection then checks off its target birds as it hears them — and adds any other bird — at your current location, instead of making a separate trip. Only one trip is logged at a time; on another trip, tap “Log Sound ID to this trip” to switch. “Finish Trip” stops it. If a detection was wrong, tap “Incorrect” and that entry is removed from the trip."
         },
         {
-          "id": "62",
+          "id": "65",
+          "question": "How do I add inbox birds, photos or videos to a trip?",
+          "answer": "On the Trips screen, open the Import Trip menu and tap “Import from Inbox” (it shows only when something is waiting). It lists birds from a linked phone, camera node photos and camera node videos. Tick the ones you want, choose a trip — any trip, past or open, with the one from that day suggested — or New Trip, and optionally a stop. Left on “Where I was when found”, each goes to the stop you were at when it was found. A species already at that stop isn't added twice; its photos join the existing sighting. Camera node videos come in as “Unidentified” — tap the name in the trip to change it."
+        },
+        {
+          "id": "66",
           "question": "Can a second phone send its birds and photos to my trip?",
           "answer": "Yes — Settings › App Settings › Linked Phone. Set the phone that keeps the trip to Home and the other to Sender, tap Link on the Sender and approve it once on Home. The Sender then passes on each bird it hears and each photo ID you save (photos full size), and Home logs them into the trip you're logging, at the current stop, without double-logging a bird it already has. No network is needed — the phones connect directly within roughly 30–100 m. If the link drops (out of range, or the app in the background), the Sender keeps everything and catches up when both apps are open again; with no trip being logged on Home, arrivals wait in the “From linked phone” inbox."
         },
         {
-          "id": "63",
+          "id": "67",
           "question": "What does “I've moved to a new location” do?",
           "answer": "It starts a fresh checklist for a place that isn't one of the trip's planned stops (or picks one that is). Choose a nearby eBird hotspot (within 5 km), one of the trip's stops, or “Use where I'm standing” with a name you type. Sound ID and the Scope Display then log there, and birds you already saw earlier on the trip are flagged. For a planned stop you can also just tap “I'm here…”, or the “You're near … — I'm here” suggestion when you get close."
         }
@@ -709,84 +779,99 @@ window.HELP_CONTENT = {
       "name": "Data, photos & backup",
       "faqs": [
         {
-          "id": "64",
+          "id": "68",
           "question": "How can I export or share my birding trips?",
           "answer": "Open a trip in Trip Logs and use the share action to export it as a JSON file (importable by other app users), a plain-text summary shareable via email / messaging / any app that accepts the iOS share sheet, or Add to Calendar to create one all-day event per trip day. PDF export is not currently available."
         },
         {
-          "id": "65",
+          "id": "69",
+          "question": "How do I keep evidence for a rare bird?",
+          "answer": "On Sound ID, tap “Save last 30 s” as soon as you hear it — the app keeps the last 30 seconds all the time — or let it save by itself: an unusual new bird for the area gets 30 s before and 15 s after saved automatically. Then open the bird on the trip and tap “Document this bird” to see recordings with spectrograms, photos, why it's unusual, and to answer the questions eBird reviewers ask. “Prepare evidence packet” makes a zip with a PDF report, photos and recordings."
+        },
+        {
+          "id": "70",
           "question": "How do I export my trips to share with friends?",
           "answer": "Open a saved trip in Trip Logs and use the share action to export it as a JSON file or plain-text summary, then share it via email, messaging apps, or any other sharing method. Recipients can import your JSON export using the Import Trip feature."
         },
         {
-          "id": "66",
+          "id": "71",
           "question": "Can I import my eBird checklists, or just the ones that add to my life list?",
           "answer": "Yes to both. Get either your full eBird data (ebird.org › My eBird › Download My Data) or your Life List download (My eBird › Life List › Download), then on Trip Logs tap the import button and choose “Import from eBird CSV”. Each checklist becomes a completed trip — from a Life List file, holding just the species you first saw on it. Turn on “Only import trips with new life birds” to bring in only checklists with at least one species not already on your Life List — judged against your list as it is before the import, so two checklists with the same new bird both come in. The whole checklist is imported, not just the new birds, and “sp.”, slash, hybrid, and domestic-type entries don't count as new. You can combine it with the date-range option, and checklists you've already imported are always skipped. The summary at the end says how many new life birds were added."
         },
         {
-          "id": "67",
+          "id": "72",
           "question": "How do I import a trip from a file?",
           "answer": "From Trip Logs, tap the import button and select a trip file (.json format) from your device. Any photos included in the file are automatically saved and linked to their corresponding bird sightings, along with all metadata (date, location, species)."
         },
         {
-          "id": "68",
+          "id": "73",
           "question": "How do photos work with trip imports and exports?",
           "answer": "The per-trip JSON export (for sharing a trip with other app users) intentionally leaves photos and personal notes / seen-status out, keeping it a clean, shareable trip plan. If you want an export that includes your photos — for backing up or moving to a new phone — use Data Backup & Migration in Settings instead, which captures everything."
         },
         {
-          "id": "69",
+          "id": "74",
           "question": "Can I export my life list to compare against eBird?",
           "answer": "Yes. Open Life List, tap the ••• button, and choose Export Life List (CSV) — it exports your full life list (not just the currently-selected time filter) with common name, scientific name, first-seen date, and sighting count. To compare directly, choose Compare with eBird… in the same menu instead."
         },
         {
-          "id": "70",
+          "id": "75",
           "question": "Why does my life list in the app show a different number than eBird?",
           "answer": "Open Life List, tap ••• › Compare with eBird…, and pick your eBird Life List download (My eBird › Life List › Download) or full data export. You'll get the birds on your app life list that aren't in the eBird file (tap one to see the trips it's on — often a mistyped or misidentified name, or a sighting you never entered on eBird), the birds in both that eBird doesn't count toward its total (slashes like “Western/Clark's Grebe”, “sp.” entries, hybrids, domestic types, non-established exotics — the app's life list counts every name you've logged), and any countable eBird birds the app is missing."
         },
         {
-          "id": "71",
+          "id": "76",
           "question": "Is my birding data backed up anywhere?",
           "answer": "All your trips, sightings, logs, photos, and settings are stored locally on your device — there is currently no automatic cloud sync. To back up everything or move to a new phone, use Data Backup & Migration in Settings, which exports all of it (including photos) as one file."
         },
         {
-          "id": "72",
+          "id": "77",
           "question": "How do I move all my data to a new phone?",
           "answer": "Go to Settings > Advanced > Data Backup & Migration and tap Export All Data — this bundles every trip, sighting, photo, behavior / migration log, story, hotspot note, challenge progress record, and setting into one file, which you can AirDrop, save to Files / iCloud Drive, or email to yourself. On your new phone, once the app is installed, use Import All Data and select that file. Note that importing replaces whatever's currently on the destination device rather than merging — export a backup of that device first if it has data you don't want to lose."
         },
         {
-          "id": "73",
+          "id": "78",
           "question": "How do I change the sort order on the Photos screen?",
           "answer": "On the Log tab choose Photos from the title menu, then use the up / down arrows in the toolbar. You can sort by newest first, oldest first, species A–Z, species Z–A, or by which species has the most photos. Your choice is saved between visits. The button next to it switches between grid and list layout."
         },
         {
-          "id": "74",
+          "id": "79",
           "question": "What are the bird thumbnail images and bird cards?",
           "answer": "Peregrine Planner shows small thumbnail images next to bird names throughout the app, sourced from iNaturalist.org (cached for offline viewing). Tap the photo to open the bird's card: a full-size image with attribution, and — for the roughly 1,200 species in the app's bundled database — size, distinguishing field marks, habitat, behavior, seasonal patterns, and similar (confusion) species, plus quick links to eBird, Wikipedia, and iNaturalist. A few very recently renamed or split species, and any bird not yet in the database, show the photo and links only."
         },
         {
-          "id": "75",
+          "id": "80",
           "question": "Why don't some birds show thumbnail images, and what are placeholder bubbles?",
           "answer": "Not all bird species have photos available in the iNaturalist database, which is the source for bird thumbnails. When no image is available, you'll see a placeholder bubble with the first letter of the bird's name — tapping it still opens the bird card with whatever identification information is available. Coverage improves over time as more photographers contribute to iNaturalist."
         },
         {
-          "id": "76",
+          "id": "81",
           "question": "How do I access detailed bird information cards?",
           "answer": "Tap the bird's thumbnail photo (or letter placeholder) wherever one appears — the Plan list, trip logs, Life List, Big Month, State Birds, the Hotspot Browser, and the Learn tab. Tapping just the photo opens the card; tapping elsewhere on the row still does the row's normal action (selecting the bird, opening its sighting history, and so on). The card shows the species' size, field marks, habitat, behavior, seasonal patterns, and similar species from the bundled database, along with eBird / Wikipedia / iNaturalist links."
         },
         {
-          "id": "77",
+          "id": "82",
           "question": "How do I manage the image cache and storage?",
           "answer": "Peregrine Planner automatically caches bird thumbnail images from iNaturalist for faster loading and offline viewing. You can disable bird image thumbnails entirely in Settings if you want to reduce data usage — when disabled, you'll see simple letter placeholders instead of photos."
         },
         {
-          "id": "78",
+          "id": "83",
           "question": "Where does the bird data come from?",
           "answer": "All bird observation data comes from eBird.org, one of the world's largest biodiversity citizen-science projects, managed by the Cornell Lab of Ornithology. Bird thumbnail images come from iNaturalist.org."
         },
         {
-          "id": "79",
+          "id": "84",
           "question": "How can I contribute my bird sightings to eBird?",
-          "answer": "eBird.org is where the app's own observation data comes from, and it's easy to contribute back: log your sightings in Peregrine Planner, then visit eBird.org directly to record the same observations there using their site or app. This helps support a global citizen-science project tracking bird populations and migration."
+          "answer": "Log the trip in Peregrine Planner, then open it, tap the share action and choose Export as eBird CSV. Upload that file at ebird.org › Submit › Import data, choosing Record Format (Extended). Each stop becomes its own checklist, with its real start time, duration and (for Walking or Driving) the distance you actually walked or drove. Afterwards add photos and recordings to the checklists on ebird.org — the import can't carry media. eBird is a global citizen-science project tracking bird populations and migration, and it's where the app's own observation data comes from."
+        },
+        {
+          "id": "85",
+          "question": "Which eBird protocol does each Birding Mode use?",
+          "answer": "Walking and Driving export as Traveling, with the distance from your trip trail. Blind, Tower / hawk watch and Night listening export as Stationary (Night listening adds “Nocturnal flight call count.” to the checklist comment). Incidental exports as Incidental, with no effort and not marked complete. A Traveling stop that moved less than 30 m goes out as Stationary, and a checklist of 24 hours or more goes out as Incidental. Set the mode on the trip screen under Birding Mode; each stop can override it from its header."
+        },
+        {
+          "id": "86",
+          "question": "Why did my eBird export say time and distance were estimated?",
+          "answer": "Some stops have no arrive and leave times — usually trips logged before version 8.1, or a stop you never tapped “I'm here…” for. The export then estimates their time and distance from the number of birds, as older versions did, and the export menu names those stops. Check them on eBird after uploading."
         }
       ]
     },
@@ -794,227 +879,247 @@ window.HELP_CONTENT = {
       "name": "Mic array & camera nodes",
       "faqs": [
         {
-          "id": "80",
+          "id": "87",
           "question": "What is the directional mic array accessory?",
           "answer": "It's an optional, separately-built ESP32-S3 4-microphone hardware accessory that adds direction-finding to Sound detection. Once paired, tap the location icon next to a detected species during a listening session to see an arrow pointing toward it (left / right only, relative to the accessory's own forward mark) plus a getting closer / farther / steady trend. Set it up from Settings > Mic Array; when it's enabled, Mic Array also becomes its own tab. Firmware and wiring for anyone building the hardware are in the User Guide's Directional Mic Array section."
         },
         {
-          "id": "81",
+          "id": "88",
           "question": "Where do I find the Mic Array in the app?",
           "answer": "When “Enable Mic Array Integration” is turned on in Settings, Mic Array is its own bottom tab, bringing the directional mic array, the fleet, and the camera nodes together. When the setting is off, that tab is hidden and none of the mic-array UI appears — so if you don't have the DIY hardware, you never see it. The enable switch itself always lives in Settings > Mic Array."
         },
         {
-          "id": "82",
+          "id": "89",
           "question": "Why does the mic array's direction arrow update slowly or not at all?",
           "answer": "The direction only refreshes when the app confirms a fresh detection of the specific species you're tracking, not on every sound the array hears — this keeps it from jumping around on background noise or other birds, at the cost of updating less often than raw audio would. If it's not showing anything, confirm the accessory shows “Connected” on the Mic Array tab's Fleet screen, and try lowering the “Direction Sensitivity” slider on the Primary Array's own row there, which controls how confident a reading needs to be before it's shown at all."
         },
         {
-          "id": "83",
+          "id": "90",
           "question": "What is Radar Mode in the directional mic array?",
           "answer": "Radar Mode shows a live bearing for up to 4 species calling at the same time, instead of tracking just one. It works by isolating each species' typical call frequency range separately, so a busy multi-bird soundscape is more likely to produce a distinct direction per species rather than one reading for whichever call happens to be loudest. Toggle it on in Sound detection once the mic array is connected — it runs alongside single-species tracking, not instead of it."
         },
         {
-          "id": "84",
+          "id": "91",
           "question": "What's the difference between the direction arrow, Radar Mode, and the Mic Array Map?",
           "answer": "The direction arrow tracks one species at a time and points left / right relative to the array's own forward mark. Radar Mode shows a live bearing for up to 4 species at once, each separated by call frequency, still relative to the array. The Mic Array Map is different: once two or more GPS-equipped nodes are connected, it plots each node's real map position and bearing and — when their bearings line up — an estimated map position for the sound. Reach it from the Sound detection screen."
         },
         {
-          "id": "85",
+          "id": "92",
           "question": "What is Fleet-Wide Classification and the “N nodes agree” line under a tracked species?",
           "answer": "It's an experimental, opt-in mode on the Sound detection screen (a toggle that appears once 2 or more nodes are connected) that classifies every connected node's audio at once, instead of only the one picked as the sound source. When 2 or more nodes independently confirm the same species within a couple of seconds of each other, their bearings are cross-correlated into one real fused location, shown as a line like “~120m NE from you (3 nodes agree)” next to the usual single-node arrow — a step up from any one node's own relative bearing. It's off by default because it uses more battery and processing than the normal single-source mode; turn it on and see how your device and fleet handle it. With fewer than 2 corroborating nodes, everything behaves exactly as it did before."
         },
         {
-          "id": "86",
+          "id": "93",
           "question": "What are Learned Frequency Bands in the Mic Array settings?",
           "answer": "Directional tracking narrows in on a species' typical call frequency to isolate it from background noise, starting from a general per-species estimate. The app also keeps a running average of the real frequency range it actually measures each time you track that species, and — once “Seed Tracking from Learned Data” is turned on — uses that real history instead of the general estimate once at least 3 confirmed detections have accumulated for it. Measurement happens automatically in the background whether or not the toggle is on, and can be cleared with “Reset Learned Data” in the same settings screen."
         },
         {
-          "id": "87",
+          "id": "94",
           "question": "How do I choose which mic array node feeds Sound detection?",
           "answer": "While the mic array is enabled, a “Sound source” picker appears on the Sound detection screen. Pick the Primary array, a specific Additional Node, or Phone mic to use your phone's own microphone even while the array is connected — real-time detection, single-species direction tracking, and Radar Mode all follow whichever source you select."
         },
         {
-          "id": "88",
+          "id": "95",
           "question": "Can I run Merlin or another bird sound app at the same time?",
           "answer": "Yes, as long as Peregrine Planner is listening to a node rather than the phone. Pick a node (or the Primary array) as the Sound source, start listening, then open the other app. While listening to a node, this app keeps running in the background without using the phone's microphone or pausing other apps' audio, so the other app gets the phone mic and node detections — including Fleet-Wide Classification — keep arriving. If the Sound source is Phone mic, both apps would compete for the same microphone, so don't run them together that way. If the picked node isn't connected when you start, the app falls back to the phone mic — check the source before switching apps."
         },
         {
-          "id": "89",
+          "id": "96",
           "question": "How do I add a second mic array or a camera node?",
           "answer": "Go to the Mic Array tab's Fleet screen. Tap Add Node to enter a name, type (mic-only or camera), and network address, or tap Auto-Discover Nodes to find hardware already joined to your shared Wi-Fi — discovery also works over Bluetooth before any node is connected. The original front array is the Primary Array row at the top of the same screen; the list below it is for additional units. A node whose IP address changes on your network is re-matched to its existing entry automatically."
         },
         {
-          "id": "90",
+          "id": "97",
           "question": "Can the nodes tell how high a bird is?",
           "answer": "Yes, if one node in a close group stands on end. A node's two mics only measure along the line between them, so a flat node measures left/right; stand one vertically (mic line pointing up) and it measures how far above or below level a sound is. On a node with a BNO055 compass and its Heading Source set to Compass, the app detects this automatically — its settings show “Flat”, “Tilted 17° up” or “Vertical” — and it also corrects for a node that simply leans a few degrees. A node without a compass can be vertical too: on its Edit screen (Fleet), under Mic Mounting, choose which mic is on top. It then shows no left/right direction of its own and isn’t used for bearings, only for the height. If you pick a vertical node as the Sound source, it still does the listening, while Radar Mode, Track and the Scope Display take directions from the Primary array or another connected flat node — a note under the radar says which. A good layout is two flat nodes with mic lines 90° apart plus one vertical node, all within about 16 ft. The Mic Array Map then shows the elevation (e.g. “35° up”), and a height in feet when there's also a distance, such as the paired nodes' own close-range fix or a far node's crossing bearing. Set “Mic axis on compass board” once per node (the axis printed on the BNO055 board that runs toward the right-hand mic); if a sound on the right reads as left, pick the opposite axis."
         },
         {
-          "id": "91",
+          "id": "98",
           "question": "Why pair two nodes a few meters apart?",
           "answer": "A node's two mics can tell how far left or right a sound is, but not whether it's in front of the node or behind it — both give exactly the same reading. Put two nodes 2–5 m apart with their mic pairs facing different ways (about 90° apart is best; never nearly parallel) and only the real direction agrees between them, so the app can tell front from back. It also evens out accuracy, because a node is least precise for sounds along its own mic line and the other node covers that direction well. Both nodes need a working heading source (a compass, or a Fixed Pin) and both need to hear the call. The Mic Array Map shows the result as one thick line with an uncertainty wedge, and says “ambiguous” instead of guessing when the two don't clearly agree."
         },
         {
-          "id": "92",
+          "id": "99",
           "question": "Why does a mic array node need a “heading source”?",
           "answer": "To place a node on the Mic Array Map, the app needs to know where it is and which way it's facing. Fixed Pin is the usual choice for a placed node: stand at it and tap “Set from my current location” to capture both its position and its facing from your phone's GPS and compass. It's used only while the node's own GPS has no fix — a real node fix always takes over automatically, and the pin re-syncs from that fix if the node is later moved. Phone Proxy instead borrows the phone's live GPS and compass (only right when the node is carried with you). Manual Heading Only records a mounting heading but no position, so that node won't appear on the map. Compass uses the node's own onboard compass (on builds that have one) and stays right if the node is bumped or turned, and its position comes from its own GPS — or, while the node has no fix, from an optional position you pin by standing at it and tapping “Set position from my current location”. You set this per node from its Edit screen on the Fleet screen, and for the Primary array from its own row there."
         },
         {
-          "id": "93",
+          "id": "100",
           "question": "How do I change a node's Wi-Fi networks, role, or access-point password?",
           "answer": "Open the “Wi-Fi & Role” screen from a node's row — the Primary Array's own row on the Fleet screen, or an Additional Node's Edit screen. There you can set the node's role (host its own network, join one as a client, or fall back between the two), edit its priority-ordered list of Wi-Fi networks to try — including a per-network on/off switch so you can retire one without deleting its saved password — and its access-point password (a per-chip default is shown until you set your own, and a Bluetooth-discovered node's default password is shown with a copy button even before you've connected). Tap “Apply & reboot node” to send the change; the node restarts to pick it up."
         },
         {
-          "id": "94",
+          "id": "101",
           "question": "I turned off a Wi-Fi network on a node, but it still connects to it. What happened?",
           "answer": "If the node can't reach any of its still-enabled networks after the change, it automatically reverts to its previous working settings about 3 minutes after rebooting — a safety net so a bad remote change can't permanently lock you out of a node. If the network you disabled was the only one actually in range at the time, that safety net silently undoes your change with no separate warning that it happened. Before disabling the network you're currently using, confirm another enabled candidate is genuinely reachable — otherwise wait for the revert, fix the other candidate, and try again."
         },
         {
-          "id": "95",
+          "id": "102",
           "question": "My camera node's GPS won't get a fix. Can I still use the Mic Array Map?",
           "answer": "Yes. If the node has an onboard compass, keep its Heading Source on “Compass” and pin its position (stand at it and tap “Set position from my current location”) — it keeps its live compass heading and uses the pinned spot until its GPS gets a fix. Otherwise, set that node's Heading Source to “Fixed Pin”, stand next to the node, and tap “Set from my current location” to capture its position and facing from your phone. The node then plots on the Mic Array Map and contributes to triangulation using that pinned location, even with its own GPS dead. If the node's GPS ever does get a fix, the app switches to the real position automatically and updates the stored pin. Everything else about the node — sound detection, direction tracking, photo and video capture — works regardless of GPS."
         },
         {
-          "id": "96",
+          "id": "103",
           "question": "How do camera nodes capture photos, and where do they go?",
           "answer": "Open the Mic Array tab's Camera segment and tap the gear for Camera Setup — the field screen for the camera side of the mic-array hardware. There you can set each node (the Primary array and any declared camera node) to Auto capture (it photographs a bird itself when its own audio / motion detection fires) or Manual only; “Take Photo Now” works in either mode, as long as that node's Camera switch is on (see the next question). Captured photos land in the Camera Node Captures inbox on that same screen, where you can Save a photo to a trip with the on-device species guess, choose “Not a Bird” to route it into a Tell Your Story journal, or Discard it."
         },
         {
-          "id": "97",
+          "id": "104",
           "question": "How do I record and save video from a camera node?",
           "answer": "Open the Mic Array tab's Camera segment (the Camera Console), tap the node, and use Record / Stop rec — or Start Video / Stop Recording on the node's card in Camera Setup (the gear). Recording runs on the node itself and continues even if you leave the screen. Finished clips appear in the Camera Node Videos inbox on the same screen, where you can play a clip, share it through the iOS share sheet, or Save it into a trip as a sighting you identify yourself — no automatic species identification runs on video."
         },
         {
-          "id": "98",
+          "id": "105",
           "question": "Can I turn off a camera node's camera to save power or free up processing?",
           "answer": "Yes — each node's card in Camera Setup (Mic Array tab > Camera, then the gear) has a “Camera” switch. Turning it off fully shuts the camera down (not just pausing captures), freeing that node's processing time, memory, and camera hardware for GPS-fix acquisition or attentive sound capture — useful if a node is struggling to get a GPS fix or you want its full attention on audio. Turning it off immediately stops any recording or live preview already in progress, and Take Photo Now / Start Video / Live Preview stay unavailable until you turn it back on. It's not a saved setting — the camera comes back on automatically the next time the node reboots."
         },
         {
-          "id": "99",
+          "id": "106",
           "question": "What is Field Debug for?",
           "answer": "Field Debug (Mic Array tab > Fleet > Field Debug) is a troubleshooting screen for the hardware accessories. Turn on remote logging per node to see a live tail of what each node reports, filter or search those lines, and share the full or filtered log out of the app for later analysis — useful for chasing GPS or Wi-Fi issues without tethering a node to a laptop. It also shows per-node AI classify latency once the Sound detection model has been loaded."
         },
         {
-          "id": "100",
+          "id": "107",
           "question": "What is the Scope Display?",
           "answer": "An optional DIY touch display for your spotting scope (a Freenove ESP32-S3 4-inch display). Add it in Mic Array › Fleet as a Scope Display node. It lists every bird the app hears — and the birds Merlin identifies on your iPhone — (tap for its bird card), keeps a trip's target checklist you can check off at the scope, turns Radar Mode into a “turn the scope this way” arrow when a BNO055 compass is mounted on the scope, shows the fleet's status with a live setup aid for aiming nodes, works as a camp security console with hold-to-talk to your security nodes, and shows a session dashboard."
         },
         {
-          "id": "101",
+          "id": "108",
           "question": "Why does the Scope Display's arrow say “not aligned”, or point the wrong way?",
           "answer": "The display needs to learn how its compass sits relative to the scope's line of sight. Stand at the scope, open the display's node in Mic Array › Fleet › Scope alignment, aim the scope at another node (or anything whose direction you know), and tap Align. Also calibrate the compass with a slow figure-8 until the Radar tab shows cal 3/3, and keep the compass away from the display's speaker magnet and the battery leads. A target marked “?” comes from a single 2-mic node, which can't tell front from back — it may be behind you. Keep the phone at the scope: directions from a distant node are re-aimed from the phone's position."
         },
         {
-          "id": "102",
+          "id": "109",
           "question": "Which node's direction does Radar Mode use?",
           "answer": "The node that heard the bird. With Fleet-Wide Classification on, a bird detected by another node takes its direction from that node's own reading, and its radar pin is labelled with the node's name. If that node's mics are vertical or it has no reading from around the time of the call, the Sound source's reading is used instead (or, when the source is a vertical node, the Primary array or another flat node). A reading older than a few seconds is never used, so a pin only moves when a fresh direction arrives. Two nodes hearing the same bird are crossed into a real location instead. On the Scope Display, a node's direction is re-aimed from where you stand, with a wider “±” the further you are from that node, because without a distance the bird could be anywhere along its line."
         },
         {
-          "id": "103",
+          "id": "110",
           "question": "How do I turn the Scope Display off without unplugging it?",
           "answer": "Tap Power off on the display's Session tab and tap again to confirm, or hold the BOOT button for 3 seconds. It shuts everything down and sleeps, drawing very little from the battery. Press BOOT (or RESET) to turn it back on — it rejoins Wi-Fi and the fleet by itself."
         },
         {
-          "id": "104",
+          "id": "111",
           "question": "Why isn't the Scope Display in Sound detection's Sound source list?",
           "answer": "Its Sound detection switch (on the display's Session tab) is off — that turns the display's microphone off to save battery and removes it from the list. Turn it back on, and check the display shows as connected in Mic Array › Fleet. If birds sound faint, raise the Mic level slider on the same tab."
         },
         {
-          "id": "105",
+          "id": "112",
+          "question": "Will hands-free logging stop Merlin from listening?",
+          "answer": "No. Spoken alerts play through the Scope Display's speaker and voice commands are heard by the display's microphone, so the iPhone's microphone and speaker aren't touched and Merlin keeps listening. The only exception is “Speak From Phone Without a Display” (off by default), which uses the phone's speaker and can interrupt Merlin. Playing back a saved recording also uses the phone's speaker for that moment."
+        },
+        {
+          "id": "113",
+          "question": "Why doesn't the display react when I talk to it?",
+          "answer": "Check that Voice Commands is on in Settings › App Settings and Speech Recognition is allowed for Peregrine Planner in iOS Settings; that the display's Sound detection switch (Session tab) is on, since voice commands use its microphone; and that the app is running and linked to the display. Every command must start with “Peregrine”. The last thing heard and the reply show under the Voice Commands switch, which helps if a bird name was misheard."
+        },
+        {
+          "id": "114",
+          "question": "How do I record night flight calls?",
+          "answer": "Use a camping-security node with an SD card. Open it from the Camera Console (Mic Array tab › Camera) and turn on Night Listening; the phone sends tonight's window (30 minutes after sunset to 30 minutes before sunrise) and the time. The node records short clips of flight calls on its own all night. In the morning open Night Calls from the moon button on the Camera Console, download the clips, review BirdNET's guesses, and tap “Log this night as a trip”."
+        },
+        {
+          "id": "115",
+          "question": "Why are most of my night clips insects or “Unknown”?",
+          "answer": "BirdNET recognises the flight calls of only some species, so many real calls stay “Unknown – low band” or “high band” for you to label. Insects, rain and wind make most false clips: mark them Not a bird, and if more than half of what you review isn't a bird, raise the node's trigger level (Camera Console › node › Night Listening). The node also raises its own level when more than its per-minute limit fire."
+        },
+        {
+          "id": "116",
           "question": "Does the Scope Display work without the phone?",
           "answer": "Partly. Hold to talk (straight from the display to a security node's speaker) and camera snapshots (fetched straight from each node) keep working with the phone off. Bird cards and stop maps already on the display's SD card open with no phone, and trip checks, Start trip and I'm here made on the display are saved and sent to the phone later. Merlin's birds come from the iPhone over Bluetooth, so they need the phone nearby but not the Peregrine app. Detections, cards not yet on the SD card, radar targets, fleet status, presence alerts and the siren are relayed by the app, so they need it running — in the foreground, or in the background during a node listening session."
         },
         {
-          "id": "106",
+          "id": "117",
           "question": "What is Node Mode, and why don't I see it on my camera node?",
           "answer": "Node Mode only appears on a camera node built with a presence sensor and a speaker — a “camping/home security” hardware variant, not the standard camera node. If your build doesn't have those parts, the app has no Node Mode control to show, and everything else about that node works exactly as an ordinary camera node. On a qualifying node, Node Mode is on its card in the Mic Array tab's Camera screen: Birding (an ordinary camera node), Camping Security (unattended monitoring in the field, with an on-device Automatic Alarm toggle), or Home Security (reports to Home Assistant)."
         },
         {
-          "id": "107",
+          "id": "118",
           "question": "What's the difference between Automatic Alarm and the Sound Alarm button?",
           "answer": "Sound Alarm is a manual button on the node's card — tap it any time, in any Node Mode, to sound the siren immediately (e.g. to test it or to deliberately warn something off). Automatic Alarm is a separate toggle that only exists in Camping Security mode; when it's on, the node sounds the siren on its own the instant its presence sensor fires, with no app involvement at all. It's off by default and meant only for a genuinely isolated site — leave it off around other campers, since an unconditional automatic siren is a real nuisance risk. Either way, the node stops the tone on its own after a short time."
         },
         {
-          "id": "108",
+          "id": "119",
           "question": "How do presence alerts work, and why didn't I get one?",
           "answer": "A security-capable camera node alerts your phone when its presence sensor detects someone — but only while that node is in Camping Security or Home Security mode (Birding just logs it in Recent Activity), only while Presence Alerts is on, and at most once per node every 30 seconds. With the app open you get a full-screen alert with the node's picture and Hold to talk / Sound siren / View live; in the background, a notification. The app has to be running and connected to the node to hear the detection at all — if iOS has suspended it, nothing arrives. With the app closed, use Home Assistant's own notifications in Home Security mode."
         },
         {
-          "id": "109",
+          "id": "120",
           "question": "Can a security node tell which way someone is walking and how fast?",
           "answer": "Partly. The node's radar measures movement toward or away from it, so you'll see “Approaching” or “Moving away” with a speed in mph, “Standing still”, or “Moving across” for someone who's moving but not getting closer or farther. It can't tell a compass direction of travel, and someone walking straight across in front of it has almost no speed toward or away from it, so it shows no speed for them. A C4001 sensor reports speed but not which way."
         },
         {
-          "id": "110",
+          "id": "121",
           "question": "Why does a security node show presence when no one is there?",
           "answer": "Usually one of three things. 1) The radar sees through interior walls — set the node's Detection range (on its Camera Console page) to the far edge of the area you actually want watched. 2) Something that moves now and then — a fan, an HVAC vent, curtains in a draft, a pet — is inside that range; aim the node away from it or set the range just short of it. 3) “Clearing…” right after someone leaves is the sensor counting down before it reports clear (set with Clear after); it doesn't send alerts. If it persists, Field Debug's log shows the distance of every detection — something that keeps coming back at exactly the same distance is a fixed object, not a person."
         },
         {
-          "id": "111",
+          "id": "122",
           "question": "What does “Clearing…” mean on a security node?",
           "answer": "The sensor has lost whoever it was tracking and is counting down before it reports the area clear — how long is the node's “Clear after” setting (5 seconds by default, C4002 only). Nothing is actually being detected then, so it doesn't alert, photograph, or sound the siren during that time."
         },
         {
-          "id": "112",
+          "id": "123",
           "question": "How does “speak through the node” work?",
           "answer": "On a security-capable camera node's page in the Camera Console (or right on a presence alert), hold the “Hold to talk” button and talk — your phone's microphone streams live to the node's speaker for as long as you hold it, and stops the moment you release. It works in any Node Mode and is a more direct, human alternative to sounding an automatic siren."
         },
         {
-          "id": "113",
+          "id": "124",
           "question": "How do I connect a camera node to Home Assistant?",
           "answer": "Set that node's Node Mode to Home Security, then open its “Home Assistant” row on the Camera screen and enter your MQTT broker's host, port, and username/password if your setup needs them. Once it connects, the node automatically adds a presence sensor, a Sound Alarm button, and a camera on/off switch to Home Assistant — no YAML needed for those three. The one exception is the live camera image itself: add a one-time manual YAML `generic` camera entry pointing at the node's own snapshot address, the same approach this app's Feeder Cam Mode already uses, since Home Assistant's automatic setup can't discover a camera feed that way."
         },
         {
-          "id": "114",
+          "id": "125",
           "question": "In Home Security mode, why is there no Automatic Alarm toggle?",
           "answer": "That decision is meant to live in Home Assistant instead, once the node is connected there — a Home Assistant automation can factor in things the node itself can't, like whether anyone's phone shows home, whether your house alarm panel is armed, or the time of day, and call the node's Sound Alarm button only when all of that lines up. Camping Security mode keeps its own on-device Automatic Alarm toggle specifically because a genuinely isolated campsite has no Home Assistant to delegate that decision to."
         },
         {
-          "id": "115",
+          "id": "126",
           "question": "How do I check off trip targets on the Scope Display?",
           "answer": "Start the trip on the phone (Start Trip, or I'm here at a stop), then open the display's Birds tab › Targets. It lists the trip's birds for where you are now with “n of N seen”; tap a box to check one off, or tap the name to open its card and “Seen it — check off here”. Sound ID checks birds off by itself as it hears them. Checks made on the display are saved on it and reach the phone whenever it's in range, even after the display has been turned off."
         },
         {
-          "id": "116",
+          "id": "127",
           "question": "How do I load bird cards onto the Scope Display's SD card?",
           "answer": "Put a microSD card in the display. While the phone has internet, open the display's node in Mic Array › Fleet › “Bird cards on the display”, pick the Area (where you are now, the Plan screen's search area, or a planned trip) and the radius, and tap “Load bird cards for this area”. Keep the app open and the phone online until it says Done — about 1–2 seconds per card. After that, tapping a bird on the display opens its card instantly with no phone signal. Cards that couldn't be loaded are counted; load again to retry them."
         },
         {
-          "id": "117",
+          "id": "128",
           "question": "How do I see a map of a trip stop on the Scope Display?",
           "answer": "Open the display's Birds tab › Trip › “Map & trip stops”, tap Trips and tap a stop. Use ◀ ▶ to flip through the trip's stops, drag to move around, and + / − to zoom (from the whole 4 × 5 km map down to 250 m across the screen). Map / Satellite switches the style. The trip needs Maps turned on (on the display's Trips screen, or in the app under the display's node › Trip maps on the display), and its maps need to have reached the display — see the % on the Trips screen."
         },
         {
-          "id": "118",
+          "id": "129",
           "question": "Why does a stop map on the Scope Display say it isn't ready, or stay at 0%?",
           "answer": "Maps are made on the phone, while it has internet, and copied to the display while the Peregrine app is open (in front) and the display is connected — about 10 minutes a stop for both map styles. Check that Maps is turned on for that trip, open the app and leave it in front, and leave the display alone for a while: downloads pause while you're touching it. A stop map the phone hasn't made yet says so."
         },
         {
-          "id": "119",
+          "id": "130",
           "question": "Why doesn't my position show on the Scope Display's map?",
           "answer": "Your position is only sent while a trip is being logged — tap Start trip (or I'm here at a stop) on the display's Trips screen or in the app. It keeps updating with the phone locked. If the dot is grey, the last position is old; if the line says “off map”, you're outside the 4 × 5 km map. Settings › Trip GPS Updates sets how often the phone checks — a longer interval saves battery but the dot moves less often."
         },
         {
-          "id": "120",
+          "id": "131",
           "question": "What does Settings › Trip GPS Updates do?",
           "answer": "It sets how often the phone checks where you are while a trip records its path or the Scope Display shows where you are: every second (most accurate, most battery), or every 10 s, 30 s, 1 or 2 minutes, with the GPS resting in between to save battery. Trip recording keeps going with the phone locked; iOS shows the blue location indicator while it does."
         },
         {
-          "id": "121",
+          "id": "132",
           "question": "How do I look up a bird card on the Scope Display?",
           "answer": "Open the Birds tab › Cards. It lists every card saved on the display's SD card; tap the search box and type part of the bird's name (common or scientific) to narrow it down, then tap the bird. It works with no phone. If you don't know the name, tap Filter next to the search box and pick a size and the colors you saw — only birds with all of those colors stay in the list. A bird that isn't in the list hasn't been saved yet — load cards for your area from the phone first (Mic Array › Fleet › the display's node › Bird cards on the display), or tap the bird in Heard or Targets while the phone is connected."
         },
         {
-          "id": "122",
+          "id": "133",
           "question": "How do I see Merlin's birds on the Scope Display?",
           "answer": "Pair the display with your iPhone once: Settings › Bluetooth › tap PPScope › allow notifications (if PPScope isn't listed, connect to it once with a Bluetooth app such as nRF Connect, then tap it under My Devices). The display's Session tab should say “receiving”. Then run Merlin's Sound ID in the background — phone locked or another app open — and each bird it identifies appears in the display's Heard list tagged MERLIN. When Merlin hears several birds at once, each becomes its own entry."
         },
         {
-          "id": "123",
+          "id": "134",
           "question": "Why do Merlin's notifications disappear from my phone when the Scope Display is connected?",
           "answer": "The display clears them on purpose. Merlin keeps one notification and rewrites it for each new bird, and iOS doesn't tell Bluetooth accessories about the rewrite — so without clearing, the display would only ever see Merlin's first bird. Once the display has read a Merlin notification it clears it, and Merlin posts a fresh one for the next bird. Your birds are still in Merlin's own list. Other apps' notifications are never touched."
         },
         {
-          "id": "124",
+          "id": "135",
           "question": "Merlin shows birds on my phone, but none reach the Scope Display. What should I check?",
           "answer": "1) The display's Session tab should say “receiving”; if it says not paired or not allowed, pair it (Settings › Bluetooth › PPScope › allow notifications). 2) Merlin must post real notifications: keep it running in the background (phone locked or another app open) and make sure Merlin's notifications are allowed in iPhone Settings › Notifications. Birds Merlin shows on its own screen while it's open aren't notifications. 3) The Session tab's notification count should rise when any app notifies — if it never does, tap “Forget iPhone pairing”, forget PPScope on the iPhone too, and pair again."
         }
@@ -1024,37 +1129,37 @@ window.HELP_CONTENT = {
       "name": "Settings & app basics",
       "faqs": [
         {
-          "id": "125",
+          "id": "136",
           "question": "How do I search Help & Info, and what does “Enhanced by Apple Intelligence” mean?",
           "answer": "Use the search box at the top of Help & Info to instantly find matching guide sections and FAQ answers by keyword — this always works, no AI involved. On devices with Apple Intelligence available and turned on, an “Ask a question about using this app” button also appears, opening a chat where you can ask in plain language (e.g. “how do I export my trip data?”) and get an answer grounded in this same Help & Info content. The AI Bird ID Assistant (Identify > Ask) works the same way for bird questions: when Apple Intelligence is available, its answers are tagged “Enhanced by Apple Intelligence”; otherwise it automatically falls back to the app's built-in bird database. You can turn the smart assistant off in Settings if you'd rather it always use the built-in database."
         },
         {
-          "id": "126",
+          "id": "137",
           "question": "What are the notification settings for?",
           "answer": "The “Bird Detection Alerts” toggle in Settings controls whether the app posts a notification when a species is detected during a Sound session, showing the species name and confidence percentage."
         },
         {
-          "id": "127",
+          "id": "138",
           "question": "How do I set my home state and why does it matter?",
           "answer": "Set your home state in Settings. It's used by the State Birds Goals feature to filter the official state bird checklist, and by Learn About Birds as a fallback source of local species when eBird observation data isn't available for your exact location."
         },
         {
-          "id": "128",
+          "id": "139",
           "question": "What is “Auto-Remove Unseen Birds”?",
           "answer": "A toggle in Settings. When on, marking a trip complete automatically removes any birds in that trip you never marked as seen, so a completed trip reflects only what you actually observed. When off, unseen birds stay in the completed trip."
         },
         {
-          "id": "129",
+          "id": "140",
           "question": "What does “Re-check for Previous App Data” do?",
           "answer": "It's in Settings > Advanced, and only appears if data from an earlier version of the app is detected on the device. Tapping it re-offers the one-time import prompt for that older data; force-quit and reopen the app to see the prompt again."
         },
         {
-          "id": "130",
+          "id": "141",
           "question": "How do I report a bug or suggest a feature?",
           "answer": "Open Help & Info from the gear button at the top-right of any tab and choose Contact Support. Fill out the form and it opens your email app with a message to peregrineplanner@gmail.com ready to send. The same form on the support website works the same way."
         },
         {
-          "id": "131",
+          "id": "142",
           "question": "How can I support the app?",
           "answer": "The app includes an optional tip jar where you can support ongoing development. Access it from Settings under “Support the App”."
         }
