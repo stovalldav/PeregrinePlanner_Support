@@ -64,8 +64,12 @@
             var bullets = (sec.details || []).map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("");
             var download = "";
             if (sec.downloadHref) {
+                // The firmware keeps its old id -- the app links to #firmware-download.
+                var downloadId = sec.downloadHref === "peregrine-mic-array-firmware.zip"
+                    ? "firmware-download"
+                    : slug(sec.downloadHref.replace(/\.zip$/, "")) + "-download";
                 download =
-                    '<div class="download-row" id="firmware-download">' +
+                    '<div class="download-row" id="' + downloadId + '">' +
                     '<a class="download-btn" href="' + esc(sec.downloadHref) + '">' +
                     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.6l3.3-3.3L16.7 12 12 16.7 7.3 12l1.4-1.7L12 13.6V3zM5 19h14v2H5z"/></svg>' +
                     esc(sec.downloadLabel || "Download") + "</a></div>";
@@ -145,7 +149,7 @@
         tabContents.forEach(function (c) { c.classList.toggle("active", c.id === name); });
     }
 
-    // ----- Deep links: #guide opens that tab; #firmware-download opens the tab holding it + scrolls -----
+    // ----- Deep links: #guide opens that tab; #firmware-download (or any download/card id) opens the tab holding it + scrolls -----
     function applyDeepLink() {
         var target = window.location.hash.replace("#", "");
         if (!target) return;

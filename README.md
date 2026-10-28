@@ -9,6 +9,7 @@ Static site served from GitHub Pages. Plain HTML/CSS/JS, no build step, no frame
 | `help-content.js` | **Generated.** `window.HELP_CONTENT` = the Quick Start / guide / FAQ data |
 | `privacy-policy.html` | Standalone, linked from the header |
 | `peregrine-mic-array-firmware.zip` | Linked from the User Guide's Directional Mic Array section |
+| `peregrine-scope-display-enclosure.zip` | 3D-printable Scope Display enclosure (AI-generated first-fit prototype: STL + OpenSCAD source + REVIEW-NOTES.txt). Linked from the User Guide's Scope Display section (`#peregrine-scope-display-enclosure-download`) |
 
 ## Editing help content
 
