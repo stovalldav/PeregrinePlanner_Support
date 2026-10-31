@@ -183,12 +183,12 @@ window.HELP_CONTENT = {
         "Birds tab — Cards: saved bird cards, alphabetically. Find searches any part of a name, and Filter narrows by size and colors. Clear (tap twice) deletes them all.",
         "Bird cards: before you head out, while the phone has internet, open the badge's node in Mic Array › Fleet and tap Load bird cards for this area. The badge pulls each missing card through the app, so keep the app open and linked until it's done. Cards you tap are saved too. Saved cards include the photo and open with no phone signal. Roughly 500 cards fit. Downloads stop before the storage fills, and Cards › Clear makes room.",
         "Photos tab: Get copies up to 12 of the newest photos from the app's Camera Node Captures and Linked Phone inboxes. View shows them full screen: swipe to move, tap to close. Clear (tap twice) deletes the copies from the badge only; the phone keeps its photos. Copies stay on the badge when it's switched off.",
-        "Session tab: the session timer, species count, recent birds, Wi-Fi, IP address and storage. Trips lets you start a planned trip or say I'm here at a stop. Your target list, trip history and trip plans are saved on the badge, so they still show after a restart with the phone out of reach.",
+        "Session tab: the session timer, species count, recent birds, Wi-Fi, IP address, storage and battery voltage. Trips lets you start a planned trip or say I'm here at a stop. Your target list, trip history and trip plans are saved on the badge, so they still show after a restart with the phone out of reach.",
         "Waking the screen: it goes dark after 15 seconds. Raise your wrist, or touch it; the first touch on a dark screen only wakes it, so a blind tap can't check off a bird. A new lifer or a camp alert lights it by itself.",
         "Camp alerts: a presence alert from a security node takes over the screen with a pulsing backlight until you tap it.",
-        "Merlin's birds: pair once in the iPhone's Settings › Bluetooth (PPWrist) and allow notifications. Only one device can read Merlin's notifications, so while a Scope Display is linked the badge leaves them to it, and Merlin's birds don't appear on the wrist.",
+        "Merlin's birds: pair once in the iPhone's Settings › Bluetooth (PPWrist) and allow notifications. Only one display can read Merlin's notifications, so with two linked the app picks one (a Scope Display first), and it sends each bird through the app to the other. That needs Peregrine Planner open or listening to a node. If the app goes quiet each display reads them itself again, and each may miss the odd bird.",
         "Not on the wrist: stop maps (they need more storage and memory than the badge has), Radar and Compass (no compass), Hold to talk and the microphone (no audio hardware), and the Fleet and Camp tabs.",
-        "Installing and battery: the firmware is the PeregrineWristDisplay folder in the firmware download; its README has the steps. The badge turns on and off with its slide switch and charges over USB-C at a gentle 704 mA while switched on. Battery life on Wi-Fi hasn't been measured over a full day yet."
+        "Installing and battery: the firmware is the PeregrineWristDisplay folder in the firmware download; its README has the steps. The badge turns on and off with its slide switch and charges over USB-C at a gentle 704 mA while switched on. On USB the top strip shows Charging, Full or USB instead of a percentage, because charging lifts the battery's voltage; the percentage comes back when you unplug. Battery life on Wi-Fi hasn't been measured over a full day yet."
       ],
       "downloadHref": "peregrine-mic-array-firmware.zip",
       "downloadLabel": "Download Firmware (.zip)"
@@ -1021,160 +1021,170 @@ window.HELP_CONTENT = {
         {
           "id": "110",
           "question": "Why don't Merlin's birds show on my Wrist Display?",
-          "answer": "Pair PPWrist in the iPhone's Settings › Bluetooth and allow notifications. Only one device can read Merlin's notifications, so while a Scope Display is linked it gets them and the wrist doesn't."
+          "answer": "Pair PPWrist in the iPhone's Settings › Bluetooth and allow notifications. Only one display can read Merlin's notifications, so with a Scope Display linked too, one of them reads and sends each bird through the app to the other. Both displays need the app linked, and iOS can pause the app in the background, so keep it open or listening to a node. Both displays need their latest firmware."
         },
         {
           "id": "111",
+          "question": "Why does my Wrist Display show Charging or Full instead of a percentage?",
+          "answer": "The badge estimates its charge from battery voltage, and charging lifts that voltage, so a percentage on USB would read too high. The percentage comes back when you unplug, and it's a rough estimate. If the strip says USB, it has power but isn't charging. Session shows the voltage, and “USB source limited” means the USB port can't supply all the charger asks for, so charging may be slow."
+        },
+        {
+          "id": "112",
           "question": "If I clear photos on the Wrist Display, are they gone from my phone?",
           "answer": "No. The badge holds copies. Clear only deletes those, and the app's inboxes keep every photo."
         },
         {
-          "id": "112",
+          "id": "113",
           "question": "What is the Scope Display?",
           "answer": "An optional DIY touch display for your spotting scope (a Freenove ESP32-S3 4-inch display). Add it in Mic Array › Fleet as a Scope Display node. It lists every bird the app hears — and the birds Merlin identifies on your iPhone — (tap for its bird card), keeps a trip's target checklist you can check off at the scope, turns Radar Mode into a “turn the scope this way” arrow when a BNO055 compass is mounted on the scope, shows the fleet's status with a live setup aid for aiming nodes, works as a camp security console with hold-to-talk to your security nodes, and shows a session dashboard."
         },
         {
-          "id": "113",
+          "id": "114",
           "question": "Why does the Scope Display's arrow say “not aligned”, or point the wrong way?",
           "answer": "The display needs to learn how its compass sits relative to the scope's line of sight. Stand at the scope, open the display's node in Mic Array › Fleet › Scope alignment, aim the scope at another node (or anything whose direction you know), and tap Align. Also calibrate the compass with a slow figure-8 until the Radar tab shows cal 3/3, and keep the compass away from the display's speaker magnet and the battery leads. A target marked “?” comes from a single 2-mic node, which can't tell front from back — it may be behind you. Keep the phone at the scope: directions from a distant node are re-aimed from the phone's position."
         },
         {
-          "id": "114",
+          "id": "115",
           "question": "Which node's direction does Radar Mode use?",
           "answer": "The node that heard the bird. With Fleet-Wide Classification on, a bird detected by another node takes its direction from that node's own reading, and its radar pin is labelled with the node's name. If that node's mics are vertical or it has no reading from around the time of the call, the Sound source's reading is used instead (or, when the source is a vertical node, the Primary array or another flat node). A reading older than a few seconds is never used, so a pin only moves when a fresh direction arrives. Two nodes hearing the same bird are crossed into a real location instead. On the Scope Display, a node's direction is re-aimed from where you stand, with a wider “±” the further you are from that node, because without a distance the bird could be anywhere along its line."
         },
         {
-          "id": "115",
+          "id": "116",
           "question": "How do I turn the Scope Display off without unplugging it?",
           "answer": "Tap Power off on the display's Session tab and tap again to confirm, or hold the BOOT button for 3 seconds. It shuts everything down and sleeps, drawing very little from the battery. Press BOOT (or RESET) to turn it back on — it rejoins Wi-Fi and the fleet by itself."
         },
         {
-          "id": "116",
+          "id": "117",
           "question": "Why isn't the Scope Display in Sound detection's Sound source list?",
           "answer": "Its Sound detection switch (on the display's Session tab) is off — that turns the display's microphone off to save battery and removes it from the list. Turn it back on, and check the display shows as connected in Mic Array › Fleet. If birds sound faint, raise the Mic level slider on the same tab."
         },
         {
-          "id": "117",
+          "id": "118",
           "question": "Will hands-free logging stop Merlin from listening?",
           "answer": "No. Spoken alerts play through the Scope Display's speaker and voice commands are heard by the display's microphone, so the iPhone's microphone and speaker aren't touched and Merlin keeps listening. The exceptions are “Speak From Phone Without a Display” (off by default), which uses the phone's speaker, and Phone Mic Fallback (off by default), which listens on the phone's mic when no display is heard; both can interrupt Merlin. Playing back a saved recording also uses the phone's speaker for that moment."
         },
         {
-          "id": "118",
+          "id": "119",
           "question": "Why doesn't the display react when I talk to it?",
           "answer": "Check that Voice Commands is on in Settings › App Settings and Speech Recognition is allowed for Peregrine Planner in iOS Settings; that the display's Sound detection switch (Session tab) is on, since voice commands use its microphone; and that the app is running and linked to the display. Every command must start with “Peregrine”. The last thing heard and the reply show under the Voice Commands switch, which helps if a bird name was misheard."
         },
         {
-          "id": "119",
+          "id": "120",
           "question": "Can I use voice commands without the Scope Display, like in the car?",
           "answer": "Yes. Turn on Voice Commands, then set Phone Mic Fallback (just below it in Settings › App Settings) to While Driving or Always. With no display heard for 5 seconds, the app listens on the iPhone's mic (or the car's Bluetooth mic) and answers from the phone. While Driving waits until you're driving: a trip or stop in Driving mode, car speed on GPS, or iOS's motion detection saying you're in a car. Open the app before you leave, and say “Peregrine, start a drive” to start a trip in Driving mode. The status line under the setting says why it isn't listening if it isn't. It can stop Merlin while it listens."
         },
         {
-          "id": "120",
+          "id": "121",
           "question": "How do I record night flight calls?",
           "answer": "Use a camping-security node with an SD card. Open it from the Camera Console (Mic Array tab › Camera) and turn on Night Listening; the phone sends tonight's window (30 minutes after sunset to 30 minutes before sunrise) and the time. The node records short clips of flight calls on its own all night. In the morning open Night Calls from the moon button on the Camera Console, download the clips, review BirdNET's guesses, and tap “Log this night as a trip”."
         },
         {
-          "id": "121",
+          "id": "122",
           "question": "Why are most of my night clips insects or “Unknown”?",
           "answer": "BirdNET recognises the flight calls of only some species, so many real calls stay “Unknown – low band” or “high band” for you to label. Insects, rain and wind make most false clips: mark them Not a bird, and if more than half of what you review isn't a bird, raise the node's trigger level (Camera Console › node › Night Listening). The node also raises its own level when more than its per-minute limit fire."
         },
         {
-          "id": "122",
+          "id": "123",
           "question": "Does the Scope Display work without the phone?",
           "answer": "Partly. Hold to talk (straight from the display to a security node's speaker) and camera snapshots (fetched straight from each node) keep working with the phone off. Bird cards and stop maps already on the display's SD card open with no phone, and trip checks, Start trip and I'm here made on the display are saved and sent to the phone later. Merlin's birds come from the iPhone over Bluetooth, so they need the phone nearby but not the Peregrine app. Detections, cards not yet on the SD card, radar targets, fleet status, presence alerts and the siren are relayed by the app, so they need it running — in the foreground, or in the background during a node listening session."
         },
         {
-          "id": "123",
+          "id": "124",
           "question": "What is Node Mode, and why don't I see it on my camera node?",
           "answer": "Node Mode only appears on a camera node built with a presence sensor and a speaker — a “camping/home security” hardware variant, not the standard camera node. If your build doesn't have those parts, the app has no Node Mode control to show, and everything else about that node works exactly as an ordinary camera node. On a qualifying node, Node Mode is on its card in the Mic Array tab's Camera screen: Birding (an ordinary camera node), Camping Security (unattended monitoring in the field, with an on-device Automatic Alarm toggle), or Home Security (reports to Home Assistant)."
         },
         {
-          "id": "124",
+          "id": "125",
           "question": "What's the difference between Automatic Alarm and the Sound Alarm button?",
           "answer": "Sound Alarm is a manual button on the node's card — tap it any time, in any Node Mode, to sound the siren immediately (e.g. to test it or to deliberately warn something off). Automatic Alarm is a separate toggle that only exists in Camping Security mode; when it's on, the node sounds the siren on its own the instant its presence sensor fires, with no app involvement at all. It's off by default and meant only for a genuinely isolated site — leave it off around other campers, since an unconditional automatic siren is a real nuisance risk. Either way, the node stops the tone on its own after a short time."
         },
         {
-          "id": "125",
+          "id": "126",
           "question": "How do presence alerts work, and why didn't I get one?",
           "answer": "A security-capable camera node alerts your phone when its presence sensor detects someone — but only while that node is in Camping Security or Home Security mode (Birding just logs it in Recent Activity), only while Presence Alerts is on, and at most once per node every 30 seconds. With the app open you get a full-screen alert with the node's picture and Hold to talk / Sound siren / View live; in the background, a notification. The app has to be running and connected to the node to hear the detection at all — if iOS has suspended it, nothing arrives. With the app closed, use Home Assistant's own notifications in Home Security mode."
         },
         {
-          "id": "126",
+          "id": "127",
           "question": "Can a security node tell which way someone is walking and how fast?",
           "answer": "Partly. The node's radar measures movement toward or away from it, so you'll see “Approaching” or “Moving away” with a speed in mph, “Standing still”, or “Moving across” for someone who's moving but not getting closer or farther. It can't tell a compass direction of travel, and someone walking straight across in front of it has almost no speed toward or away from it, so it shows no speed for them. A C4001 sensor reports speed but not which way."
         },
         {
-          "id": "127",
+          "id": "128",
           "question": "Why does a security node show presence when no one is there?",
           "answer": "Usually one of three things. 1) The radar sees through interior walls — set the node's Detection range (on its Camera Console page) to the far edge of the area you actually want watched. 2) Something that moves now and then — a fan, an HVAC vent, curtains in a draft, a pet — is inside that range; aim the node away from it or set the range just short of it. 3) “Clearing…” right after someone leaves is the sensor counting down before it reports clear (set with Clear after); it doesn't send alerts. If it persists, Field Debug's log shows the distance of every detection — something that keeps coming back at exactly the same distance is a fixed object, not a person."
         },
         {
-          "id": "128",
+          "id": "129",
           "question": "What does “Clearing…” mean on a security node?",
           "answer": "The sensor has lost whoever it was tracking and is counting down before it reports the area clear — how long is the node's “Clear after” setting (5 seconds by default, C4002 only). Nothing is actually being detected then, so it doesn't alert, photograph, or sound the siren during that time."
         },
         {
-          "id": "129",
+          "id": "130",
           "question": "How does “speak through the node” work?",
           "answer": "On a security-capable camera node's page in the Camera Console (or right on a presence alert), hold the “Hold to talk” button and talk — your phone's microphone streams live to the node's speaker for as long as you hold it, and stops the moment you release. It works in any Node Mode and is a more direct, human alternative to sounding an automatic siren."
         },
         {
-          "id": "130",
+          "id": "131",
           "question": "How do I connect a camera node to Home Assistant?",
           "answer": "Set that node's Node Mode to Home Security, then open its “Home Assistant” row on the Camera screen and enter your MQTT broker's host, port, and username/password if your setup needs them. Once it connects, the node automatically adds a presence sensor, a Sound Alarm button, and a camera on/off switch to Home Assistant — no YAML needed for those three. The one exception is the live camera image itself: add a one-time manual YAML `generic` camera entry pointing at the node's own snapshot address, the same approach this app's Feeder Cam Mode already uses, since Home Assistant's automatic setup can't discover a camera feed that way."
         },
         {
-          "id": "131",
+          "id": "132",
           "question": "In Home Security mode, why is there no Automatic Alarm toggle?",
           "answer": "That decision is meant to live in Home Assistant instead, once the node is connected there — a Home Assistant automation can factor in things the node itself can't, like whether anyone's phone shows home, whether your house alarm panel is armed, or the time of day, and call the node's Sound Alarm button only when all of that lines up. Camping Security mode keeps its own on-device Automatic Alarm toggle specifically because a genuinely isolated campsite has no Home Assistant to delegate that decision to."
         },
         {
-          "id": "132",
+          "id": "133",
           "question": "How do I check off trip targets on the Scope Display?",
           "answer": "Start the trip on the phone (Start Trip, or I'm here at a stop), then open the display's Birds tab › Targets. It lists the trip's birds for where you are now with “n of N seen”; tap a box to check one off, or tap the name to open its card and “Seen it — check off here”. Sound ID checks birds off by itself as it hears them. Checks made on the display are saved on it and reach the phone whenever it's in range, even after the display has been turned off."
         },
         {
-          "id": "133",
+          "id": "134",
           "question": "How do I load bird cards onto the Scope Display's SD card?",
           "answer": "Put a microSD card in the display. While the phone has internet, open the display's node in Mic Array › Fleet › “Bird cards on the display”, pick the Area (where you are now, the Plan screen's search area, or a planned trip) and the radius, and tap “Load bird cards for this area”. Keep the app open and the phone online until it says Done — about 1–2 seconds per card. After that, tapping a bird on the display opens its card instantly with no phone signal. Cards that couldn't be loaded are counted; load again to retry them."
         },
         {
-          "id": "134",
+          "id": "135",
           "question": "How do I see a map of a trip stop on the Scope Display?",
           "answer": "Open the display's Birds tab › Trip › “Map & trip stops”, tap Trips and tap a stop. Use ◀ ▶ to flip through the trip's stops, drag to move around, and + / − to zoom (from the whole 4 × 5 km map down to 250 m across the screen). Map / Satellite switches the style. The trip needs Maps turned on (on the display's Trips screen, or in the app under the display's node › Trip maps on the display), and its maps need to have reached the display — see the % on the Trips screen."
         },
         {
-          "id": "135",
+          "id": "136",
           "question": "Why does a stop map on the Scope Display say it isn't ready, or stay at 0%?",
           "answer": "Maps are made on the phone, while it has internet, and copied to the display while the Peregrine app is open (in front) and the display is connected — about 10 minutes a stop for both map styles. Check that Maps is turned on for that trip, open the app and leave it in front, and leave the display alone for a while: downloads pause while you're touching it. A stop map the phone hasn't made yet says so."
         },
         {
-          "id": "136",
+          "id": "137",
           "question": "Why doesn't my position show on the Scope Display's map?",
           "answer": "Your position is only sent while a trip is being logged — tap Start trip (or I'm here at a stop) on the display's Trips screen or in the app. It keeps updating with the phone locked. If the dot is grey, the last position is old; if the line says “off map”, you're outside the 4 × 5 km map. Settings › Trip GPS Updates sets how often the phone checks — a longer interval saves battery but the dot moves less often."
         },
         {
-          "id": "137",
+          "id": "138",
           "question": "What does Settings › Trip GPS Updates do?",
           "answer": "It sets how often the phone checks where you are while a trip records its path or the Scope Display shows where you are: every second (most accurate, most battery), or every 10 s, 30 s, 1 or 2 minutes, with the GPS resting in between to save battery. Trip recording keeps going with the phone locked; iOS shows the blue location indicator while it does."
         },
         {
-          "id": "138",
+          "id": "139",
           "question": "How do I look up a bird card on the Scope Display?",
           "answer": "Open the Birds tab › Cards. It lists every card saved on the display's SD card; tap the search box and type part of the bird's name (common or scientific) to narrow it down, then tap the bird. It works with no phone. If you don't know the name, tap Filter next to the search box and pick a size and the colors you saw — only birds with all of those colors stay in the list. A bird that isn't in the list hasn't been saved yet — load cards for your area from the phone first (Mic Array › Fleet › the display's node › Bird cards on the display), or tap the bird in Heard or Targets while the phone is connected."
         },
         {
-          "id": "139",
+          "id": "140",
+          "question": "Can two displays both show Merlin's birds?",
+          "answer": "Yes. With two displays linked, the app has one read Merlin's notifications, and that one sends each bird through the app to the other. It chooses a display that's receiving notifications, so pair at least one, and update both displays' firmware. If the app is paused in the background each display reads for itself, and each may miss the odd bird."
+        },
+        {
+          "id": "141",
           "question": "How do I see Merlin's birds on the Scope Display?",
           "answer": "Pair the display with your iPhone once: Settings › Bluetooth › tap PPScope › allow notifications (if PPScope isn't listed, connect to it once with a Bluetooth app such as nRF Connect, then tap it under My Devices). The display's Session tab should say “receiving”. Then run Merlin's Sound ID in the background — phone locked or another app open — and each bird it identifies appears in the display's Heard list tagged MERLIN. When Merlin hears several birds at once, each becomes its own entry."
         },
         {
-          "id": "140",
+          "id": "142",
           "question": "Why do Merlin's notifications disappear from my phone when the Scope Display is connected?",
           "answer": "The display clears them on purpose. Merlin keeps one notification and rewrites it for each new bird, and iOS doesn't tell Bluetooth accessories about the rewrite — so without clearing, the display would only ever see Merlin's first bird. Once the display has read a Merlin notification it clears it, and Merlin posts a fresh one for the next bird. Your birds are still in Merlin's own list. Other apps' notifications are never touched."
         },
         {
-          "id": "141",
+          "id": "143",
           "question": "Merlin shows birds on my phone, but none reach the Scope Display. What should I check?",
           "answer": "1) The display's Session tab should say “receiving”; if it says not paired or not allowed, pair it (Settings › Bluetooth › PPScope › allow notifications). 2) Merlin must post real notifications: keep it running in the background (phone locked or another app open) and make sure Merlin's notifications are allowed in iPhone Settings › Notifications. Birds Merlin shows on its own screen while it's open aren't notifications. 3) The Session tab's notification count should rise when any app notifies — if it never does, tap “Forget iPhone pairing”, forget PPScope on the iPhone too, and pair again."
         }
@@ -1184,37 +1194,37 @@ window.HELP_CONTENT = {
       "name": "Settings & app basics",
       "faqs": [
         {
-          "id": "142",
+          "id": "144",
           "question": "How do I search Help & Info, and what does “Enhanced by Apple Intelligence” mean?",
           "answer": "Use the search box at the top of Help & Info to instantly find matching guide sections and FAQ answers by keyword — this always works, no AI involved. On devices with Apple Intelligence available and turned on, an “Ask a question about using this app” button also appears, opening a chat where you can ask in plain language (e.g. “how do I export my trip data?”) and get an answer grounded in this same Help & Info content. The AI Bird ID Assistant (Identify > Ask) works the same way for bird questions: when Apple Intelligence is available, its answers are tagged “Enhanced by Apple Intelligence”; otherwise it automatically falls back to the app's built-in bird database. You can turn the smart assistant off in Settings if you'd rather it always use the built-in database."
         },
         {
-          "id": "143",
+          "id": "145",
           "question": "What are the notification settings for?",
           "answer": "The “Bird Detection Alerts” toggle in Settings controls whether the app posts a notification when a species is detected during a Sound session, showing the species name and confidence percentage."
         },
         {
-          "id": "144",
+          "id": "146",
           "question": "How do I set my home state and why does it matter?",
           "answer": "Set your home state in Settings. It's used by the State Birds Goals feature to filter the official state bird checklist, and by Learn About Birds as a fallback source of local species when eBird observation data isn't available for your exact location."
         },
         {
-          "id": "145",
+          "id": "147",
           "question": "What is “Auto-Remove Unseen Birds”?",
           "answer": "A toggle in Settings. When on, marking a trip complete automatically removes any birds in that trip you never marked as seen, so a completed trip reflects only what you actually observed. When off, unseen birds stay in the completed trip."
         },
         {
-          "id": "146",
+          "id": "148",
           "question": "What does “Re-check for Previous App Data” do?",
           "answer": "It's in Settings > Advanced, and only appears if data from an earlier version of the app is detected on the device. Tapping it re-offers the one-time import prompt for that older data; force-quit and reopen the app to see the prompt again."
         },
         {
-          "id": "147",
+          "id": "149",
           "question": "How do I report a bug or suggest a feature?",
           "answer": "Open Help & Info from the gear button at the top-right of any tab and choose Contact Support. Fill out the form and it opens your email app with a message to peregrineplanner@gmail.com ready to send. The same form on the support website works the same way."
         },
         {
-          "id": "148",
+          "id": "150",
           "question": "How can I support the app?",
           "answer": "The app includes an optional tip jar where you can support ongoing development. Access it from Settings under “Support the App”."
         }
