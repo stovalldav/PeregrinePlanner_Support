@@ -153,7 +153,7 @@
     <div class="container">
         <div class="privacy-policy">
             <h1>Privacy Policy for Peregrine Planner</h1>
-            <p class="last-updated">Last Updated: September 3, 2026</p>
+            <p class="last-updated">Last Updated: November 11, 2026</p>
 
             <h2>The short version</h2>
             <p>Peregrine Planner is a hobby project by an individual developer. There are no user
@@ -172,6 +172,17 @@
                 <li><strong>Birding data</strong>: trips and itineraries, logged sightings, photos
                 you attach, notes and counts, behavior and migration logs, "Tell Your Story"
                 journals, hotspot notes, and Life List / Big Month / State Birds progress.</li>
+                <li><strong>Sound recordings</strong>: short clips you choose to keep with "Save last
+                30 s", and clips the app keeps by itself for a bird that is unusual where you are
+                (the 30 seconds before it was heard and the 15 seconds after). They are saved with
+                the sighting so you can document it, and stay on your device unless you share them.</li>
+                <li><strong>Trip trails and marks</strong>: while a trip is being logged, the path you
+                travel, the time and place of each stop, and any Marks you make, so the app can
+                measure effort for eBird and show the trip on a map. Nothing is recorded when no
+                trip is being logged.</li>
+                <li><strong>Photo review records</strong>: which photos in your iPhone Photos library
+                Find Bird Photos has already reviewed, confirmed, or ignored, so it can skip them
+                next time.</li>
                 <li><strong>Preferences</strong>: your display name (used only as "exported by" in
                 trip files you choose to share), home state, and the app's setting toggles.</li>
                 <li><strong>Caches</strong>: bird thumbnail images downloaded from iNaturalist are
@@ -205,32 +216,55 @@
                 aggregate sales figures from Apple and never sees your name, card, or contact
                 details. On devices that support Apple Intelligence, the assistant's on-device model
                 may be used to phrase answers &mdash; that processing happens on your device and
-                nothing is sent to Apple for it.</li>
+                nothing is sent to Apple for it. If you choose the optional BirdNET+ 3.0 sound
+                model in Settings, it is downloaded once from Apple's App Store servers like any
+                app content; nothing about you or your recordings is sent with it.</li>
                 <li><strong>Maps</strong>: map views and "open in Maps" links use Apple Maps, subject
                 to Apple's Maps privacy practices.</li>
             </ul>
-            <p>The app does not send your sightings, photos, logs, notes, or location history to any
-            of these services. It only sends the minimum needed for a given lookup (typically a
+            <p>The app does not send your sightings, photos, recordings, logs, notes, or trip trails
+            to any of these services. It only sends the minimum needed for a given lookup (typically a
             coordinate or a species name).</p>
 
             <h2>Device permissions</h2>
             <p>iOS will ask your permission before the app can use any of these. Each is used only
             for the feature named, and the data stays on your device:</p>
             <ul>
-                <li><strong>Location</strong>: to center "nearby" bird observations on where you are
-                and to plan trip routes from your current location. Coordinates are sent to the
-                eBird API as described above; location history is not stored or uploaded.</li>
-                <li><strong>Microphone</strong>: for real-time bird sound identification. Audio is
-                analyzed on your device by an on-device model (BirdNET) and is not recorded to a
-                file or uploaded.</li>
+                <li><strong>Location</strong>: to center "nearby" bird observations on where you are,
+                to plan trip routes from your current location, and, while a trip is being logged,
+                to record your trip trail (this continues with the phone in your pocket, which is
+                why iOS may show the app using location in the background). Coordinates are sent
+                to the eBird API for lookups as described above. Your trail is stored only on your
+                device and is never uploaded.</li>
+                <li><strong>Microphone</strong>: for real-time bird sound identification, and for
+                voice commands if you turn on Phone Mic Fallback. Audio is analyzed on your device
+                by an on-device model (BirdNET) and is never uploaded. While listening, the app keeps
+                only the most recent 45 seconds of audio, in memory, and discards older audio as it
+                goes. It is saved to a file only when you tap
+                "Save last 30 s", or automatically for a bird that is unusual where you are (see
+                "Sound recordings" above). Recording can continue in the background during a
+                session, so iOS shows the microphone indicator.</li>
+                <li><strong>Speech Recognition</strong>: only if you turn on Voice Commands. Speech
+                such as "Peregrine, three Ruddy Ducks" is recognized on your device; the app
+                requires on-device recognition, so your speech is not sent to Apple.</li>
+                <li><strong>Motion &amp; Fitness</strong>: only if you set Phone Mic Fallback to
+                While Driving, so the app can tell when you are in a car. Motion data is used on
+                the device and not stored.</li>
                 <li><strong>Camera</strong>: for photo and AR bird identification. Image analysis
                 runs on your device.</li>
                 <li><strong>Photo Library</strong>: to let you pick existing photos for
-                identification and to save bird photos you capture.</li>
-                <li><strong>Local Network &amp; Bluetooth</strong>: only used if you build and pair
-                the optional DIY directional microphone array accessory. The app talks to that
-                accessory over your local Wi-Fi and Bluetooth; the accessory has no internet
-                connection and sends nothing offsite.</li>
+                identification and to save bird photos you capture. If you use Find Bird Photos,
+                the app looks through your whole library or one album you choose, on your device,
+                and reads each photo's date and location to match it to a trip. When you confirm a
+                bird, it adds the photo to a "Bird - &lt;name&gt;" album and adds that name to the
+                photo's keywords (an edit you can undo in Photos with Revert).</li>
+                <li><strong>Local Network &amp; Bluetooth</strong>: only used with the optional DIY
+                accessories (microphone array and camera nodes, the Scope Display, and the Wrist
+                Display) and with Linked Phone. The app talks to accessories over your local Wi-Fi
+                and Bluetooth; they have no internet connection and send nothing offsite. Linked
+                Phone connects two iPhones running the app directly (peer-to-peer Wi-Fi or
+                Bluetooth, no internet), after you approve the pairing on the first phone, and sends
+                bird detections, photos, and video clips from one phone to the other's trip.</li>
                 <li><strong>Calendars</strong>: only if you use "Add to Calendar" on a trip, which
                 writes trip days into a calendar you choose.</li>
             </ul>
