@@ -153,7 +153,7 @@
     <div class="container">
         <div class="privacy-policy">
             <h1>Privacy Policy for Peregrine Planner</h1>
-            <p class="last-updated">Last Updated: November 11, 2026</p>
+            <p class="last-updated">Last Updated: November 14, 2026</p>
 
             <h2>The short version</h2>
             <p>Peregrine Planner is a hobby project by an individual developer. There are no user
@@ -188,10 +188,14 @@
                 <li><strong>Caches</strong>: bird thumbnail images downloaded from iNaturalist are
                 cached locally for offline viewing and can be cleared in Settings.</li>
             </ul>
-            <p>There is no cloud sync and no automatic backup. Moving data to a new phone is a
-            manual action you take: Settings &gt; Advanced &gt; Data Backup &amp; Migration exports
-            a single file that you transfer yourself (AirDrop, Files, iCloud Drive, or email). The
-            developer never receives that file.</p>
+            <p><strong>iCloud backup.</strong> Unless you turn off Back Up to iCloud (Settings &gt;
+            Advanced &gt; Data Backup &amp; Migration), once a day the app saves a full backup file
+            containing everything listed above, photos and recordings included, to the app's folder
+            in <em>your own</em> iCloud Drive. It is stored by Apple under your Apple Account and
+            Apple's iCloud terms; the developer has no access to it and never receives it. Each phone
+            keeps its newest three backups there. There is no live sync between devices. You can
+            also export the same file by hand and transfer it yourself (AirDrop, Files, or
+            email).</p>
 
             <h2>Outside services the app contacts</h2>
             <p>To function, the app makes network requests to the following services. These requests
@@ -244,9 +248,10 @@
                 "Save last 30 s", or automatically for a bird that is unusual where you are (see
                 "Sound recordings" above). Recording can continue in the background during a
                 session, so iOS shows the microphone indicator.</li>
-                <li><strong>Speech Recognition</strong>: only if you turn on Voice Commands. Speech
-                such as "Peregrine, three Ruddy Ducks" is recognized on your device; the app
-                requires on-device recognition, so your speech is not sent to Apple.</li>
+                <li><strong>Speech Recognition</strong>: only if you turn on Voice Commands, or tap
+                the microphone to answer in Quiz My Birds. Speech such as "Peregrine, three Ruddy
+                Ducks" or a bird's name is recognized on your device; the app requires on-device
+                recognition, so your speech is not sent to Apple.</li>
                 <li><strong>Motion &amp; Fitness</strong>: only if you set Phone Mic Fallback to
                 While Driving, so the app can tell when you are in a car. Motion data is used on
                 the device and not stored.</li>
